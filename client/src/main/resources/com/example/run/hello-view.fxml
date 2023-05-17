@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -53,8 +54,9 @@
                         </PasswordField>
                      </children>
                   </VBox>
-                  <Button layoutX="14.0" layoutY="322.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="169.0" styleClass="buttonReg" stylesheets="@../../../CSS/RegistrationButton.css" text="Зарегистрироваться" textFill="WHITE" />
-                  <Button layoutX="218.0" layoutY="322.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="108.0" styleClass="buttonEnter" stylesheets="@../../../CSS/RegistrationButton.css" text="Войти" textFill="WHITE" />
+                  <Button layoutX="14.0" layoutY="322.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="169.0" styleClass="buttonReg" stylesheets="@../../../CSS/Registration.css" text="Зарегистрироваться" textFill="WHITE" />
+                  <Button layoutX="218.0" layoutY="322.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="108.0" styleClass="buttonEnter" stylesheets="@../../../CSS/Registration.css" text="Войти" textFill="WHITE" />
+                  <ChoiceBox fx:id="languages" layoutX="109.0" layoutY="375.0" prefWidth="150.0" styleClass="cb" stylesheets="@../../../CSS/Registration.css" />
                </children>
             </AnchorPane>
          </children>
