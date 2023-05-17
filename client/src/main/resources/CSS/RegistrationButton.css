@@ -1,0 +1,33 @@
+.buttonReg {
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, #2d7308 0%, #2d7308 100%),
+            #2d7308,
+            #2d7308,
+            radial-gradient(center 50% 50%, radius 100%, #fc2b2b, #fc2b2b);
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-font-weight: bold;
+    -fx-font-size: 1.1em;
+}
+.buttonReg:hover {
+    -fx-underline: true;
+}
+
+.buttonEnter {
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, #2d7308 0%, #2d7308 100%),
+            #2d7308,
+            #2d7308,
+            radial-gradient(center 50% 50%, radius 100%, #0e75be, #0e75be);
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-font-weight: bold;
+    -fx-font-size: 1.1em;
+}
+.buttonEnter:hover {
+    -fx-underline: true;
+}

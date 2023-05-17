@@ -1,0 +1,4 @@
+.root{
+    -fx-background-image: url("../images/log_background.jpg");
+    -fx-background-size: cover;
+}
