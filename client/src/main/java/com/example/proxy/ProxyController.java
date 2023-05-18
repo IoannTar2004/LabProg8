@@ -4,6 +4,10 @@ import com.example.run.Controller;
 
 import java.lang.reflect.Field;
 
+/**
+ * Class for monitoring controller's fields and its events
+ */
+
 public abstract class ProxyController {
 
     protected static Controller controller;
