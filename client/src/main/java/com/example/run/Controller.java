@@ -1,7 +1,7 @@
 package com.example.run;
 
-import com.example.misc.Translation;
-import com.example.misc.Languages;
+import com.example.proxy.Translation;
+import com.example.proxy.Languages;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;

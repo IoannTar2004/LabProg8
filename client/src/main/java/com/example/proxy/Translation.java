@@ -1,4 +1,4 @@
-package com.example.misc;
+package com.example.proxy;
 
 import com.example.run.Controller;
 import javafx.event.ActionEvent;
