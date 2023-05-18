@@ -12,21 +12,14 @@ import java.util.ResourceBundle;
 /**
  * Class for translation texts to different languages using text from .properties files
  */
-public class Translation {
-    private Controller controller;
-
-    public Translation(Controller controller) {
-        this.controller = controller;
-    }
-
+public class Translation extends ProxyController {
     /**
      * Translate all texts in application
      * @param event
      */
     public void changeLanguage(ActionEvent event) {
         String[] bundles = {"Registration"};
-        Class<Controller> controllerClass = Controller.class;
-        Field[] fields = controllerClass.getDeclaredFields();
+        Field[] fields = getFields();
         Locale locale = getLocale();
 
         for (String bundle: bundles) {
@@ -46,7 +39,7 @@ public class Translation {
         }
     }
 
-    private Locale getLocale() {
+    public Locale getLocale() {
         try {
             Field field = Controller.class.getDeclaredField("languages");
             field.setAccessible(true);

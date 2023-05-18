@@ -1,5 +1,6 @@
 package com.example.run;
 
+import com.example.proxy.ProxyController;
 import com.example.proxy.Translation;
 import com.example.proxy.Languages;
 import javafx.fxml.FXML;
@@ -35,9 +36,11 @@ public class Controller {
 
     @FXML
     public void initialize() {
+        ProxyController.setController(this);
+
         languages.setItems(Languages.getLangArray());
         languages.setValue("Русский");
-        new Translation(this).changeLanguage(null);
-        languages.setOnAction(new Translation(this)::changeLanguage);
+        new Translation().changeLanguage(null);
+        languages.setOnAction(new Translation()::changeLanguage);
     }
 }
