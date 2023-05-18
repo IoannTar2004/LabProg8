@@ -3,13 +3,15 @@ package com.example.misc;
 import com.example.run.Controller;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
-import javafx.scene.text.Text;
 
 import java.lang.reflect.Field;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+/**
+ * Class for translation texts to different languages using text from .properties files
+ */
 public class Translation {
     private Controller controller;
 
@@ -17,6 +19,10 @@ public class Translation {
         this.controller = controller;
     }
 
+    /**
+     * Translate all texts in application
+     * @param event
+     */
     public void changeLanguage(ActionEvent event) {
         String[] bundles = {"Registration"};
         Class<Controller> controllerClass = Controller.class;

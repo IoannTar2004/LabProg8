@@ -8,6 +8,9 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
+/**
+ * Controls all nodes in application
+ */
 public class Controller {
     @FXML
     private Button enter;

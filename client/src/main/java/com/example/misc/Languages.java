@@ -3,13 +3,15 @@ package com.example.misc;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.LinkedList;
 import java.util.Locale;
 
+/**
+ * Consists of some languages
+ */
 public enum Languages {
     RUSSIAN("Русский"), ENGLISH("English"), CZECH("Český"), LITHUANIAN("Lietuviškas");
 
-    private String language;
+    private final String language;
 
     Languages(String language) {
         this.language = language;
