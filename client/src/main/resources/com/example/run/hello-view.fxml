@@ -32,30 +32,30 @@
                   </Text>
                   <VBox layoutX="63.0" layoutY="75.0" prefHeight="227.0" prefWidth="224.0">
                      <children>
-                        <TextField fx:id="hostField" prefHeight="33.0" prefWidth="210.0">
+                        <TextField fx:id="host" prefHeight="33.0" prefWidth="210.0">
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin>
                         </TextField>
-                        <TextField fx:id="portField" prefHeight="33.0" prefWidth="210.0">
+                        <TextField fx:id="port" prefHeight="33.0" prefWidth="210.0">
                            <VBox.margin>
                               <Insets top="28.0" />
                            </VBox.margin>
                         </TextField>
-                        <TextField fx:id="loginField" prefHeight="33.0" prefWidth="210.0">
+                        <TextField fx:id="login" prefHeight="33.0" prefWidth="210.0">
                            <VBox.margin>
                               <Insets top="28.0" />
                            </VBox.margin>
                         </TextField>
-                        <PasswordField fx:id="passField" prefHeight="33.0" prefWidth="224.0">
+                        <PasswordField fx:id="password" prefHeight="33.0" prefWidth="224.0">
                            <VBox.margin>
                               <Insets top="28.0" />
                            </VBox.margin>
                         </PasswordField>
                      </children>
                   </VBox>
-                  <Button layoutX="14.0" layoutY="322.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="169.0" styleClass="buttonReg" stylesheets="@../../../CSS/Registration.css" text="Зарегистрироваться" textFill="WHITE" />
-                  <Button layoutX="218.0" layoutY="322.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="108.0" styleClass="buttonEnter" stylesheets="@../../../CSS/Registration.css" text="Войти" textFill="WHITE" />
+                  <Button fx:id="register" layoutX="14.0" layoutY="322.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="169.0" styleClass="buttonReg" stylesheets="@../../../CSS/Registration.css" textFill="WHITE" />
+                  <Button fx:id="enter" layoutX="218.0" layoutY="322.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="108.0" styleClass="buttonEnter" stylesheets="@../../../CSS/Registration.css" textFill="WHITE" />
                   <ChoiceBox fx:id="languages" layoutX="109.0" layoutY="375.0" prefWidth="150.0" styleClass="cb" stylesheets="@../../../CSS/Registration.css" />
                </children>
             </AnchorPane>

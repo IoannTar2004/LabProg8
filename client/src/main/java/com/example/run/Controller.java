@@ -1,33 +1,40 @@
 package com.example.run;
 
+import com.example.misc.Translation;
+import com.example.misc.Languages;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-import java.util.ResourceBundle;
-
 public class Controller {
     @FXML
-    private TextField hostField;
+    private Button enter;
 
     @FXML
-    private TextField portField;
-
-    @FXML
-    private TextField loginField;
-
-    @FXML
-    private PasswordField passField;
+    private TextField host;
 
     @FXML
     private ChoiceBox<String> languages;
 
-    private final String[] strings = {"Русский", "Английский", "Чешский", "Литовский"};
+    @FXML
+    private TextField login;
+
+    @FXML
+    private PasswordField password;
+
+    @FXML
+    private TextField port;
+
+    @FXML
+    private Button register;
 
     @FXML
     public void initialize() {
-        hostField.setPromptText(ResourceBundle.getBundle("Registration").getString("host"));
-        languages.getItems().addAll(strings);
+        languages.setItems(Languages.getLangArray());
+        languages.setValue("Русский");
+        new Translation(this).changeLanguage(null);
+        languages.setOnAction(new Translation(this)::changeLanguage);
     }
 }
