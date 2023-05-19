@@ -1,5 +1,6 @@
 package com.example.run;
 
+import com.example.modules.Registration;
 import com.example.proxy.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -58,7 +59,6 @@ public class Controller {
 
     @FXML
     protected void registerClick(MouseEvent event) {
-        new Validation().registerEmpty(Languages.getLocale(languages.getValue()));
-        new Validation().registerLong(Languages.getLocale(languages.getValue()));
+        new Registration().register(Languages.getLocale(languages.getValue()));
     }
 }
