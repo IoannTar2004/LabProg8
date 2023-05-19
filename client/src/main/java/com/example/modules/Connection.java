@@ -3,8 +3,11 @@ package com.example.modules;
 import java.io.IOException;
 import java.net.Socket;
 import java.nio.channels.UnresolvedAddressException;
+import java.util.concurrent.atomic.AtomicBoolean;
 
-public class Connection {
+public class Connection implements Runnable {
+    private volatile AtomicBoolean connection = new AtomicBoolean(true);
+
     private String host;
     private int port;
     private Socket socket;
@@ -14,17 +17,20 @@ public class Connection {
         this.port = port;
     }
 
+    public void stop() {
+        connection.set(false);
+    }
+
     /**
      * Run endless tries to connect to server
-     * @return open and return socket channel
-     * @throws UnresolvedAddressException when host is unknown
      */
-    public void waitingForConnection() throws UnresolvedAddressException {
-        while (true) {
+    public void run() {
+        while (connection.get()) {
             try {
                 socket = new Socket(host, port);
                 return;
-            } catch (IOException ignored) {}
+            } catch (IOException ignored) {} //повторяет подключение
         }
+        connection.set(true);
     }
 }

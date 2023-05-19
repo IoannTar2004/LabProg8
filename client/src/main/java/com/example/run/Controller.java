@@ -5,11 +5,18 @@ import com.example.proxy.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 /**
  * Controls all nodes in application
  */
 public class Controller {
+    @FXML
+    private AnchorPane anchor;
+
     @FXML
     private Button enter;
 
@@ -50,6 +57,8 @@ public class Controller {
     @FXML
     public void initialize() {
         ProxyController.setController(this);
+        Circle circle = new Circle(3, Color.BLUE);
+        circle.setRadius(100);
 
         languages.setItems(Languages.getLangArray());
         languages.setValue("Русский");

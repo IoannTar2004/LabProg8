@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 /**
- * Class Dragon whose objects stored in Java Collection and xml file
+ * Class Dragon whose objects stored in Java Collection
  */
 public class Dragon implements Serializable {
     private long id;
