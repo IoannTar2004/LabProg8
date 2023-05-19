@@ -1,6 +1,8 @@
-package com.example.proxy;
+package com.example.modules;
 
+import com.example.modules.Languages;
 import com.example.run.Controller;
+import com.example.run.ProxyController;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 

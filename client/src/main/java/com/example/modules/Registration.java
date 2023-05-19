@@ -1,18 +1,16 @@
 package com.example.modules;
 
-import com.example.proxy.Validation;
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 import java.util.Locale;
 
-import static com.example.proxy.ProxyController.getField;
+import static com.example.run.ProxyController.getField;
 
 public class Registration {
 

@@ -1,4 +1,4 @@
-package com.example.proxy;
+package com.example.modules;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

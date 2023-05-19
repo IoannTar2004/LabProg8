@@ -1,5 +1,6 @@
-package com.example.proxy;
+package com.example.modules;
 
+import com.example.run.ProxyController;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 

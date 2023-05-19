@@ -1,6 +1,4 @@
-package com.example.proxy;
-
-import com.example.run.Controller;
+package com.example.run;
 
 import java.lang.reflect.Field;
 
