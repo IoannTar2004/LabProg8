@@ -1,13 +1,9 @@
 package com.example.run;
 
-import com.example.proxy.ProxyController;
-import com.example.proxy.Translation;
-import com.example.proxy.Languages;
+import com.example.proxy.*;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 
 /**
  * Controls all nodes in application
@@ -20,19 +16,35 @@ public class Controller {
     private TextField host;
 
     @FXML
+    private Label hostEmpty;
+
+    @FXML
+    private Label hostLabel;
+
+    @FXML
     private ChoiceBox<String> languages;
 
     @FXML
     private TextField login;
 
     @FXML
+    private Label loginLabel;
+
+    @FXML
     private PasswordField password;
+
+    @FXML
+    private Label passwordLabel;
 
     @FXML
     private TextField port;
 
     @FXML
+    private Label portLabel;
+
+    @FXML
     private Button register;
+
 
     @FXML
     public void initialize() {
@@ -42,5 +54,11 @@ public class Controller {
         languages.setValue("Русский");
         new Translation().changeLanguage(null);
         languages.setOnAction(new Translation()::changeLanguage);
+    }
+
+    @FXML
+    protected void registerClick(MouseEvent event) {
+        new Validation().registerEmpty(Languages.getLocale(languages.getValue()));
+        new Validation().registerLong(Languages.getLocale(languages.getValue()));
     }
 }

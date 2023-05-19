@@ -31,3 +31,9 @@
 .buttonEnter:hover {
     -fx-underline: true;
 }
+
+.labelText {
+    -fx-font-size: 15;
+    -fx-font-weight: bolder;
+    -fx-alignment: center;
+}
