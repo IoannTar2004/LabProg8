@@ -32,7 +32,7 @@ public class Registration extends ProxyController {
                 try {
                     ((Node) f.get(controller)).setDisable(true);
                 } catch (IllegalAccessException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
             });
 
