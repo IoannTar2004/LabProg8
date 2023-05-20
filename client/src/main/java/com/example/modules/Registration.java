@@ -1,7 +1,7 @@
 package com.example.modules;
 
 import com.example.grapghics.Animations;
-import com.example.grapghics.TextSetter;
+import com.example.grapghics.NodeManager;
 import com.example.run.ProxyController;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -12,7 +12,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
-import java.lang.reflect.Field;
 import java.util.*;
 
 public class Registration extends ProxyController {
@@ -27,14 +26,8 @@ public class Registration extends ProxyController {
         Validation validation = new Validation();
         this.locale = locale;
         if (validation.registerEmpty(locale) & validation.registerLong(locale)) {
-            Field[] fields = getFields("register", "enter", "languages");
-            Arrays.stream(fields).forEach(f -> {
-                try {
-                    ((Node) f.get(controller)).setDisable(true);
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-            });
+            Node[] fields = getNodes("register", "enter", "languages");
+            new NodeManager().forEach(fields, f -> f.setDisable(true));
 
             host = ((TextField) getField("host")).getText();
             port = ((TextField) getField("port")).getText();
@@ -53,13 +46,15 @@ public class Registration extends ProxyController {
 
         String[] fields = {"connectionText", "hostText", "portText", "cancelButton"};
         String[] keys = {"connectionText", "host_", "port_", "cancelButton"};
-        TextSetter.set(ResourceBundle.getBundle(bundle, locale), fields, keys);
+        new NodeManager().setText(ResourceBundle.getBundle(bundle, locale), fields, keys);
         Animations animations = new Animations();
 
         rectangle.setStroke(Color.WHITE);
         rectangle.setLayoutX(175);
         rectangle.setLayoutY(193);
-        anchorPane.getChildren().add(13, rectangle);
+        try {
+            anchorPane.getChildren().add(13, rectangle);
+        } catch (IllegalArgumentException ignored) {} //если объект добавлен, то просто проигнорировать
         animations.scaleTransition(Duration.millis(250), rectangle, 0,0,302,217);
 
         connectionAnchor.setVisible(true);
@@ -68,13 +63,10 @@ public class Registration extends ProxyController {
 
     public void cancelConnection() {
         AnchorPane connectionAnchor = getField("connectionAnchor");
-        AnchorPane anchorPane = getField("mainAnchor");
         Animations animations = new Animations();
 
         Connection.stop();
         animations.scaleTransition(Duration.millis(250), connectionAnchor, 1,1,0,0);
         animations.scaleTransition(Duration.millis(250), rectangle, 302,217,0,0);
-
-        anchorPane.getChildren().remove(13);
     }
 }

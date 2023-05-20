@@ -1,5 +1,7 @@
 package com.example.run;
 
+import javafx.scene.Node;
+
 import java.lang.reflect.Field;
 import java.util.Arrays;
 
@@ -29,17 +31,18 @@ public abstract class ProxyController {
         return fields;
     }
 
-    public static Field[] getFields(String... fieldsName) {
-        Field[] fields = new Field[fieldsName.length];
+    public static Node[] getNodes(String... fieldsName) {
+        Node[] nodes = new Node[fieldsName.length];
 
         Class<Controller> controllerClass = Controller.class;
         for (int i = 0; i < fieldsName.length; i++) {
             try {
-                fields[i] = controllerClass.getDeclaredField(fieldsName[i]);
-            } catch (NoSuchFieldException e) {e.printStackTrace();}
+                Field field = controllerClass.getDeclaredField(fieldsName[i]);
+                field.setAccessible(true);
+                nodes[i] = (Node) field.get(controller);
+            } catch (NoSuchFieldException | IllegalAccessException e) {e.printStackTrace();}
         }
-        Arrays.stream(fields).forEach(f -> f.setAccessible(true));
-        return fields;
+        return nodes;
     }
 
     public static void setController(Controller controller) {
