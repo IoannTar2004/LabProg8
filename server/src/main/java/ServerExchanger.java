@@ -12,9 +12,9 @@ import java.util.concurrent.Executors;
 
 public class ServerExchanger {
     public static void main(String[] args) {
-//        DataBaseInitialization.connect(OutputText.database("url"),
-//                OutputText.database("login"), OutputText.database("password"));
+        DataBaseInitialization.connect(OutputText.getDataBaseResources());
         Scanner scanner = new Scanner(System.in);
+
         System.out.print("Port: ");
         int port = scanner.nextInt();
         System.out.println("Running!");

@@ -8,9 +8,10 @@ import java.util.ResourceBundle;
  */
 public class OutputText {
 
-    private static ResourceBundle registration;
-
-    public static String print(String bundle, Locale locale, String key) {
-        return ResourceBundle.getBundle(bundle, locale).getString(key);
+    public static String[] getDataBaseResources() {
+        String dataBase = "Database";
+        return new String[] {ResourceBundle.getBundle(dataBase).getString("url"),
+                            ResourceBundle.getBundle(dataBase).getString("login"),
+                            ResourceBundle.getBundle(dataBase).getString("password")};
     }
 }

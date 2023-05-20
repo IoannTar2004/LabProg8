@@ -22,12 +22,12 @@ public abstract class DataBaseInitialization {
         return connection;
     }
 
-    public static void connect(String url, String user, String password) {
-        String key = url + "_" + user + "_" + password;
+    public static void connect(String[] resources) {
+        String key = resources[0] + "_" + resources[1] + "_" + resources[2];
         if (connections.get(key) == null) {
             try {
                 Class.forName("org.postgresql.Driver");
-                Connection connection = DriverManager.getConnection(url, user, password);
+                Connection connection = DriverManager.getConnection(resources[0], resources[1], resources[2]);
                 connections.put(key, connection);
                 readFromDataBase(connection);
             } catch (ClassNotFoundException | SQLException e) {e.printStackTrace();}
