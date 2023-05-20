@@ -106,6 +106,7 @@ public class Controller {
     @FXML
     protected void cancelConnection(MouseEvent event) {
         new Registration().cancelConnection();
+        Connection.stop();
 
         register.setDisable(false);
         enter.setDisable(false);

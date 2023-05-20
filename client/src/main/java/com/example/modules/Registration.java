@@ -66,7 +66,6 @@ public class Registration extends ProxyController {
         AnchorPane connectionAnchor = getField("connectionAnchor");
         Animations animations = new Animations();
 
-        Connection.stop();
         animations.scaleTransition(Duration.millis(250), connectionAnchor, 1,1,0,0);
         animations.scaleTransition(Duration.millis(250), rectangle, 302,217,0,0);
     }

@@ -27,6 +27,7 @@ public class Connection implements Runnable {
         while (connection.get()) {
             try {
                 socket = new Socket(host, port);
+                new Registration().cancelConnection();
                 return;
             } catch (IOException ignored) {} //повторяет подключение
         }
