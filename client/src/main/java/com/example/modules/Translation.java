@@ -1,6 +1,5 @@
 package com.example.modules;
 
-import com.example.modules.Languages;
 import com.example.run.Controller;
 import com.example.run.ProxyController;
 import javafx.event.ActionEvent;
@@ -21,7 +20,7 @@ public class Translation extends ProxyController {
      */
     public void changeLanguage(ActionEvent event) {
         String[] bundles = {"Registration"};
-        Field[] fields = getFields();
+        Field[] fields = getAllFields();
         Locale locale = getLocale();
 
         for (String bundle: bundles) {

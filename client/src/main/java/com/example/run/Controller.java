@@ -1,5 +1,7 @@
 package com.example.run;
 
+import com.example.grapghics.Animations;
+import com.example.modules.Connection;
 import com.example.modules.Languages;
 import com.example.modules.Registration;
 import com.example.modules.Translation;
@@ -10,7 +12,9 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,6 +23,7 @@ import java.util.List;
  * Controls all nodes in application
  */
 public class Controller {
+
     @FXML
     private Button cancelButton;
 
@@ -92,9 +97,23 @@ public class Controller {
 
     @FXML
     protected void registerClick(MouseEvent event) {
-        register.setDisable(true);
-        enter.setDisable(true);
-        languages.setDisable(true);
         new Registration().register(Languages.getLocale(languages.getValue()));
+    }
+
+    @FXML
+    protected void cancelConnection(MouseEvent event) {
+        new Registration().cancelConnection();
+
+        register.setDisable(false);
+        enter.setDisable(false);
+        languages.setDisable(false);
+    }
+
+    @FXML
+    protected void fieldClick(MouseEvent event) {
+        hostLabel.setText("");
+        portLabel.setText("");
+        loginLabel.setText("");
+        passwordLabel.setText("");
     }
 }

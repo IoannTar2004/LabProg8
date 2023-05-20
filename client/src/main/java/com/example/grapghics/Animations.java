@@ -6,7 +6,7 @@ import javafx.util.Duration;
 
 public class Animations {
 
-    public void scaleTransitionIn(Duration duration, Node node, double fromX, double fromY, double toX, double toY) {
+    public void scaleTransition(Duration duration, Node node, double fromX, double fromY, double toX, double toY) {
         ScaleTransition transition = new ScaleTransition(duration, node);
         transition.setFromX(fromX);
         transition.setFromY(fromY);

@@ -2,11 +2,10 @@ package com.example.modules;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.nio.channels.UnresolvedAddressException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Connection implements Runnable {
-    private volatile AtomicBoolean connection = new AtomicBoolean(true);
+    private static volatile AtomicBoolean connection = new AtomicBoolean(true);
 
     private String host;
     private int port;
@@ -17,7 +16,7 @@ public class Connection implements Runnable {
         this.port = port;
     }
 
-    public void stop() {
+    public static void stop() {
         connection.set(false);
     }
 

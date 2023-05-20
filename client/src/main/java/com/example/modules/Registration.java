@@ -2,25 +2,22 @@ package com.example.modules;
 
 import com.example.grapghics.Animations;
 import com.example.grapghics.TextSetter;
+import com.example.run.ProxyController;
 import javafx.fxml.FXML;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import java.lang.reflect.Field;
 import java.util.*;
 
-import static com.example.run.ProxyController.getField;
+public class Registration extends ProxyController {
+    private static final Rectangle rectangle = new Rectangle(0, 0, Color.WHITE);
 
-public class Registration {
     private final String bundle = "properties.Registration";
     private String host;
     private String port;
@@ -30,6 +27,15 @@ public class Registration {
         Validation validation = new Validation();
         this.locale = locale;
         if (validation.registerEmpty(locale) & validation.registerLong(locale)) {
+            Field[] fields = getFields("register", "enter", "languages");
+            Arrays.stream(fields).forEach(f -> {
+                try {
+                    ((Node) f.get(controller)).setDisable(true);
+                } catch (IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
             host = ((TextField) getField("host")).getText();
             port = ((TextField) getField("port")).getText();
             ((Label) getField("hostInput")).setText(host);
@@ -50,15 +56,25 @@ public class Registration {
         TextSetter.set(ResourceBundle.getBundle(bundle, locale), fields, keys);
         Animations animations = new Animations();
 
-        Rectangle rectangle = new Rectangle(0, 0, Color.WHITE);
         rectangle.setStroke(Color.WHITE);
         rectangle.setLayoutX(175);
         rectangle.setLayoutY(193);
         anchorPane.getChildren().add(13, rectangle);
-        animations.scaleTransitionIn(Duration.millis(250), rectangle, 0,0,302,217);
-
+        animations.scaleTransition(Duration.millis(250), rectangle, 0,0,302,217);
 
         connectionAnchor.setVisible(true);
-        animations.scaleTransitionIn(Duration.millis(250), connectionAnchor, 0,0,1,1);
+        animations.scaleTransition(Duration.millis(250), connectionAnchor, 0,0,1,1);
+    }
+
+    public void cancelConnection() {
+        AnchorPane connectionAnchor = getField("connectionAnchor");
+        AnchorPane anchorPane = getField("mainAnchor");
+        Animations animations = new Animations();
+
+        Connection.stop();
+        animations.scaleTransition(Duration.millis(250), connectionAnchor, 1,1,0,0);
+        animations.scaleTransition(Duration.millis(250), rectangle, 302,217,0,0);
+
+        anchorPane.getChildren().remove(13);
     }
 }

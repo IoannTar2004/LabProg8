@@ -33,10 +33,10 @@
                   <Button fx:id="register" layoutX="14.0" layoutY="322.0" mnemonicParsing="false" onMouseClicked="#registerClick" prefHeight="42.0" prefWidth="169.0" styleClass="buttonReg" stylesheets="@../../../CSS/Registration.css" textFill="WHITE" />
                   <Button fx:id="enter" layoutX="218.0" layoutY="322.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="108.0" styleClass="buttonEnter" stylesheets="@../../../CSS/Registration.css" textFill="WHITE" />
                   <ChoiceBox fx:id="languages" layoutX="100.0" layoutY="375.0" prefWidth="150.0" styleClass="cb" stylesheets="@../../../CSS/Registration.css" />
-                  <TextField fx:id="port" layoutX="70.0" layoutY="117.0" prefHeight="33.0" prefWidth="210.0" AnchorPane.topAnchor="145.0" />
-                  <TextField fx:id="login" layoutX="69.0" layoutY="181.0" prefHeight="33.0" prefWidth="210.0" AnchorPane.topAnchor="206.0" />
-                  <TextField fx:id="host" layoutX="70.0" layoutY="84.0" prefHeight="33.0" prefWidth="210.0" AnchorPane.topAnchor="84.0" />
-                  <PasswordField fx:id="password" layoutX="68.0" layoutY="249.0" prefHeight="33.0" prefWidth="212.0" AnchorPane.topAnchor="267.0" />
+                  <TextField fx:id="host" layoutX="70.0" layoutY="84.0" onMouseClicked="#fieldClick" prefHeight="33.0" prefWidth="210.0" AnchorPane.topAnchor="84.0" />
+                  <TextField fx:id="port" layoutX="70.0" layoutY="117.0" onMouseClicked="#fieldClick" prefHeight="33.0" prefWidth="210.0" AnchorPane.topAnchor="145.0" />
+                  <TextField fx:id="login" layoutX="69.0" layoutY="181.0" onMouseClicked="#fieldClick" prefHeight="33.0" prefWidth="210.0" AnchorPane.topAnchor="206.0" />
+                  <PasswordField fx:id="password" layoutX="68.0" layoutY="249.0" onMouseClicked="#fieldClick" prefHeight="33.0" prefWidth="212.0" AnchorPane.topAnchor="267.0" />
                   <Label fx:id="portLabel" layoutX="1.0" layoutY="118.0" prefHeight="26.0" prefWidth="346.0" styleClass="labelText" stylesheets="@../../../CSS/Registration.css">
                      <font>
                         <Font size="16.0" />
@@ -79,7 +79,7 @@
                               <Font size="19.0" />
                            </font>
                         </Label>
-                        <Button fx:id="cancelButton" layoutX="109.0" layoutY="166.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="74.0" />
+                        <Button fx:id="cancelButton" layoutX="109.0" layoutY="166.0" mnemonicParsing="false" onMouseClicked="#cancelConnection" prefHeight="36.0" prefWidth="74.0" />
                         <Label fx:id="portText" layoutX="1.0" layoutY="109.0" prefHeight="31.0" prefWidth="78.0">
                            <font>
                               <Font size="19.0" />
