@@ -37,3 +37,7 @@
     -fx-font-weight: bolder;
     -fx-alignment: center;
 }
+
+.connectionText {
+    -fx-font-size: 19;
+}

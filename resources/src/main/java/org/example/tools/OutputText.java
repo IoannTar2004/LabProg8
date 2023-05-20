@@ -10,7 +10,7 @@ public class OutputText {
 
     private static ResourceBundle registration;
 
-    public static String registration(String key, Locale locale) {
-        return ResourceBundle.getBundle("key", locale).getString(key);
+    public static String print(String bundle, Locale locale, String key) {
+        return ResourceBundle.getBundle(bundle, locale).getString(key);
     }
 }

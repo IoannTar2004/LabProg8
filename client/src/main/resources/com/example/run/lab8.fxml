@@ -10,6 +10,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -18,7 +19,7 @@
    <center>
       <Group BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane fx:id="anchor" layoutX="98.0" prefHeight="423.0" prefWidth="338.0">
+            <AnchorPane fx:id="mainAnchor" layoutX="98.0" prefHeight="423.0" prefWidth="338.0">
                <children>
                   <ImageView fitHeight="437.0" fitWidth="350.0" layoutY="-15.0">
                      <image>
@@ -62,6 +63,44 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
+                  <AnchorPane fx:id="connectionAnchor" layoutX="28.0" layoutY="88.0" prefHeight="229.0" prefWidth="294.0">
+                     <children>
+                        <HBox layoutX="2.0" layoutY="61.0" prefHeight="36.0" prefWidth="291.0">
+                           <children>
+                              <Label fx:id="hostText" prefHeight="31.0" prefWidth="49.0">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="hostInput" layoutX="10.0" layoutY="10.0" prefHeight="31.0" prefWidth="242.0">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Label fx:id="connectionText" layoutX="80.0" prefHeight="31.0" prefWidth="144.0">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="cancelButton" layoutX="109.0" layoutY="166.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="74.0" />
+                        <HBox layoutX="1.0" layoutY="109.0" prefHeight="36.0" prefWidth="291.0">
+                           <children>
+                              <Label fx:id="portText" prefHeight="31.0" prefWidth="49.0">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="portInput" layoutX="10.0" layoutY="10.0" prefHeight="31.0" prefWidth="242.0">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
                </children>
             </AnchorPane>
          </children>

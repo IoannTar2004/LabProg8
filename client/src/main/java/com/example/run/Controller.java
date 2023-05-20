@@ -4,18 +4,24 @@ import com.example.modules.Languages;
 import com.example.modules.Registration;
 import com.example.modules.Translation;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 
 /**
  * Controls all nodes in application
  */
 public class Controller {
     @FXML
-    private AnchorPane anchor;
+    private Button cancelButton;
+
+    @FXML
+    private AnchorPane connectionAnchor;
+
+    @FXML
+    private Label connectionText;
 
     @FXML
     private Button enter;
@@ -27,7 +33,13 @@ public class Controller {
     private Label hostEmpty;
 
     @FXML
+    private Label hostInput;
+
+    @FXML
     private Label hostLabel;
+
+    @FXML
+    private Label hostText;
 
     @FXML
     private ChoiceBox<String> languages;
@@ -39,6 +51,9 @@ public class Controller {
     private Label loginLabel;
 
     @FXML
+    private AnchorPane mainAnchor;
+
+    @FXML
     private PasswordField password;
 
     @FXML
@@ -48,17 +63,21 @@ public class Controller {
     private TextField port;
 
     @FXML
+    private Label portInput;
+
+    @FXML
     private Label portLabel;
+
+    @FXML
+    private Label portText;
 
     @FXML
     private Button register;
 
-
     @FXML
     public void initialize() {
+        connectionAnchor.setVisible(false);
         ProxyController.setController(this);
-        Circle circle = new Circle(3, Color.BLUE);
-        circle.setRadius(100);
 
         languages.setItems(Languages.getLangArray());
         languages.setValue("Русский");
