@@ -97,7 +97,10 @@ public class Controller {
 
     @FXML
     protected void registerClick(MouseEvent event) {
-        new Registration().register(Languages.getLocale(languages.getValue()));
+        Registration registration = new Registration();
+        if(registration.register(Languages.getLocale(languages.getValue()))) {
+            registration.initialize();
+        }
     }
 
     @FXML

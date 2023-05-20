@@ -22,7 +22,7 @@ public class Registration extends ProxyController {
     private String port;
     private Locale locale;
 
-    public void register(Locale locale) {
+    public boolean register(Locale locale) {
         Validation validation = new Validation();
         this.locale = locale;
         if (validation.registerEmpty(locale) & validation.registerLong(locale)) {
@@ -33,10 +33,11 @@ public class Registration extends ProxyController {
             port = ((TextField) getField("port")).getText();
             ((Label) getField("hostInput")).setText(host);
             ((Label) getField("portInput")).setText(port);
-            //new Thread(new Connection(host, port)).start();
+            new Thread(new Connection(host, Integer.parseInt(port))).start();
 
-            initialize();
+            return true;
         }
+        return false;
     }
 
     @FXML
