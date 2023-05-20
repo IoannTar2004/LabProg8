@@ -5,10 +5,15 @@ import com.example.modules.Registration;
 import com.example.modules.Translation;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Controls all nodes in application
@@ -87,6 +92,9 @@ public class Controller {
 
     @FXML
     protected void registerClick(MouseEvent event) {
+        register.setDisable(true);
+        enter.setDisable(true);
+        languages.setDisable(true);
         new Registration().register(Languages.getLocale(languages.getValue()));
     }
 }

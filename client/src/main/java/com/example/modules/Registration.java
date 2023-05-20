@@ -47,7 +47,7 @@ public class Registration {
 
         String[] fields = {"connectionText", "hostText", "portText", "cancelButton"};
         String[] keys = {"connectionText", "host_", "port_", "cancelButton"};
-        TextSetter.<Label>set(ResourceBundle.getBundle(bundle, locale), fields, keys);
+        TextSetter.set(ResourceBundle.getBundle(bundle, locale), fields, keys);
         Animations animations = new Animations();
 
         Rectangle rectangle = new Rectangle(0, 0, Color.WHITE);
