@@ -3,6 +3,7 @@ package com.example.modules;
 import com.example.grapghics.Animations;
 import com.example.grapghics.NodeManager;
 import com.example.run.ProxyController;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -12,6 +13,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
@@ -23,10 +27,17 @@ public class Registration extends ProxyController implements Runnable {
     private String host;
     private String port;
     private Locale locale;
+    private String mode;
 
-    public boolean register(Locale locale) {
-        Validation validation = new Validation();
+    public Registration(String mode, Locale locale) {
         this.locale = locale;
+        this.mode = mode;
+    }
+
+    public Registration() {}
+
+    public boolean register() {
+        Validation validation = new Validation();
 
         if (validation.registerEmpty(locale) & validation.registerLong(locale)) {
             Node[] fields = getNodes("register", "enter", "languages");
@@ -35,7 +46,7 @@ public class Registration extends ProxyController implements Runnable {
             host = ((TextField) getField("host")).getText();
             port = ((TextField) getField("port")).getText();
             initialize();
-            new Thread(this).start();
+            Platform.runLater(this);
 
             return true;
         }
@@ -52,7 +63,7 @@ public class Registration extends ProxyController implements Runnable {
 
         String[] fields = {"connectionText", "hostText", "portText", "cancelButton"};
         String[] keys = {"connectionText", "host_", "port_", "cancelButton"};
-        new NodeManager().setText(ResourceBundle.getBundle(bundle, locale), fields, keys);
+        new NodeManager().setText(bundle, locale, fields, keys);
         Animations animations = new Animations();
 
         rectangle.setStroke(Color.WHITE);
@@ -73,16 +84,40 @@ public class Registration extends ProxyController implements Runnable {
 
         animations.scaleTransition(Duration.millis(250), connectionAnchor, 1,1,0,0);
         animations.scaleTransition(Duration.millis(250), rectangle, 302,217,0,0);
+
+        Node[] fields = getNodes("register", "enter", "languages");
+        new NodeManager().forEach(fields, f -> f.setDisable(false));
     }
 
     @Override
     public void run() {
-        FutureTask<Boolean> connect = new FutureTask<>(new Connection(host, Integer.parseInt(port)));
+        String login = ((TextField) getField("login")).getText();
+        String password = hash(((TextField) getField("password")).getText());
+        Connection connection = new Connection(host, Integer.parseInt(port));
+        NodeManager nodeManager = new NodeManager();
+
+        FutureTask<Boolean> connect = new FutureTask<>(connection);
         new Thread(connect).start();
         try {
             if (connect.get()) {
+                String key = connection.<String, String>exchange(new String[]{"user_access"}, mode, login, password)[0];
+                if (!key.equals("access")) {
+                    nodeManager.setText(bundle, locale, new String[]{"loginLabel"}, new String[]{key});
+                } else {
+                    // переключение на другую сцену
+                }
                 cancel();
             }
         } catch (InterruptedException | ExecutionException e) {e.printStackTrace();}
+    }
+
+    private String hash(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-224");
+            byte[] bytes = md.digest(password.getBytes());
+            BigInteger integer = new BigInteger(1, bytes);
+            return integer.toString(16);
+        } catch (NoSuchAlgorithmException e) {e.printStackTrace();}
+        return null;
     }
 }

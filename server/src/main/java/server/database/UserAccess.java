@@ -11,40 +11,38 @@ import java.util.List;
 public class UserAccess implements Command {
 
     @Override
-    public ServerSender<Boolean> execute(String mode, String[] command, String login, Object... args) {
+    public ServerSender<String> execute(String mode, String[] command, String login, Object... args) {
         if(mode.equals("newUser")) {
             return newUser(login, (String) args[0]);
         } else if (mode.equals("existedUser")) {
             return existedUser(login, (String) args[0]);
-        } else {
-            return new ServerSender<>(List.of("Такой команды нет!"));
         }
+        return null;
     }
 
-    private static ServerSender<Boolean> newUser(String login, String password) {
+    private static ServerSender<String> newUser(String login, String password) {
         DataBaseStuds studs = new DataBaseStuds();
         try {
             PreparedStatement statement = studs.getConnection().prepareStatement("INSERT INTO users VALUES (?,?)");
             statement.setString(1, login);
             statement.setString(2, password);
             statement.execute();
-            return new ServerSender<>(List.of("Вы успешно зарегистрированы"), true);
+            return new ServerSender<>(new String[]{"access"});
         } catch (SQLException e) {
-            return new ServerSender<>(List.of("Пользователь с таким логином уже существует! Попробуйте другой."), false);
+            return new ServerSender<>(new String[]{"existedUser"});
         }
     }
 
-    private static ServerSender<Boolean> existedUser(String login, String password) {
+    private static ServerSender<String> existedUser(String login, String password) {
         DataBaseStuds studs = new DataBaseStuds();
         try {
             ResultSet set = studs.getConnection().createStatement().executeQuery("SELECT * FROM users");
             while (set.next()) {
                 if (set.getString(1).equals(login) && set.getString(2).equals(password)) {
-                    return new ServerSender<>(List.of("Вы успешно вошли!"), true);
+                    return new ServerSender<>(new String[]{"access"});
                 }
             }
-            return new ServerSender<>(List.of("Не удалось войти. Проверьте логин и пароль. " +
-                    "Зарегистрироваться? (y - да, n - нет)"), false);
+            return new ServerSender<>(new String[]{"UserNotFound"});
         } catch (SQLException e) {e.printStackTrace();}
         return null;
     }

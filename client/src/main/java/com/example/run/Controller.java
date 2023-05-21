@@ -9,9 +9,6 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.FutureTask;
-
 /**
  * Controls all nodes in application
  */
@@ -89,10 +86,9 @@ public class Controller {
     }
 
     @FXML
-    protected void registerClick(MouseEvent event) throws ExecutionException, InterruptedException {
-        Registration registration = new Registration();
-        registration.register(Languages.getLocale(languages.getValue()));
-        Connection connection = new Connection(host.getText(), Integer.parseInt(port.getText()));
+    protected void registerClick(MouseEvent event) {
+        Registration registration = new Registration("newUser", Languages.getLocale(languages.getValue()));
+        registration.register();
 
     }
 
@@ -100,10 +96,6 @@ public class Controller {
     protected void cancelConnection(MouseEvent event) {
         new Registration().cancel();
         Connection.stop();
-
-        register.setDisable(false);
-        enter.setDisable(false);
-        languages.setDisable(false);
     }
 
     @FXML
@@ -112,5 +104,11 @@ public class Controller {
         portLabel.setText("");
         loginLabel.setText("");
         passwordLabel.setText("");
+    }
+
+    @FXML
+    protected void enterClick(MouseEvent event) {
+        Registration registration = new Registration("existedUser", Languages.getLocale(languages.getValue()));
+        registration.register();
     }
 }
