@@ -1,4 +1,8 @@
-.root {
+.log {
     -fx-background-image: url("../images/log_background.jpg");
+    -fx-background-size: cover;
+}
+.table {
+    -fx-background-image: url("../images/table_background.jpg");
     -fx-background-size: cover;
 }
