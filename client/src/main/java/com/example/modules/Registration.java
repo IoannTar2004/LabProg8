@@ -46,7 +46,7 @@ public class Registration extends ProxyController implements Runnable {
             host = ((TextField) getField("host")).getText();
             port = ((TextField) getField("port")).getText();
             initialize();
-            Platform.runLater(this);
+            new Thread(this).start();
 
             return true;
         }
@@ -96,19 +96,15 @@ public class Registration extends ProxyController implements Runnable {
         Connection connection = new Connection(host, Integer.parseInt(port));
         NodeManager nodeManager = new NodeManager();
 
-        FutureTask<Boolean> connect = new FutureTask<>(connection);
-        new Thread(connect).start();
-        try {
-            if (connect.get()) {
-                String key = connection.<String, String>exchange(new String[]{"user_access"}, mode, login, password)[0];
-                if (!key.equals("access")) {
-                    nodeManager.setText(bundle, locale, new String[]{"loginLabel"}, new String[]{key});
-                } else {
-                    // переключение на другую сцену
-                }
-                cancel();
+        if (connection.run()) {
+            String key = connection.<String, String>exchange(new String[]{"user_access"}, mode, login, password)[0];
+            if (!key.equals("access")) {
+                Platform.runLater(() -> nodeManager.setText(bundle, locale, new String[]{"loginLabel"}, new String[]{key}));
+            } else {
+                // переключение на другую сцену
             }
-        } catch (InterruptedException | ExecutionException e) {e.printStackTrace();}
+            cancel();
+        }
     }
 
     private String hash(String password) {

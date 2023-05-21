@@ -7,11 +7,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class Connection implements Callable<Boolean> {
+public class Connection {
     private static volatile AtomicBoolean connection = new AtomicBoolean(true);
 
     private static String host;
@@ -31,7 +30,7 @@ public class Connection implements Callable<Boolean> {
     /**
      * Run endless tries to connect to server
      */
-    public Boolean call() {
+    public boolean run() {
         while (connection.get()) {
             try {
                 socket = new Socket(host, port);
@@ -57,7 +56,7 @@ public class Connection implements Callable<Boolean> {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
-            new Thread(new FutureTask<>(this)).start();
+            run();
         }
         return null;
     }
