@@ -17,8 +17,6 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.FutureTask;
 
 public class Registration extends ProxyController implements Runnable {
     private static final Rectangle rectangle = new Rectangle(0, 0, Color.WHITE);
@@ -30,11 +28,14 @@ public class Registration extends ProxyController implements Runnable {
     private String mode;
 
     public Registration(String mode, Locale locale) {
+        super("registration");
         this.locale = locale;
         this.mode = mode;
     }
 
-    public Registration() {}
+    public Registration() {
+        super("registration");
+    }
 
     public boolean register() {
         Validation validation = new Validation();
@@ -63,7 +64,7 @@ public class Registration extends ProxyController implements Runnable {
 
         String[] fields = {"connectionText", "hostText", "portText", "cancelButton"};
         String[] keys = {"connectionText", "host_", "port_", "cancelButton"};
-        new NodeManager().setText(bundle, locale, fields, keys);
+        new NodeManager().setText("registration", bundle, locale, fields, keys);
         Animations animations = new Animations();
 
         rectangle.setStroke(Color.WHITE);
@@ -99,7 +100,9 @@ public class Registration extends ProxyController implements Runnable {
         if (connection.run()) {
             String key = connection.<String, String>exchange(new String[]{"user_access"}, mode, login, password)[0];
             if (!key.equals("access")) {
-                Platform.runLater(() -> nodeManager.setText(bundle, locale, new String[]{"loginLabel"}, new String[]{key}));
+                Platform.runLater(() -> nodeManager.setText("registration",
+                        bundle, locale, new String[]{"loginLabel"}, new String[]{key}));
+                connection.close();
             } else {
                 // переключение на другую сцену
             }

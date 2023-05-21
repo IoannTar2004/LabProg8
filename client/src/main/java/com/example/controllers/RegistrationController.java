@@ -1,18 +1,23 @@
-package com.example.run;
+package com.example.controllers;
 
 import com.example.modules.Connection;
 import com.example.modules.Languages;
 import com.example.modules.Registration;
 import com.example.modules.Translation;
+import com.example.run.ProxyController;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 /**
  * Controls all nodes in application
  */
-public class Controller {
+public class RegistrationController implements Initializable {
 
     @FXML
     private Button cancelButton;
@@ -75,14 +80,14 @@ public class Controller {
     private Button register;
 
     @FXML
-    public void initialize() {
+    public void initialize(URL url, ResourceBundle bundle) {
         connectionAnchor.setVisible(false);
-        ProxyController.setController(this);
+        ProxyController.setController("registration", this);
 
         languages.setItems(Languages.getLangArray());
         languages.setValue("Русский");
-        new Translation().changeLanguage(null);
-        languages.setOnAction(new Translation()::changeLanguage);
+        new Translation("registration").changeLanguage(null);
+        languages.setOnAction(new Translation("registration")::changeLanguage);
     }
 
     @FXML

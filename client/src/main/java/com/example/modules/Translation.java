@@ -1,6 +1,6 @@
 package com.example.modules;
 
-import com.example.run.Controller;
+import com.example.controllers.RegistrationController;
 import com.example.run.ProxyController;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
@@ -14,6 +14,11 @@ import java.util.ResourceBundle;
  * Class for translation texts to different languages using text from .properties files
  */
 public class Translation extends ProxyController {
+
+    public Translation(String classname) {
+        super(classname);
+    }
+
     /**
      * Translate all texts in application
      * @param event
@@ -42,7 +47,7 @@ public class Translation extends ProxyController {
 
     public Locale getLocale() {
         try {
-            Field field = Controller.class.getDeclaredField("languages");
+            Field field = RegistrationController.class.getDeclaredField("languages");
             field.setAccessible(true);
             String language = ((ChoiceBox<String>) field.get(controller)).getValue();
             return Languages.getLocale(language);

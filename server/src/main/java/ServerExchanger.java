@@ -19,7 +19,7 @@ public class ServerExchanger {
         int port = scanner.nextInt();
         System.out.println("Running!");
         try (ServerSocket serverSocket = new ServerSocket(port)) {
-            serverSocket.setReuseAddress(true);
+            serverSocket.setReuseAddress(false);
             ExecutorService consumers = Executors.newCachedThreadPool();
             consumers.submit(new Consumer());
             while (true) {

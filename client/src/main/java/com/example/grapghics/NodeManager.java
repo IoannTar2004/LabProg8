@@ -1,5 +1,6 @@
 package com.example.grapghics;
 
+import com.example.run.ProxyController;
 import javafx.scene.Node;
 import javafx.scene.control.Labeled;
 
@@ -9,14 +10,13 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
 
-import static com.example.run.ProxyController.getField;
-
 public class NodeManager {
 
-    public <T extends Labeled> void setText(String bundle, Locale locale, String[] fields, String[] keys) {
+    public <T extends Labeled> void setText(String clas, String bundle, Locale locale, String[] fields, String[] keys) {
+        ProxyController controller = new ProxyController(clas);
         int i = 0;
         for (String field: fields) {
-            T node = getField(field);
+            T node = controller.getField(field);
             node.setText(ResourceBundle.getBundle(bundle, locale).getString(keys[i]));
             i++;
         }

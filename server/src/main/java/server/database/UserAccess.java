@@ -3,6 +3,7 @@ package server.database;
 import server.modules.ServerSender;
 import server.commands.Command;
 
+import java.net.Socket;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

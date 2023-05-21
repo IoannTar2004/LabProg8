@@ -7,35 +7,37 @@ import javafx.scene.control.TextField;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class Validation extends ProxyController {
+public class Validation {
 
     public boolean registerEmpty(Locale locale) {
+        ProxyController controller = new ProxyController("registration");
+
         boolean result = true;
         String bundle = "properties.Registration";
-        TextField host = getField("host");
+        TextField host = controller.getField("host");
         if (host.getText().length() == 0) {
-            Label label = getField("hostLabel");
+            Label label = controller.getField("hostLabel");
             label.setText(ResourceBundle.getBundle(bundle, locale).getString("hostEmpty"));
             result = false;
         }
 
-        TextField port = getField("port");
+        TextField port = controller.getField("port");
         if (port.getText().length() == 0) {
-            Label label = getField("portLabel");
+            Label label = controller.getField("portLabel");
             label.setText(ResourceBundle.getBundle(bundle, locale).getString("portEmpty"));
             result = false;
         }
 
-        TextField login = getField("login");
+        TextField login = controller.getField("login");
         if (login.getText().length() == 0) {
-            Label label = getField("loginLabel");
+            Label label = controller.getField("loginLabel");
             label.setText(ResourceBundle.getBundle(bundle, locale).getString("loginEmpty"));
             result = false;
         }
 
-        TextField password = getField("password");
+        TextField password = controller.getField("password");
         if (password.getText().length() == 0) {
-            Label label = getField("passwordLabel");
+            Label label = controller.getField("passwordLabel");
             label.setText(ResourceBundle.getBundle(bundle, locale).getString("passwordEmpty"));
             result = false;
         }
@@ -44,30 +46,31 @@ public class Validation extends ProxyController {
     }
 
     public boolean registerLong(Locale locale) {
+        ProxyController controller = new ProxyController("registration");
         boolean result = true;
         String bundle = "properties.Registration";
 
-        TextField port = getField("port");
+        TextField port = controller.getField("port");
         try {
             if (port.getText().length() != 0) {
                 Integer.parseInt(port.getText());
             }
         } catch (NumberFormatException e) {
-            Label label = getField("portLabel");
+            Label label = controller.getField("portLabel");
             label.setText(ResourceBundle.getBundle(bundle, locale).getString("portWrongFormat"));
             result = false;
         }
 
-        TextField login = getField("login");
+        TextField login = controller.getField("login");
         if (login.getText().length() > 32) {
-            Label label = getField("loginLabel");
+            Label label = controller.getField("loginLabel");
             label.setText(ResourceBundle.getBundle(bundle, locale).getString("loginLong"));
             result = false;
         }
 
-        TextField password = getField("password");
+        TextField password = controller.getField("password");
         if (password.getText().length() > 32) {
-            Label label = getField("passwordLabel");
+            Label label = controller.getField("passwordLabel");
             label.setText(ResourceBundle.getBundle(bundle, locale).getString("passwordLong"));
             result = false;
         }

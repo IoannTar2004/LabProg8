@@ -7,4 +7,6 @@ module com.example.client {
 
     opens com.example.run to javafx.fxml;
     exports com.example.run;
+    exports com.example.controllers;
+    opens com.example.controllers to javafx.fxml;
 }

@@ -13,13 +13,13 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class Connection {
     private static volatile AtomicBoolean connection = new AtomicBoolean(true);
 
-    private static String host;
-    private static int port;
-    private static Socket socket;
+    private String host;
+    private int port;
+    private Socket socket;
 
     public Connection(String host, int port) {
-        Connection.host = host;
-        Connection.port = port;
+        this.host = host;
+        this.port = port;
     }
     public Connection() {}
 
@@ -59,5 +59,13 @@ public class Connection {
             run();
         }
         return null;
+    }
+
+    public void close() {
+        try {
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
