@@ -37,7 +37,7 @@ public class ObjectsManager extends CollectionManager {
         return dragons.size();
     }
     public long ownerLength(String login) {
-        return new ObjectsCollectionManager().getAll().stream().filter(dragon1 -> dragon1.getUserLogin().equals(login)).count();
+        return new ObjectsCollectionManager().getAll().stream().filter(dragon1 -> dragon1.getUser().equals(login)).count();
     }
 
     public void remove(Dragon dragon) {
@@ -47,7 +47,7 @@ public class ObjectsManager extends CollectionManager {
     public void clear(String login) {
         int i = 0;
         while (i < dragons.size()) {
-            if (login.equals(dragons.get(i).getUserLogin())) {
+            if (login.equals(dragons.get(i).getUser())) {
                 dragons.remove(i);
                 continue;
             }

@@ -9,7 +9,7 @@ import java.util.Date;
  */
 public class Dragon implements Serializable {
     private long id;
-    private String user_login;
+    private String user;
     private String name;
     private Coordinates coordinates;
     private Integer age;
@@ -30,10 +30,10 @@ public class Dragon implements Serializable {
      * @param character {@link DragonCharacter character}
      * @param cave fractional number separated by a dot {@link DragonCave}
      */
-    public Dragon(long id, String user_login, String name, Coordinates coordinates, int age, Color color, DragonType type,
+    public Dragon(long id, String user, String name, Coordinates coordinates, int age, Color color, DragonType type,
                   DragonCharacter character, DragonCave cave) {
         this.id = id;
-        this.user_login = user_login;
+        this.user = user;
         this.name = name;
         this.coordinates = coordinates;
         this.age = age;
@@ -65,8 +65,8 @@ public class Dragon implements Serializable {
 
     public long getId() {return id;}
 
-    public String getUserLogin() {
-        return user_login;
+    public String getUser() {
+        return user;
     }
 
     public String getCoordinates() {
@@ -133,6 +133,6 @@ public class Dragon implements Serializable {
     }
 
     public void setUserLogin(String user_login) {
-        this.user_login = user_login;
+        this.user = user_login;
     }
 }

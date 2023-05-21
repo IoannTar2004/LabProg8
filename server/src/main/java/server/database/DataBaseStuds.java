@@ -19,7 +19,7 @@ public class DataBaseStuds extends DataBaseInitialization {
             PreparedStatement statement = getConnection().prepareStatement("INSERT INTO " +
                     "dragons VALUES (?,?,?,?,?,?,?,?,?,?)");
             statement.setLong(1, dragon.getId());
-            statement.setString(2, dragon.getUserLogin());
+            statement.setString(2, dragon.getUser());
             statement.setString(3, dragon.getName());
             statement.setString(4, dragon.getCoordinates());
             statement.setInt(5, dragon.getAge());
@@ -35,7 +35,7 @@ public class DataBaseStuds extends DataBaseInitialization {
     public void removeFirst(String login) throws NullPointerException {
         try {
             Dragon dragon = new ObjectsCollectionManager().getAll().stream().
-                    filter(dragon1 -> dragon1.getUserLogin().equals(login)).findFirst().orElse(null);
+                    filter(dragon1 -> dragon1.getUser().equals(login)).findFirst().orElse(null);
             PreparedStatement statement = getConnection().prepareStatement("DELETE FROM dragons " +
                     "WHERE id = ?");
             statement.setLong(1, dragon.getId());

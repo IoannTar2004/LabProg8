@@ -4,6 +4,7 @@ module com.example.client {
     requires resources;
 
     requires org.kordamp.bootstrapfx.core;
+    requires java.sql;
 
     opens com.example.run to javafx.fxml;
     exports com.example.run;

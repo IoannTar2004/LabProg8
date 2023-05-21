@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ObjectsCollectionManager extends CollectionManager {
     public Dragon getDragonById(String login, long id) throws NullPointerException {
-        Dragon dragon = dragons.stream().filter(dragon1 -> dragon1.getId() == id && dragon1.getUserLogin().equals(login))
+        Dragon dragon = dragons.stream().filter(dragon1 -> dragon1.getId() == id && dragon1.getUser().equals(login))
                 .findFirst().orElse(null);
         if (dragon != null) {
             return dragon;
@@ -28,7 +28,7 @@ public class ObjectsCollectionManager extends CollectionManager {
     public List<Dragon> getAll() {return dragons;}
 
     public List<Dragon> ownerList(String login) {
-        return new LinkedList<>(getAll()).stream().filter(dragon -> dragon.getUserLogin().equals(login)).toList();
+        return new LinkedList<>(getAll()).stream().filter(dragon -> dragon.getUser().equals(login)).toList();
     }
 
     public String getName(Dragon dragon) {
