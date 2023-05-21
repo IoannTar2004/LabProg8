@@ -13,8 +13,10 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 import java.util.*;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
 
-public class Registration extends ProxyController {
+public class Registration extends ProxyController implements Runnable {
     private static final Rectangle rectangle = new Rectangle(0, 0, Color.WHITE);
 
     private final String bundle = "properties.Registration";
@@ -25,15 +27,15 @@ public class Registration extends ProxyController {
     public boolean register(Locale locale) {
         Validation validation = new Validation();
         this.locale = locale;
+
         if (validation.registerEmpty(locale) & validation.registerLong(locale)) {
             Node[] fields = getNodes("register", "enter", "languages");
             new NodeManager().forEach(fields, f -> f.setDisable(true));
 
             host = ((TextField) getField("host")).getText();
             port = ((TextField) getField("port")).getText();
-            ((Label) getField("hostInput")).setText(host);
-            ((Label) getField("portInput")).setText(port);
-            new Thread(new Connection(host, Integer.parseInt(port))).start();
+            initialize();
+            new Thread(this).start();
 
             return true;
         }
@@ -42,6 +44,9 @@ public class Registration extends ProxyController {
 
     @FXML
     public void initialize() {
+        ((Label) getField("hostInput")).setText(host);
+        ((Label) getField("portInput")).setText(port);
+
         AnchorPane anchorPane = getField("mainAnchor");
         AnchorPane connectionAnchor = getField("connectionAnchor");
 
@@ -62,11 +67,22 @@ public class Registration extends ProxyController {
         animations.scaleTransition(Duration.millis(250), connectionAnchor, 0,0,1,1);
     }
 
-    public void cancelConnection() {
+    public void cancel() {
         AnchorPane connectionAnchor = getField("connectionAnchor");
         Animations animations = new Animations();
 
         animations.scaleTransition(Duration.millis(250), connectionAnchor, 1,1,0,0);
         animations.scaleTransition(Duration.millis(250), rectangle, 302,217,0,0);
+    }
+
+    @Override
+    public void run() {
+        FutureTask<Boolean> connect = new FutureTask<>(new Connection(host, Integer.parseInt(port)));
+        new Thread(connect).start();
+        try {
+            if (connect.get()) {
+                cancel();
+            }
+        } catch (InterruptedException | ExecutionException e) {e.printStackTrace();}
     }
 }

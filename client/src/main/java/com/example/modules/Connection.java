@@ -1,20 +1,28 @@
 package com.example.modules;
 
+import org.example.transmission.DataToClient;
+import org.example.transmission.DataToServer;
+
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.concurrent.Callable;
+import java.util.concurrent.FutureTask;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class Connection implements Runnable {
+public class Connection implements Callable<Boolean> {
     private static volatile AtomicBoolean connection = new AtomicBoolean(true);
 
-    private String host;
-    private int port;
-    private Socket socket;
+    private static String host;
+    private static int port;
+    private static Socket socket;
 
     public Connection(String host, int port) {
-        this.host = host;
-        this.port = port;
+        Connection.host = host;
+        Connection.port = port;
     }
+    public Connection() {}
 
     public static void stop() {
         connection.set(false);
@@ -23,14 +31,33 @@ public class Connection implements Runnable {
     /**
      * Run endless tries to connect to server
      */
-    public void run() {
+    public Boolean call() {
         while (connection.get()) {
             try {
                 socket = new Socket(host, port);
-                new Registration().cancelConnection();
-                return;
+                return true;
             } catch (IOException ignored) {} //повторяет подключение
         }
         connection.set(true);
+        return false;
+    }
+
+    public <S,G> G[] exchange(String[] input, String mode, String login, S... objects) {
+        DataToServer<S> sender = new DataToServer<>(input, mode, login, objects);
+
+        try {
+            ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+            out.writeObject(sender);
+
+            ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+            DataToClient<G> result = (DataToClient) in.readObject();
+            return result.getArguments();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            new Thread(new FutureTask<>(this)).start();
+        }
+        return null;
     }
 }

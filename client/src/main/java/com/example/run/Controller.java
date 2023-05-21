@@ -1,23 +1,16 @@
 package com.example.run;
 
-import com.example.grapghics.Animations;
 import com.example.modules.Connection;
 import com.example.modules.Languages;
 import com.example.modules.Registration;
 import com.example.modules.Translation;
 import javafx.fxml.FXML;
-import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
-import javafx.util.Duration;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
 
 /**
  * Controls all nodes in application
@@ -96,16 +89,16 @@ public class Controller {
     }
 
     @FXML
-    protected void registerClick(MouseEvent event) {
+    protected void registerClick(MouseEvent event) throws ExecutionException, InterruptedException {
         Registration registration = new Registration();
-        if(registration.register(Languages.getLocale(languages.getValue()))) {
-            registration.initialize();
-        }
+        registration.register(Languages.getLocale(languages.getValue()));
+        Connection connection = new Connection(host.getText(), Integer.parseInt(port.getText()));
+
     }
 
     @FXML
     protected void cancelConnection(MouseEvent event) {
-        new Registration().cancelConnection();
+        new Registration().cancel();
         Connection.stop();
 
         register.setDisable(false);
