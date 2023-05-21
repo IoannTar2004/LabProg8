@@ -1,14 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.controllers.TableController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="627.0" prefWidth="876.0" styleClass="table" stylesheets="@../../../CSS/background.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.TableController">
+   <center>
+      <Group BorderPane.alignment="CENTER">
+         <children>
+            <TableView fx:id="dragonsTable" layoutY="-22.0" onMouseClicked="#getItem" prefHeight="393.0" prefWidth="849.0">
+              <columns>
+                <TableColumn fx:id="id" prefWidth="43.20001566410065" text="id" />
+                  <TableColumn fx:id="user" prefWidth="95.99998474121094" text="Пользователь" />
+                <TableColumn fx:id="name" prefWidth="77.5999755859375" text="Имя" />
+                  <TableColumn fx:id="coordinates" prefWidth="123.20001220703125" text="Координаты" />
+                  <TableColumn fx:id="age" prefWidth="67.20001220703125" text="Возраст" />
+                  <TableColumn fx:id="color" prefWidth="71.20001220703125" text="Цвет" />
+                  <TableColumn fx:id="type" prefWidth="72.00006103515625" text="Тип" />
+                  <TableColumn fx:id="character" prefWidth="84.79998779296875" text="Характер" />
+                  <TableColumn fx:id="cave" prefWidth="79.99993896484375" text="Пещера" />
+                  <TableColumn fx:id="creationDate" prefWidth="140.0" text="Дата создания" />
+              </columns>
+            </TableView>
+         </children>
+      </Group>
+   </center>
+   <top>
+      <Pane prefHeight="65.0" prefWidth="724.0" style="-fx-background-color: red;" BorderPane.alignment="CENTER" />
+   </top>
+</BorderPane>
