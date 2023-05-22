@@ -1,7 +1,8 @@
 package org.example.collections;
 
 public enum DragonFields {
-    NAME("name"), COORDINATES("coordinates"), AGE("age"), COLOR("color"), TYPE("type"), CHARACTER("character"), CAVE("cave");
+    ID("id"), USER("user"), NAME("name"), COORDINATES("coordinates"), AGE("age"), COLOR("color"), TYPE("type"),
+    CHARACTER("character"), CAVE("cave"), DATE("creationDate");
 
     private String field;
 
@@ -13,6 +14,7 @@ public enum DragonFields {
         return field;
     }
 
+    @Deprecated
     public static DragonFields getFieldByNumber(String number) {
         try {
             int num = Integer.parseInt(number);
@@ -23,5 +25,13 @@ public enum DragonFields {
             }
         } catch (NumberFormatException ignored){}
         return null;
+    }
+
+    public static String[] getAll() {
+        String[] enums = new String[10];
+        for(DragonFields fields: DragonFields.values()) {
+            enums[fields.ordinal()] = fields.getField();
+        }
+        return enums;
     }
 }

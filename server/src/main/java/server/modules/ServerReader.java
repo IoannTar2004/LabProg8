@@ -15,6 +15,7 @@ public class ServerReader {
     private static Map<String, Command> commands = new HashMap<>();
     static {
         commands.put("user_access", new UserAccess());
+        commands.put("show", new ShowCommand());
     }
 
     private Command command;

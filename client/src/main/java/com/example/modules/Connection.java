@@ -69,4 +69,16 @@ public class Connection {
             e.printStackTrace();
         }
     }
+
+    public String getHost() {
+        return host;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public Socket getSocket() {
+        return socket;
+    }
 }

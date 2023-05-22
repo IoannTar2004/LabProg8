@@ -21,10 +21,4 @@ public class NodeManager {
             i++;
         }
     }
-
-    public void forEach(Node[] fields, Consumer<? super Node> action) {
-        try {
-            Arrays.stream(fields).forEach(action);
-        } catch (Exception e) {e.printStackTrace();}
-    }
 }

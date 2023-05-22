@@ -1,19 +1,27 @@
 package com.example.modules;
 
 import com.example.controllers.RegistrationController;
+import com.example.controllers.TableController;
 import com.example.grapghics.Animations;
 import com.example.grapghics.NodeManager;
+import com.example.run.ClientMain;
 import com.example.run.ProxyController;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.example.collections.Dragon;
 
+import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -40,8 +48,8 @@ public class Registration implements Runnable {
         Validation validation = new Validation();
 
         if (validation.registerEmpty(locale) & validation.registerLong(locale)) {
-            Node[] fields = controller.getNodes("register", "enter", "languages");
-            new NodeManager().forEach(fields, f -> f.setDisable(true));
+            Object[] fields = controller.getFields("register", "enter", "languages");
+            Arrays.stream(fields).forEach(r -> ((Node) r).setDisable(true));
 
             host = ((TextField) controller.getField("host")).getText();
             port = ((TextField) controller.getField("port")).getText();
@@ -85,8 +93,8 @@ public class Registration implements Runnable {
         animations.scaleTransition(Duration.millis(250), connectionAnchor, 1,1,0,0);
         animations.scaleTransition(Duration.millis(250), rectangle, 302,217,0,0);
 
-        Node[] fields = controller.getNodes("register", "enter", "languages");
-        new NodeManager().forEach(fields, f -> f.setDisable(false));
+        Object[] fields = controller.getFields("register", "enter", "languages");
+        Arrays.stream(fields).forEach(r -> ((Node) r).setDisable(false));
     }
 
     @Override
@@ -94,16 +102,22 @@ public class Registration implements Runnable {
         String login = ((TextField) controller.getField("login")).getText();
         String password = hash(((TextField) controller.getField("password")).getText());
         Connection connection = new Connection(host, Integer.parseInt(port));
-        NodeManager nodeManager = new NodeManager();
 
         if (connection.run()) {
-            String key = connection.exchange("user_access", mode, login, password);
+            String key = connection.<String, String>exchange("user_access", mode, login, password);
             if (!key.equals("access")) {
-                Platform.runLater(() -> nodeManager.setText(RegistrationController.class,
+                Platform.runLater(() -> new NodeManager().setText(RegistrationController.class,
                         bundle, locale, new String[]{"loginLabel"}, new String[]{key}));
                 connection.close();
             } else {
-                // переключение на другую сцену
+                Platform.runLater(new Runnable() {
+                      @Override
+                      public void run() {
+                          ProxyController.changeScene(controller.getField("enter"), "table.fxml");
+                          new DragonTable(connection.getSocket(), login).getAndFill();
+                      }
+                  }
+                );
             }
             cancel();
         }
