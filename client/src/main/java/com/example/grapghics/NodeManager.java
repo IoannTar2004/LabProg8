@@ -12,7 +12,7 @@ import java.util.function.Consumer;
 
 public class NodeManager {
 
-    public <T extends Labeled> void setText(String clas, String bundle, Locale locale, String[] fields, String[] keys) {
+    public <T extends Labeled> void setText(Class<?> clas, String bundle, Locale locale, String[] fields, String[] keys) {
         ProxyController controller = new ProxyController(clas);
         int i = 0;
         for (String field: fields) {

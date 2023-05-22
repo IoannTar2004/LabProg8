@@ -82,12 +82,12 @@ public class RegistrationController implements Initializable {
     @FXML
     public void initialize(URL url, ResourceBundle bundle) {
         connectionAnchor.setVisible(false);
-        ProxyController.setController("registration", this);
+        ProxyController.setController(RegistrationController.class, this);
 
         languages.setItems(Languages.getLangArray());
         languages.setValue("Русский");
-        new Translation("registration").changeLanguage(null);
-        languages.setOnAction(new Translation("registration")::changeLanguage);
+        new Translation(RegistrationController.class).changeLanguage(null);
+        languages.setOnAction(new Translation(RegistrationController.class)::changeLanguage);
     }
 
     @FXML

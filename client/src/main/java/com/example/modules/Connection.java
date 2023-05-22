@@ -52,7 +52,7 @@ public class Connection {
 
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
             DataToClient<G> result = (DataToClient) in.readObject();
-            return result.getArgument();
+            return result.getResult();
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

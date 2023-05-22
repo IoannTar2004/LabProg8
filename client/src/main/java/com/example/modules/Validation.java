@@ -1,5 +1,6 @@
 package com.example.modules;
 
+import com.example.controllers.RegistrationController;
 import com.example.run.ProxyController;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -10,7 +11,7 @@ import java.util.ResourceBundle;
 public class Validation {
 
     public boolean registerEmpty(Locale locale) {
-        ProxyController controller = new ProxyController("registration");
+        ProxyController controller = new ProxyController(RegistrationController.class);
 
         boolean result = true;
         String bundle = "properties.Registration";
@@ -46,7 +47,7 @@ public class Validation {
     }
 
     public boolean registerLong(Locale locale) {
-        ProxyController controller = new ProxyController("registration");
+        ProxyController controller = new ProxyController(RegistrationController.class);
         boolean result = true;
         String bundle = "properties.Registration";
 

@@ -14,10 +14,12 @@ import java.util.ResourceBundle;
 /**
  * Class for translation texts to different languages using text from .properties files
  */
-public class Translation extends ProxyController {
+public class Translation {
 
-    public Translation(String classname) {
-        super(classname);
+    private ProxyController controller;
+
+    public Translation(Class<?> clas) {
+        controller = new ProxyController(clas);
     }
 
     /**
@@ -26,7 +28,7 @@ public class Translation extends ProxyController {
      */
     public void changeLanguage(ActionEvent event) {
         String[] bundles = {"Registration"};
-        Field[] fields = getAllFields();
+        Field[] fields = controller.getAllFields();
         Locale locale = getLocale();
 
         for (String bundle: bundles) {
@@ -35,10 +37,10 @@ public class Translation extends ProxyController {
                 try {
                     String data = ResourceBundle.getBundle("properties." + bundle, locale).getString(field.getName());
                     if (field.getType() == TextField.class || field.getType() == PasswordField.class) {
-                        TextInputControl textInputControl = (TextInputControl) field.get(controller);
+                        TextInputControl textInputControl = (TextInputControl) field.get(controller.getControllerClass());
                         textInputControl.setPromptText(data);
                     } else if (field.getType() == Button.class) {
-                        Labeled button = (Labeled) field.get(controller);
+                        Labeled button = (Labeled) field.get(controller.getControllerClass());
                         button.setText(data);
                     }
                 } catch (MissingResourceException | IllegalAccessException ignored) {}
@@ -50,7 +52,7 @@ public class Translation extends ProxyController {
         try {
             Field field = RegistrationController.class.getDeclaredField("languages");
             field.setAccessible(true);
-            String language = ((ChoiceBox<String>) field.get(controller)).getValue();
+            String language = ((ChoiceBox<String>) field.get(controller.getControllerClass())).getValue();
             return Languages.getLocale(language);
         } catch (NoSuchFieldException | IllegalAccessException e) {e.printStackTrace();}
         return null;

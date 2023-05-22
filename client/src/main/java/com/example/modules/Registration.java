@@ -1,5 +1,6 @@
 package com.example.modules;
 
+import com.example.controllers.RegistrationController;
 import com.example.grapghics.Animations;
 import com.example.grapghics.NodeManager;
 import com.example.run.ProxyController;
@@ -18,9 +19,10 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
-public class Registration extends ProxyController implements Runnable {
+public class Registration implements Runnable {
     private static final Rectangle rectangle = new Rectangle(0, 0, Color.WHITE);
 
+    private final ProxyController controller = new ProxyController(RegistrationController.class);
     private final String bundle = "properties.Registration";
     private String host;
     private String port;
@@ -28,24 +30,21 @@ public class Registration extends ProxyController implements Runnable {
     private String mode;
 
     public Registration(String mode, Locale locale) {
-        super("registration");
         this.locale = locale;
         this.mode = mode;
     }
 
-    public Registration() {
-        super("registration");
-    }
+    public Registration() {}
 
     public boolean register() {
         Validation validation = new Validation();
 
         if (validation.registerEmpty(locale) & validation.registerLong(locale)) {
-            Node[] fields = getNodes("register", "enter", "languages");
+            Node[] fields = controller.getNodes("register", "enter", "languages");
             new NodeManager().forEach(fields, f -> f.setDisable(true));
 
-            host = ((TextField) getField("host")).getText();
-            port = ((TextField) getField("port")).getText();
+            host = ((TextField) controller.getField("host")).getText();
+            port = ((TextField) controller.getField("port")).getText();
             initialize();
             new Thread(this).start();
 
@@ -56,16 +55,15 @@ public class Registration extends ProxyController implements Runnable {
 
     @FXML
     public void initialize() {
-        ((Label) getField("hostInput")).setText(host);
-        ((Label) getField("portInput")).setText(port);
+        ((Label) controller.getField("hostInput")).setText(host);
+        ((Label) controller.getField("portInput")).setText(port);
 
-        AnchorPane anchorPane = getField("mainAnchor");
-        AnchorPane connectionAnchor = getField("connectionAnchor");
+        AnchorPane anchorPane = controller.getField("mainAnchor");
+        AnchorPane connectionAnchor = controller.getField("connectionAnchor");
 
         String[] fields = {"connectionText", "hostText", "portText", "cancelButton"};
         String[] keys = {"connectionText", "host_", "port_", "cancelButton"};
-        new NodeManager().setText("registration", bundle, locale, fields, keys);
-        Animations animations = new Animations();
+        new NodeManager().setText(RegistrationController.class, bundle, locale, fields, keys);
 
         rectangle.setStroke(Color.WHITE);
         rectangle.setLayoutX(175);
@@ -73,34 +71,35 @@ public class Registration extends ProxyController implements Runnable {
         try {
             anchorPane.getChildren().add(13, rectangle);
         } catch (IllegalArgumentException ignored) {} //если объект добавлен, то просто проигнорировать
-        animations.scaleTransition(Duration.millis(250), rectangle, 0,0,302,217);
 
+        Animations animations = new Animations();
+        animations.scaleTransition(Duration.millis(250), rectangle, 0,0,302,217);
         connectionAnchor.setVisible(true);
         animations.scaleTransition(Duration.millis(250), connectionAnchor, 0,0,1,1);
     }
 
     public void cancel() {
-        AnchorPane connectionAnchor = getField("connectionAnchor");
+        AnchorPane connectionAnchor = controller.getField("connectionAnchor");
         Animations animations = new Animations();
 
         animations.scaleTransition(Duration.millis(250), connectionAnchor, 1,1,0,0);
         animations.scaleTransition(Duration.millis(250), rectangle, 302,217,0,0);
 
-        Node[] fields = getNodes("register", "enter", "languages");
+        Node[] fields = controller.getNodes("register", "enter", "languages");
         new NodeManager().forEach(fields, f -> f.setDisable(false));
     }
 
     @Override
     public void run() {
-        String login = ((TextField) getField("login")).getText();
-        String password = hash(((TextField) getField("password")).getText());
+        String login = ((TextField) controller.getField("login")).getText();
+        String password = hash(((TextField) controller.getField("password")).getText());
         Connection connection = new Connection(host, Integer.parseInt(port));
         NodeManager nodeManager = new NodeManager();
 
         if (connection.run()) {
             String key = connection.exchange("user_access", mode, login, password);
             if (!key.equals("access")) {
-                Platform.runLater(() -> nodeManager.setText("registration",
+                Platform.runLater(() -> nodeManager.setText(RegistrationController.class,
                         bundle, locale, new String[]{"loginLabel"}, new String[]{key}));
                 connection.close();
             } else {

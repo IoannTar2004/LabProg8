@@ -1,6 +1,5 @@
 package com.example.run;
 
-import com.example.controllers.RegistrationController;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 
@@ -15,23 +14,24 @@ import java.util.Map;
 
 public class ProxyController {
 
-    private static Map<String, Initializable> controllers = new HashMap<>();
-    protected Initializable controller;
+    private static Map<Class<?>, Initializable> controllers = new HashMap<>();
+    private final Initializable controllerClass;
 
-    public ProxyController(String classname) {
-        controller = controllers.get(classname);
+    public ProxyController(Class<?> key) {
+        controllerClass = controllers.get(key);
     }
+
     public <T> T getField(String field) {
         try {
-            Field field1 = controller.getClass().getDeclaredField(field);
+            Field field1 = controllerClass.getClass().getDeclaredField(field);
             field1.setAccessible(true);
-            return (T) field1.get(controller);
+            return (T) field1.get(controllerClass);
         } catch (NoSuchFieldException | IllegalAccessException e) {e.printStackTrace();}
         return null;
     }
 
     public Field[] getAllFields() {
-        Field[] fields = controller.getClass().getDeclaredFields();
+        Field[] fields = controllerClass.getClass().getDeclaredFields();
         Arrays.stream(fields).forEach(f -> f.setAccessible(true));
 
         return fields;
@@ -41,15 +41,19 @@ public class ProxyController {
         Node[] nodes = new Node[fieldsName.length];
         try {
             for (int i = 0; i < fieldsName.length; i++) {
-                Field field = controller.getClass().getDeclaredField(fieldsName[i]);
+                Field field = controllerClass.getClass().getDeclaredField(fieldsName[i]);
                 field.setAccessible(true);
-                nodes[i] = (Node) field.get(controller);
+                nodes[i] = (Node) field.get(controllerClass);
             }
         } catch (NoSuchFieldException | IllegalAccessException e) {e.printStackTrace();}
         return nodes;
     }
 
-    public static void setController(String key, Initializable initializable) {
+    public static void setController(Class<?> key, Initializable initializable) {
         controllers.put(key, initializable);
+    }
+
+    public Initializable getControllerClass() {
+        return controllerClass;
     }
 }
