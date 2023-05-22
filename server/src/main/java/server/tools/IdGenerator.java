@@ -14,7 +14,7 @@ public class IdGenerator {
      * generate 12-digit id. It is guaranteed that object will have unique id.
      * @return id
      */
-    public static Long generate() {
+    public synchronized static Long generate() {
         DataBaseStuds studs = new DataBaseStuds();
         try {
             Statement statement = studs.getConnection().createStatement();
