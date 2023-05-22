@@ -1,5 +1,6 @@
 package com.example.controllers;
 
+import com.example.grapghics.Translation;
 import com.example.modules.Connection;
 import com.example.modules.DragonTable;
 import com.example.run.ProxyController;
@@ -7,6 +8,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
@@ -52,8 +55,28 @@ public class TableController implements Initializable {
     private TableColumn<Dragon, String> user;
 
     @FXML
+    private Button add;
+
+    @FXML
+    private Button edit;
+
+    @FXML
+    private Button remove;
+
+    @FXML
+    private Button filter;
+
+    @FXML
+    ChoiceBox<String> languages;
+
+    @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ProxyController.setController(TableController.class, this);
+
+        languages.setItems(Translation.getAllLanguages());
+        languages.setValue(Translation.getLanguage());
+        new Translation(TableController.class).changeLanguage(null);
+        languages.setOnAction(new Translation(TableController.class)::changeLanguage);
     }
 
 }

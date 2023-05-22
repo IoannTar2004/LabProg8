@@ -76,4 +76,11 @@ public class ProxyController {
             stage.show();
         } catch (IOException e) {e.printStackTrace();}
     }
+
+    @Override
+    public String toString() {
+        return "ProxyController{" +
+                "controllerClass=" + controllerClass.getClass().getName() +
+                '}';
+    }
 }

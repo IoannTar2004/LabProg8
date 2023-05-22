@@ -30,10 +30,11 @@ public enum Color implements Serializable {
         return null;
     }
 
-    /**
-     *
-     * @param color ordinal+1 color
-     * @return color
-     */
-
+    public static String[] getAll() {
+        String[] enums = new String[3];
+        for(DragonFields fields: DragonFields.values()) {
+            enums[fields.ordinal()] = fields.getField();
+        }
+        return enums;
+    }
 }

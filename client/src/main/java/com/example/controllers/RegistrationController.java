@@ -1,21 +1,15 @@
 package com.example.controllers;
 
 import com.example.modules.Connection;
-import com.example.modules.Languages;
 import com.example.modules.Registration;
 import com.example.grapghics.Translation;
-import com.example.run.ClientMain;
 import com.example.run.ProxyController;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -89,15 +83,15 @@ public class RegistrationController implements Initializable {
         connectionAnchor.setVisible(false);
         ProxyController.setController(RegistrationController.class, this);
 
-        languages.setItems(Languages.getLangArray());
-        languages.setValue("Русский");
+        languages.setItems(Translation.getAllLanguages());
+        languages.setValue(Translation.getLanguage());
         new Translation(RegistrationController.class).changeLanguage(null);
         languages.setOnAction(new Translation(RegistrationController.class)::changeLanguage);
     }
 
     @FXML
     protected void registerClick(MouseEvent event) {
-        Registration registration = new Registration("newUser", Languages.getLocale(languages.getValue()));
+        Registration registration = new Registration("newUser", Translation.getLocale());
         registration.register();
 
     }
@@ -118,7 +112,7 @@ public class RegistrationController implements Initializable {
 
     @FXML
     protected void enterClick(MouseEvent event) {
-    Registration registration = new Registration("existedUser", Languages.getLocale(languages.getValue()));
+    Registration registration = new Registration("existedUser", Translation.getLocale());
     registration.register();
     }
 }

@@ -1,5 +1,6 @@
 package com.example.run;
 
+import com.example.grapghics.Translation;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -18,6 +19,7 @@ public class ClientMain extends Application {
     }
 
     public static void main(String[] args) {
+        Translation.setLanguage("Русский");
         launch();
     }
 }

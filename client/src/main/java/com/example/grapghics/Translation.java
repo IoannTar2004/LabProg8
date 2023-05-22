@@ -1,25 +1,39 @@
 package com.example.grapghics;
 
-import com.example.controllers.RegistrationController;
-import com.example.modules.Languages;
 import com.example.run.ProxyController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 
 import java.lang.reflect.Field;
-import java.util.Locale;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * Class for translation texts to different languages using text from .properties files
  */
 public class Translation {
+    private static final Map<String, Locale> languages = new LinkedHashMap<>();
+    static {
+        languages.put("Русский", new Locale("ru", "RU"));
+        languages.put("English", new Locale("en", "IE"));
+        languages.put("Český", new Locale("cs", "CZ"));
+        languages.put("Lietuviškas", new Locale("lt", "LT"));
+    }
 
     private ProxyController controller;
+    private static String language;
 
     public Translation(Class<?> clas) {
         controller = new ProxyController(clas);
+    }
+
+    public static void setLanguage(String language) {
+        Translation.language = language;
+    }
+
+    public static String getLanguage() {
+        return language;
     }
 
     /**
@@ -27,7 +41,8 @@ public class Translation {
      * @param event
      */
     public void changeLanguage(ActionEvent event) {
-        String[] bundles = {"Registration"};
+        String[] bundles = {"Registration", "Table"};
+        setLanguage(((ChoiceBox<String>)controller.getField("languages")).getValue());
         Field[] fields = controller.getAllFields();
         Locale locale = getLocale();
 
@@ -48,13 +63,11 @@ public class Translation {
         }
     }
 
-    public Locale getLocale() {
-        try {
-            Field field = RegistrationController.class.getDeclaredField("languages");
-            field.setAccessible(true);
-            String language = ((ChoiceBox<String>) field.get(controller.getControllerClass())).getValue();
-            return Languages.getLocale(language);
-        } catch (NoSuchFieldException | IllegalAccessException e) {e.printStackTrace();}
-        return null;
+    public static Locale getLocale() {
+        return languages.get(language);
+    }
+
+    public static ObservableList<String> getAllLanguages() {
+        return FXCollections.observableArrayList(languages.keySet().stream().toList());
     }
 }
