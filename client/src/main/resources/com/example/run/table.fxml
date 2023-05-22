@@ -59,21 +59,6 @@
                         <Insets top="8.0" />
                      </padding>
                   </HBox>
-                  <TableView fx:id="UserDragonsTable" layoutY="55.0" prefHeight="393.0" prefWidth="849.0">
-                     <columns>
-                        <TableColumn fx:id="id1" prefWidth="43.20001566410065" text="id" />
-                        <TableColumn fx:id="user1" prefWidth="95.99998474121094" text="Пользователь" />
-                        <TableColumn fx:id="name1" prefWidth="77.5999755859375" text="Имя" />
-                        <TableColumn fx:id="coordinates1" prefWidth="123.20001220703125" text="Координаты" />
-                        <TableColumn fx:id="age1" prefWidth="67.20001220703125" text="Возраст" />
-                        <TableColumn fx:id="color1" prefWidth="71.20001220703125" text="Цвет" />
-                        <TableColumn fx:id="type1" prefWidth="72.00006103515625" text="Тип" />
-                        <TableColumn fx:id="character1" prefWidth="84.79998779296875" text="Характер" />
-                        <TableColumn fx:id="cave1" prefWidth="79.99993896484375" text="Пещера" />
-                        <TableColumn fx:id="creationDate1" prefWidth="140.0" text="Дата создания" />
-                     </columns>
-                  </TableView>
-                  <Button layoutX="367.0" layoutY="8.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="126.0" styleClass="show" stylesheets="@../../../CSS/buttons.css" text="Button" />
                </children>
             </AnchorPane>
          </children>

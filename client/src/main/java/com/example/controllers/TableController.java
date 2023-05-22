@@ -9,13 +9,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import org.example.collections.*;
 
-import java.net.Socket;
 import java.net.URL;
 import java.sql.Timestamp;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class TableController implements Initializable {
@@ -58,47 +56,4 @@ public class TableController implements Initializable {
         ProxyController.setController(TableController.class, this);
     }
 
-    public TableView<Dragon> getDragonsTable() {
-        return dragonsTable;
-    }
-
-    public TableColumn<Dragon, Integer> getAge() {
-        return age;
-    }
-
-    public TableColumn<Dragon, Double> getCave() {
-        return cave;
-    }
-
-    public TableColumn<Dragon, String> getCharacter() {
-        return character;
-    }
-
-    public TableColumn<Dragon, String> getColor() {
-        return color;
-    }
-
-    public TableColumn<Dragon, Timestamp> getCreationDate() {
-        return creationDate;
-    }
-
-    public TableColumn<Dragon, Long> getId() {
-        return id;
-    }
-
-    public TableColumn<Dragon, String> getName() {
-        return name;
-    }
-
-    public TableColumn<Dragon, String> getType() {
-        return type;
-    }
-
-    public TableColumn<Dragon, String> getCoordinates() {
-        return coordinates;
-    }
-
-    public TableColumn<Dragon, String> getUser() {
-        return user;
-    }
 }
