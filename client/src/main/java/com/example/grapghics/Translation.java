@@ -1,6 +1,7 @@
-package com.example.modules;
+package com.example.grapghics;
 
 import com.example.controllers.RegistrationController;
+import com.example.modules.Languages;
 import com.example.run.ProxyController;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;

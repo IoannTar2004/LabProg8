@@ -3,7 +3,7 @@ package com.example.controllers;
 import com.example.modules.Connection;
 import com.example.modules.Languages;
 import com.example.modules.Registration;
-import com.example.modules.Translation;
+import com.example.grapghics.Translation;
 import com.example.run.ProxyController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
