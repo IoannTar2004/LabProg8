@@ -1,0 +1,29 @@
+.button {
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+    -fx-background-radius: 32;
+    -fx-font-size: 16;
+}
+
+.add {
+    -fx-background-color: #28af28;
+}
+.edit {
+    -fx-background-color: yellow;
+    -fx-text-fill: black;
+}
+.remove {
+    -fx-background-color: red;
+}
+.filter {
+    -fx-background-color: blue;
+}
+
+.button:pressed {
+    -fx-border-color: white;
+    -fx-border-radius: 32;
+    -fx-border-width: 3;
+}
+.button:hover {
+    -fx-font-size: 18;
+}
