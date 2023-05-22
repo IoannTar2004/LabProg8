@@ -9,27 +9,26 @@ import java.util.List;
  */
 public class DataToClient<T> implements Serializable {
     private List<String> result;
-    private T[] arguments;
+    private T argument;
 
-    @SafeVarargs
-    public DataToClient(List<String> result, T... arguments) {
+    public DataToClient(List<String> result, T argument) {
         this.result = result;
-        this.arguments = arguments;
+        this.argument = argument;
     }
 
     public List<String> getResult() {
         return result;
     }
 
-    public T[] getArguments() {
-        return arguments;
+    public T getArgument() {
+        return argument;
     }
 
     @Override
     public String toString() {
         return "DataToClient{" +
                 "result=" + result +
-                ", arguments=" + Arrays.toString(arguments) +
+                ", arguments=" + argument +
                 '}';
     }
 }

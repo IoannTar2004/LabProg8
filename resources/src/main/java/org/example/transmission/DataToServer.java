@@ -7,20 +7,20 @@ import java.util.Arrays;
  * General class for connecting client and server. It is used to send request from client to server.
  */
 public class DataToServer<T> implements Serializable {
-    private String[] commandString;
+    private String commandString;
     private String mode;
     private T[] objects;
     private String login;
 
     @SafeVarargs
-    public DataToServer(String[] commandString, String mode, String login, T... objects) {
+    public DataToServer(String commandString, String mode, String login, T... objects) {
         this.commandString = commandString;
         this.mode = mode;
         this.objects = objects;
         this.login = login;
     }
 
-    public String[] getCommandString() {
+    public String getCommandString() {
         return commandString;
     }
 
@@ -39,7 +39,7 @@ public class DataToServer<T> implements Serializable {
     @Override
     public String toString() {
         return "DataToServer{" +
-                "commandString=" + Arrays.toString(commandString) +
+                "commandString=" + commandString +
                 ", mode='" + mode + '\'' +
                 ", objects=" + Arrays.toString(objects) +
                 '}';

@@ -10,18 +10,18 @@ import java.util.List;
 
 public class ServerSender<T> implements Runnable {
     private List<String> result;
-    private T[] arguments;
+    private T arguments;
     private Socket socket;
 
     public ServerSender(List<String> result) {
         this.result = result;
     }
 
-    public ServerSender(T[] arguments) {
+    public ServerSender(T arguments) {
         this.arguments = arguments;
     }
 
-    public ServerSender(List<String> result, T... arguments) {
+    public ServerSender(List<String> result, T arguments) {
         this.result = result;
         this.arguments = arguments;
     }
@@ -30,7 +30,7 @@ public class ServerSender<T> implements Runnable {
         return result;
     }
 
-    public Object[] getArguments() {
+    public T getArguments() {
         return arguments;
     }
 
@@ -53,7 +53,7 @@ public class ServerSender<T> implements Runnable {
     public String toString() {
         return "ServerSender{" +
                 "result=" + result +
-                ", arguments=" + Arrays.toString(arguments) +
+                ", arguments=" + arguments +
                 '}';
     }
 }

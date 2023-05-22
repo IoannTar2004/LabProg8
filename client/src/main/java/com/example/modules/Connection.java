@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.concurrent.FutureTask;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Connection {
@@ -21,7 +20,9 @@ public class Connection {
         this.host = host;
         this.port = port;
     }
-    public Connection() {}
+    public Connection(Socket socket) {
+        this.socket = socket;
+    }
 
     public static void stop() {
         connection.set(false);
@@ -41,7 +42,7 @@ public class Connection {
         return false;
     }
 
-    public <S,G> G[] exchange(String[] input, String mode, String login, S... objects) {
+    public <S,G> G exchange(String input, String mode, String login, S... objects) {
         DataToServer<S> sender = new DataToServer<>(input, mode, login, objects);
         System.out.println(sender);
 
@@ -51,7 +52,7 @@ public class Connection {
 
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
             DataToClient<G> result = (DataToClient) in.readObject();
-            return result.getArguments();
+            return result.getArgument();
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

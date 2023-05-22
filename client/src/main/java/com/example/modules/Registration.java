@@ -98,7 +98,7 @@ public class Registration extends ProxyController implements Runnable {
         NodeManager nodeManager = new NodeManager();
 
         if (connection.run()) {
-            String key = connection.<String, String>exchange(new String[]{"user_access"}, mode, login, password)[0];
+            String key = connection.exchange("user_access", mode, login, password);
             if (!key.equals("access")) {
                 Platform.runLater(() -> nodeManager.setText("registration",
                         bundle, locale, new String[]{"loginLabel"}, new String[]{key}));
