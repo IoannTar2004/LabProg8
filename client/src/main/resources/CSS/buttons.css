@@ -18,6 +18,18 @@
 .filter {
     -fx-background-color: blue;
 }
+.login {
+    -fx-text-fill: white;
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+}
+.login:hover {
+    -fx-underline: true;
+}
+.pane{
+    -fx-background-color: red;
+    -fx-end-margin: 34;
+}
 
 .button:pressed {
     -fx-border-color: white;

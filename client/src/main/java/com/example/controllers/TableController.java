@@ -1,5 +1,6 @@
 package com.example.controllers;
 
+import com.example.grapghics.Animations;
 import com.example.grapghics.Translation;
 import com.example.modules.Connection;
 import com.example.modules.DragonTable;
@@ -8,11 +9,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
+import javafx.util.Duration;
 import org.example.collections.*;
 
 import java.net.URL;
@@ -67,10 +68,17 @@ public class TableController implements Initializable {
     private Button filter;
 
     @FXML
-    ChoiceBox<String> languages;
+    private ChoiceBox<String> languages;
+
+    @FXML
+    private AnchorPane exit;
+
+    @FXML
+    private Label exitButton;
 
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        exit.setVisible(false);
         ProxyController.setController(TableController.class, this);
 
         languages.setItems(Translation.getAllLanguages());
@@ -79,4 +87,18 @@ public class TableController implements Initializable {
         languages.setOnAction(new Translation(TableController.class)::changeLanguage);
     }
 
+    @FXML
+    protected void exitIn() {
+        exit.setVisible(true);
+        exitButton.setVisible(true);
+        Animations animations = new Animations();
+        animations.pathTransition(Duration.millis(250), exit,65,0,65,50);
+    }
+
+    @FXML
+    protected void exitOut() {
+        exitButton.setVisible(false);
+        Animations animations = new Animations();
+        animations.pathTransition(Duration.millis(250), exit,65,50,65,0);
+    }
 }
