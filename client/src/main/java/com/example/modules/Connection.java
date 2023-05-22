@@ -44,7 +44,6 @@ public class Connection {
 
     public <S,G> G exchange(String input, String mode, String login, S... objects) {
         DataToServer<S> sender = new DataToServer<>(input, mode, login, objects);
-        System.out.println(sender);
 
         try {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());

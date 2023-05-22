@@ -18,6 +18,10 @@
 .filter {
     -fx-background-color: blue;
 }
+.show {
+    -fx-background-color: linear-gradient(#E5EE04FF, #DC15B6FC);
+    -fx-text-fill: white;
+}
 
 .button:pressed {
     -fx-border-color: white;
