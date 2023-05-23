@@ -16,6 +16,7 @@ public class ServerReader {
     static {
         commands.put("user_access", new UserAccess());
         commands.put("show", new ShowCommand());
+        commands.put("add", new AddCommand());
     }
 
     private Command command;

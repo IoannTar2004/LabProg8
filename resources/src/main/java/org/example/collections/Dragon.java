@@ -19,10 +19,6 @@ public class Dragon implements Serializable {
     private DragonCave cave;
     private Timestamp creationDate;
 
-    private transient String colorString;
-    private transient String typeString;
-    private transient String characterString;
-
     /**
      *
      * @param id "Long"; 12-digit number
@@ -92,28 +88,18 @@ public class Dragon implements Serializable {
 
     public Timestamp getCreationDate() {return creationDate;}
 
-    public Color getColor() {
-        return color;
+    public String getColor() {
+        return color.getColor();
     }
-    public DragonType getType() {
-        return type;
+    public String getType() {
+        return type.getType();
     }
-    public DragonCharacter getCharacter() {
-        return character;
+    public String getCharacter() {
+        return character.getCharacter();
     }
 
     public Double getCave() {
         return cave.getDepth();
-    }
-
-    public String getColorString() {
-        return colorString;
-    }
-    public String getTypeString() {
-        return typeString;
-    }
-    public String getCharacterString() {
-        return characterString;
     }
 
     public void setName(String name) {

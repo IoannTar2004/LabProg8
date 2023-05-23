@@ -1,5 +1,6 @@
 package com.example.modules;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.example.collections.Dragon;
 
@@ -7,7 +8,7 @@ public class StaticData {
     private static StaticData staticData;
     private String login;
     private Connection connection;
-    private ObservableList<Dragon> dragons;
+    private ObservableList<Dragon> dragons = FXCollections.observableArrayList();
 
     public static StaticData getData() {
         if (staticData == null) {
