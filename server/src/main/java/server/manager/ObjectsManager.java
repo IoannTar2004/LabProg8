@@ -23,10 +23,13 @@ public class ObjectsManager extends CollectionManager {
         dragons.add(dragon);
     }
 
-    public void insert(Dragon dragon) {
-        dragon.setId(IdGenerator.generate());
+    public Long insert(Dragon dragon) {
+        Long id = IdGenerator.generate();
+        dragon.setId(id);
         new DataBaseStuds().insert(dragon);
         dragons.add(dragon);
+
+        return id;
     }
 
     public void addFromDataBase(Dragon dragon) {

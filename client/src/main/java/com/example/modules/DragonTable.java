@@ -22,7 +22,7 @@ public class DragonTable {
     }
 
     public void getAndFill() {
-        List<Dragon> dragons = new Connection(socket).<String, List<Dragon>>exchange("show", "user", login);
+        List<Dragon> dragons = new Connection(socket).<String, List<Dragon>>exchange("show", "user");
         dragons.forEach(this::fill);
     }
 

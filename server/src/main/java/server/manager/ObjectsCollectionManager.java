@@ -1,6 +1,9 @@
 package server.manager;
 
+import org.example.collections.Color;
 import org.example.collections.Dragon;
+import org.example.collections.DragonCharacter;
+import org.example.collections.DragonType;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -40,10 +43,10 @@ public class ObjectsCollectionManager extends CollectionManager {
     public String getCoordinates(Dragon dragon) {
         return dragon.getCoordinates();
     }
-    public String getColor(Dragon dragon) {
+    public Color getColor(Dragon dragon) {
         return dragon.getColor();
     }
-    public String getCharacter(Dragon dragon) {
+    public DragonCharacter getCharacter(Dragon dragon) {
         return dragon.getCharacter();
     }
     public double getCave(Dragon dragon) {
@@ -52,7 +55,7 @@ public class ObjectsCollectionManager extends CollectionManager {
     public Integer getAge(Dragon dragon) {
         return dragon.getAge();
     }
-    public  String getType(Dragon dragon) {
+    public DragonType getType(Dragon dragon) {
         return dragon.getType();
     }
 }

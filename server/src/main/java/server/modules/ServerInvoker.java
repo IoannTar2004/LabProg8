@@ -10,9 +10,9 @@ public class ServerInvoker {
      * This method receives entered or read from script command and splits by spaces.
      * It works while command is not "exit".
      */
-    public static ServerSender invoke(Command command, String input, String mode, String login, Object... args) {
+    public static ServerSender<?> invoke(Command command, String input, String mode, Object... args) {
         try {
-            return command.execute(input, mode, login, args);
+            return command.execute(input, mode, args);
         } catch (NullPointerException e) {
             if (Objects.equals(mode, "user")) {
                 return new ServerSender(List.of("Такой команды нет!"));

@@ -12,11 +12,11 @@ import java.util.List;
 public class UserAccess implements Command {
 
     @Override
-    public ServerSender<String> execute(String command, String mode, String login, Object... args) {
+    public ServerSender<String> execute(String command, String mode, Object... args) {
         if(mode.equals("newUser")) {
-            return newUser(login, (String) args[0]);
+            return newUser((String) args[0], (String) args[1]);
         } else if (mode.equals("existedUser")) {
-            return existedUser(login, (String) args[0]);
+            return existedUser((String) args[0], (String) args[1]);
         }
         return null;
     }

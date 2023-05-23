@@ -1,27 +1,19 @@
 package com.example.modules;
 
 import com.example.controllers.RegistrationController;
-import com.example.controllers.TableController;
 import com.example.grapghics.Animations;
 import com.example.grapghics.NodeManager;
-import com.example.run.ClientMain;
 import com.example.run.ProxyController;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.example.collections.Dragon;
 
-import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -110,14 +102,13 @@ public class Registration implements Runnable {
                         bundle, locale, new String[]{"loginLabel"}, new String[]{key}));
                 connection.close();
             } else {
-                Platform.runLater(new Runnable() {
-                      @Override
-                      public void run() {
-                          ProxyController.changeScene(controller.getField("enter"), "table.fxml");
-                          new DragonTable(connection.getSocket(), login).getAndFill();
-                      }
-                  }
+                Platform.runLater(() -> {
+                    ProxyController.changeScene(controller.getField("enter"), "table.fxml");
+                    new DragonTable(connection.getSocket(), login).getAndFill();
+                }
                 );
+                StaticData.getData().setLogin(login);
+                StaticData.getData().setConnection(connection);
             }
             cancel();
         }

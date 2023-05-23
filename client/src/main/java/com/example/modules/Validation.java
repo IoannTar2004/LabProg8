@@ -4,6 +4,7 @@ import com.example.controllers.RegistrationController;
 import com.example.run.ProxyController;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import org.example.collections.DragonCave;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -77,5 +78,42 @@ public class Validation {
         }
 
         return result;
+    }
+
+    public String string(TextField field, String text) {
+        String name = field.getText();
+        if (name.length() > 0) {
+            return name;
+        }
+        field.setPromptText(text);
+        return null;
+    }
+
+    public Integer integer(TextField field, String text) {
+        try {
+            return Integer.parseInt(field.getText());
+        } catch (NumberFormatException e) {
+            field.setPromptText(text);
+        }
+        return null;
+    }
+
+    public Long along(TextField field, String text) {
+        try {
+            return Long.parseLong(field.getText());
+        } catch (NumberFormatException e) {
+            field.setPromptText(text);
+        }
+        return null;
+    }
+
+    public DragonCave cave(TextField field, String text) {
+        try {
+            double depth = Double.parseDouble(field.getText());
+            return new DragonCave(depth);
+        } catch (NumberFormatException e) {
+            field.setPromptText(text);
+        }
+        return null;
     }
 }

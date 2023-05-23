@@ -23,9 +23,9 @@ public class DataBaseStuds extends DataBaseInitialization {
             statement.setString(3, dragon.getName());
             statement.setString(4, dragon.getCoordinates());
             statement.setInt(5, dragon.getAge());
-            statement.setString(6, dragon.getColor());
-            statement.setString(7, dragon.getType());
-            statement.setString(8, dragon.getCharacter());
+            statement.setObject(6, dragon.getColor());
+            statement.setObject(7, dragon.getType());
+            statement.setObject(8, dragon.getCharacter());
             statement.setDouble(9, dragon.getCave());
             statement.setTimestamp(10, dragon.getCreationDate());
             statement.execute();

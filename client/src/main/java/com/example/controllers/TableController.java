@@ -2,23 +2,20 @@ package com.example.controllers;
 
 import com.example.grapghics.Animations;
 import com.example.grapghics.Translation;
-import com.example.modules.Connection;
-import com.example.modules.DragonTable;
+import com.example.modules.StaticData;
+import com.example.modules.Validation;
 import com.example.run.ProxyController;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
 import javafx.util.Duration;
 import org.example.collections.*;
 
 import java.net.URL;
 import java.sql.Timestamp;
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class TableController implements Initializable {
@@ -101,6 +98,7 @@ public class TableController implements Initializable {
     @FXML
     private ChoiceBox<String> characterChoice;
 
+
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
         exit.setVisible(false);
@@ -109,6 +107,11 @@ public class TableController implements Initializable {
         languages.setItems(Translation.getAllLanguages());
         languages.setValue(Translation.getLanguage());
         new Translation(TableController.class).changeLanguage(null);
+
+        colorChoice.getSelectionModel().selectFirst();
+        typeChoice.getSelectionModel().selectFirst();
+        characterChoice.getSelectionModel().selectFirst();
+
         languages.setOnAction(new Translation(TableController.class)::changeLanguage);
     }
 
@@ -135,8 +138,31 @@ public class TableController implements Initializable {
     @FXML
     protected void getItem() {
         int index = dragonsTable.getSelectionModel().getSelectedIndex();
-        System.out.println(index);
+    }
 
+    @FXML
+    protected void addClick() {
+        Object[] elements = new Object[5];
+        Validation validation = new Validation();
+        elements[0] = validation.string(nameField, "");
+        elements[1] = validation.integer(xField, "");
+        elements[2] = validation.along(yField, "");
+        elements[3] = validation.integer(ageField, "");
+        elements[4] = validation.cave(caveField, "");
 
+        try {
+            Arrays.stream(elements).filter(Objects::isNull).findFirst();
+        } catch (NullPointerException e) {
+            return;
+        }
+
+        Dragon dragon = new Dragon(0L, StaticData.getData().getLogin(), (String) elements[0],
+                new Coordinates((int) elements[1], (long) elements[2]), (int) elements[3],
+                Color.values()[colorChoice.getSelectionModel().getSelectedIndex()],
+                DragonType.values()[typeChoice.getSelectionModel().getSelectedIndex()],
+                DragonCharacter.values()[typeChoice.getSelectionModel().getSelectedIndex()],
+                (DragonCave) elements[4]);
+
+        //Long id = StaticData.getData().getConnection().<Dragon, Long>exchange()
     }
 }
