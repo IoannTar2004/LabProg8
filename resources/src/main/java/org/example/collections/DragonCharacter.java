@@ -30,10 +30,12 @@ public enum DragonCharacter implements Serializable {
         return null;
     }
 
-    /**
-     *
-     * @param character ordinal+1 character
-     * @return DragonCharacter
-     */
+    public static String[] getAll() {
+        String[] enums = new String[values().length];
+        for(DragonCharacter character: values()) {
+            enums[character.ordinal()] = character.getCharacter();
+        }
+        return enums;
+    }
 
 }

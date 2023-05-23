@@ -77,7 +77,35 @@ public class TableController implements Initializable {
     private Label exitButton;
 
     @FXML
+    private TextField nameField;
+
+    @FXML
+    private TextField xField;
+
+    @FXML
+    private TextField yField;
+
+    @FXML
+    private TextField ageField;
+
+    @FXML
+    private TextField caveField;
+
+    @FXML
+    private ChoiceBox<String> colorChoice;
+
+    @FXML
+    private ChoiceBox<String> typeChoice;
+
+    @FXML
+    private ChoiceBox<String> characterChoice;
+
+    @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        colorChoice.getItems().addAll(Color.getAll());
+        typeChoice.getItems().addAll(DragonType.getAll());
+        characterChoice.getItems().addAll(DragonCharacter.getAll());
+
         exit.setVisible(false);
         ProxyController.setController(TableController.class, this);
 
@@ -105,5 +133,13 @@ public class TableController implements Initializable {
     @FXML
     protected void exitFromTable() {
         ProxyController.changeScene(exitButton, "registration.fxml");
+    }
+
+    @FXML
+    protected void getItem() {
+        int index = dragonsTable.getSelectionModel().getSelectedIndex();
+        System.out.println(index);
+
+
     }
 }

@@ -31,9 +31,9 @@ public enum Color implements Serializable {
     }
 
     public static String[] getAll() {
-        String[] enums = new String[3];
-        for(DragonFields fields: DragonFields.values()) {
-            enums[fields.ordinal()] = fields.getField();
+        String[] enums = new String[values().length];
+        for(Color color: values()) {
+            enums[color.ordinal()] = color.getColor();
         }
         return enums;
     }

@@ -31,10 +31,12 @@ public enum DragonType implements Serializable {
         return null;
     }
 
-    /**
-     *
-     * @param type ordinal+1 type
-     * @return DragonType
-     */
+    public static String[] getAll() {
+        String[] enums = new String[values().length];
+        for(DragonType type: values()) {
+            enums[type.ordinal()] = type.getType();
+        }
+        return enums;
+    }
 
 }
