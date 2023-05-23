@@ -1,14 +1,12 @@
 package com.example.grapghics;
 
 import com.example.run.ProxyController;
-import javafx.scene.Node;
 import javafx.scene.control.Labeled;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.Border;
 
-import java.lang.reflect.Field;
-import java.util.Arrays;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.function.Consumer;
 
 public class NodeManager {
 
@@ -20,5 +18,10 @@ public class NodeManager {
             node.setText(ResourceBundle.getBundle(bundle, locale).getString(keys[i]));
             i++;
         }
+    }
+
+    public void textFieldError(TextField textField) {
+        textField.setStyle("-fx-border-color: red;" +
+                "-fx-border-width: 2px;");
     }
 }

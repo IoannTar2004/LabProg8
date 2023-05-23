@@ -142,14 +142,25 @@ public class TableController implements Initializable {
     }
 
     @FXML
+    protected void enterAgain() {
+        ProxyController proxyController = new ProxyController(TableController.class);
+        String[] fields = {"nameField", "xField", "yField", "ageField", "caveField"};
+        for (String field: fields) {
+            TextField textField = proxyController.getField(field);
+            textField.setStyle("");
+            textField.setPromptText(ResourceBundle.getBundle("properties.Table", Translation.getLocale()).getString(field));
+        }
+    }
+
+    @FXML
     protected void addClick() {
         Object[] elements = new Object[5];
         Validation validation = new Validation();
-        elements[0] = validation.string(nameField, "");
-        elements[1] = validation.integer(xField, "");
-        elements[2] = validation.along(yField, "");
-        elements[3] = validation.integer(ageField, "");
-        elements[4] = validation.cave(caveField, "");
+        elements[0] = validation.string(nameField);
+        elements[1] = validation.integer(xField);
+        elements[2] = validation.along(yField);
+        elements[3] = validation.integer(ageField);
+        elements[4] = validation.cave(caveField);
 
         try {
             Arrays.stream(elements).filter(Objects::isNull).findFirst();

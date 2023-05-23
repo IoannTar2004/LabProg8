@@ -1,6 +1,8 @@
 package com.example.modules;
 
 import com.example.controllers.RegistrationController;
+import com.example.grapghics.NodeManager;
+import com.example.grapghics.Translation;
 import com.example.run.ProxyController;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -80,39 +82,47 @@ public class Validation {
         return result;
     }
 
-    public String string(TextField field, String text) {
+    public String string(TextField field) {
         String name = field.getText();
         if (name.length() > 0) {
             return name;
         }
-        field.setPromptText(text);
+        field.setText("");
+        field.setPromptText(ResourceBundle.getBundle("properties.Table", Translation.getLocale()).getString("nameEmpty"));
+        new NodeManager().textFieldError(field);
         return null;
     }
 
-    public Integer integer(TextField field, String text) {
+    public Integer integer(TextField field) {
         try {
             return Integer.parseInt(field.getText());
         } catch (NumberFormatException e) {
-            field.setPromptText(text);
+            field.setText("");
+            field.setPromptText(ResourceBundle.getBundle("properties.Table", Translation.getLocale()).getString("numberError"));
+            new NodeManager().textFieldError(field);
         }
         return null;
     }
 
-    public Long along(TextField field, String text) {
+    public Long along(TextField field) {
         try {
             return Long.parseLong(field.getText());
         } catch (NumberFormatException e) {
-            field.setPromptText(text);
+            field.setText("");
+            field.setPromptText(ResourceBundle.getBundle("properties.Table", Translation.getLocale()).getString("numberError"));
+            new NodeManager().textFieldError(field);
         }
         return null;
     }
 
-    public DragonCave cave(TextField field, String text) {
+    public DragonCave cave(TextField field) {
         try {
             double depth = Double.parseDouble(field.getText());
             return new DragonCave(depth);
         } catch (NumberFormatException e) {
-            field.setPromptText(text);
+            field.setText("");
+            field.setPromptText(ResourceBundle.getBundle("properties.Table", Translation.getLocale()).getString("numberError"));
+            new NodeManager().textFieldError(field);
         }
         return null;
     }
