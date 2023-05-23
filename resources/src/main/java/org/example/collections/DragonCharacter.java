@@ -23,9 +23,9 @@ public enum DragonCharacter implements Serializable {
      * @return DragonCharacter
      */
     public static DragonCharacter getEnumCharacter(String character) {
-        if (character.matches("\\s*Хитрый\\s*")) {return CUNNING;}
-        else if (character.matches("\\s*Злой\\s*")) {return EVIL;}
-        else if (character.matches("\\s*Хаотичный\\s*")) {return CHAOTIC;}
+        if (character.equals("cunning")) {return CUNNING;}
+        else if (character.equals("evil")) {return EVIL;}
+        else if (character.equals("chaotic")) {return CHAOTIC;}
 
         return null;
     }

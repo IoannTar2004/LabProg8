@@ -23,10 +23,10 @@ public enum DragonType implements Serializable {
      * @return DragonType
      */
     public static DragonType getEnumType(String type) {
-        if (type.matches("\\s*Водный\\s*")) {return WATER;}
-        else if (type.matches("\\s*Подземельный\\s*")) {return UNDERGROUND;}
-        else if (type.matches("\\s*Воздушный\\s*")) {return AIR;}
-        else if (type.matches("\\s*Огненный\\s*")) {return FIRE;}
+        if (type.equals("water")) {return WATER;}
+        else if (type.equals("underground")) {return UNDERGROUND;}
+        else if (type.equals("air")) {return AIR;}
+        else if (type.equals("fire")) {return FIRE;}
 
         return null;
     }

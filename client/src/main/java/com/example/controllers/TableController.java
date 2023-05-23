@@ -2,6 +2,7 @@ package com.example.controllers;
 
 import com.example.grapghics.Animations;
 import com.example.grapghics.Translation;
+import com.example.modules.DragonTable;
 import com.example.modules.StaticData;
 import com.example.modules.Validation;
 import com.example.run.ProxyController;
@@ -165,6 +166,6 @@ public class TableController implements Initializable {
 
         Long id = StaticData.getData().getConnection().<Dragon, Long>exchange("add", dragon);
         dragon.setId(id);
-        StaticData.getData().add(dragon);
+        new DragonTable().fill(dragon);
     }
 }

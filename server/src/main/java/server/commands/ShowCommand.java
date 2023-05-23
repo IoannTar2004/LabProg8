@@ -22,7 +22,7 @@ public class ShowCommand implements Command {
     @Override
     public ServerSender<List<Dragon>> execute(Object... args) {
         List<Dragon> dragonList = new LinkedList<>(new ObjectsCollectionManager().getAll());
-
+        System.out.println(dragonList);
         return new ServerSender<>(dragonList);
     }
 }

@@ -41,5 +41,6 @@ public class StaticData {
 
     public void add(Dragon dragon) {
         dragons.add(dragon);
+        //new DragonTable().fill(dragon);
     }
 }

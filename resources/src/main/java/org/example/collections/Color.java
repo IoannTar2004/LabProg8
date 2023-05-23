@@ -25,9 +25,9 @@ public enum Color implements Serializable {
      * @return color
      */
     public static Color getEnumColor(String color) {
-        if (color.matches("\\s*Чёрный\\s*")) {return BLACK;}
-        else if (color.matches("\\s*Синий\\s*")) {return BLUE;}
-        else if (color.matches("\\s*Жёлтый\\s*")) {return YELLOW;}
+        if (color.equals("black")) {return BLACK;}
+        else if (color.equals("blue")) {return BLUE;}
+        else if (color.equals("yellow")) {return YELLOW;}
 
         return null;
     }

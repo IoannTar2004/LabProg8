@@ -104,7 +104,7 @@ public class Registration implements Runnable {
             } else {
                 Platform.runLater(() -> {
                     ProxyController.changeScene(controller.getField("enter"), "table.fxml");
-                    new DragonTable(connection.getSocket(), login).getAndFill();
+                    new DragonTable().getAndFill(connection.getSocket());
                 }
                 );
                 StaticData.getData().setLogin(login);

@@ -22,7 +22,7 @@ public class AddCommand implements Command {
      */
     @Override
     public ServerSender<Long> execute(Object... args) {
-            Long id = new ObjectsManager().insert((Dragon) args[0]);
-            return new ServerSender<>(id);
+        Long id = new ObjectsManager().insert((Dragon) args[0]);
+        return new ServerSender<>(id);
     }
 }
