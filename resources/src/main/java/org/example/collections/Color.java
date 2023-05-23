@@ -1,12 +1,14 @@
 package org.example.collections;
 
 import java.io.Serializable;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * Enums of dragon's color
  */
 public enum Color implements Serializable {
-    BLACK("Чёрный"), BLUE("Синий"), YELLOW("Жёлтый");
+    BLACK("black"), BLUE("blue"), YELLOW("yellow");
 
     private String color;
     Color(String color) {
@@ -23,18 +25,10 @@ public enum Color implements Serializable {
      * @return color
      */
     public static Color getEnumColor(String color) {
-        if (color.matches("\\s*Ч(ё|е)рный\\s*")) {return BLACK;}
+        if (color.matches("\\s*Чёрный\\s*")) {return BLACK;}
         else if (color.matches("\\s*Синий\\s*")) {return BLUE;}
-        else if (color.matches("\\s*Ж(ё|е)лтый\\s*")) {return YELLOW;}
+        else if (color.matches("\\s*Жёлтый\\s*")) {return YELLOW;}
 
         return null;
-    }
-
-    public static String[] getAll() {
-        String[] enums = new String[values().length];
-        for(Color color: values()) {
-            enums[color.ordinal()] = color.getColor();
-        }
-        return enums;
     }
 }

@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Enums of dragon's character
  */
 public enum DragonCharacter implements Serializable {
-    CUNNING("Хитрый"), EVIL("Злой"), CHAOTIC("Хаотичный");
+    CUNNING("cunning"), EVIL("evil"), CHAOTIC("chaotic");
 
     private String character;
     DragonCharacter(String character) {
@@ -28,14 +28,6 @@ public enum DragonCharacter implements Serializable {
         else if (character.matches("\\s*Хаотичный\\s*")) {return CHAOTIC;}
 
         return null;
-    }
-
-    public static String[] getAll() {
-        String[] enums = new String[values().length];
-        for(DragonCharacter character: values()) {
-            enums[character.ordinal()] = character.getCharacter();
-        }
-        return enums;
     }
 
 }

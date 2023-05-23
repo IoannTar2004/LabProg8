@@ -7,6 +7,7 @@ import com.example.modules.DragonTable;
 import com.example.run.ProxyController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -102,10 +103,6 @@ public class TableController implements Initializable {
 
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        colorChoice.getItems().addAll(Color.getAll());
-        typeChoice.getItems().addAll(DragonType.getAll());
-        characterChoice.getItems().addAll(DragonCharacter.getAll());
-
         exit.setVisible(false);
         ProxyController.setController(TableController.class, this);
 

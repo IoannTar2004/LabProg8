@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Enums of dragon's type
  */
 public enum DragonType implements Serializable {
-    WATER("Водный"), UNDERGROUND("Подземельный"), AIR("Воздушный"), FIRE("Огненный");
+    WATER("water"), UNDERGROUND("underground"), AIR("air"), FIRE("fire");
 
     private String type;
     DragonType(String type) {
@@ -29,14 +29,6 @@ public enum DragonType implements Serializable {
         else if (type.matches("\\s*Огненный\\s*")) {return FIRE;}
 
         return null;
-    }
-
-    public static String[] getAll() {
-        String[] enums = new String[values().length];
-        for(DragonType type: values()) {
-            enums[type.ordinal()] = type.getType();
-        }
-        return enums;
     }
 
 }

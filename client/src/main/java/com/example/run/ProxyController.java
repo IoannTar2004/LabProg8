@@ -36,7 +36,7 @@ public class ProxyController {
             Field field1 = controllerClass.getClass().getDeclaredField(field);
             field1.setAccessible(true);
             return (T) field1.get(controllerClass);
-        } catch (NoSuchFieldException | IllegalAccessException e) {e.printStackTrace();}
+        } catch (NoSuchFieldException | IllegalAccessException ignored) {} //если поле не найдено - просто пропустить.
         return null;
     }
 
@@ -55,7 +55,7 @@ public class ProxyController {
                 field.setAccessible(true);
                 list[i] = field.get(controllerClass);
             }
-        } catch (NoSuchFieldException | IllegalAccessException e) {e.printStackTrace();}
+        } catch (NoSuchFieldException | IllegalAccessException ignored) {} //если поле не найдено - просто пропустить.
         return list;
     }
 

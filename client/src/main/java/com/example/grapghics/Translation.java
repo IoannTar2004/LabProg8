@@ -1,10 +1,14 @@
 package com.example.grapghics;
 
+import com.example.controllers.TableController;
 import com.example.run.ProxyController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
+import org.example.collections.Color;
+import org.example.collections.DragonCharacter;
+import org.example.collections.DragonType;
 
 import java.lang.reflect.Field;
 import java.util.*;
@@ -60,9 +64,13 @@ public class Translation {
                         TableColumn<?,?> tableColumn = (TableColumn<?, ?>) field.get(controller.getControllerClass());
                         tableColumn.setText(data);
                     }
-                } catch (MissingResourceException | IllegalAccessException ignored) {}
+                    changeColorLanguage(locale);
+                    changeTypeLanguage(locale);
+                    changeCharacterLanguage(locale);
+                } catch (MissingResourceException | IllegalAccessException | NullPointerException ignored) {}
             }
         }
+
     }
 
     public static Locale getLocale() {
@@ -71,5 +79,33 @@ public class Translation {
 
     public static ObservableList<String> getAllLanguages() {
         return FXCollections.observableArrayList(languages.keySet().stream().toList());
+    }
+
+    public void changeColorLanguage(Locale locale) {
+        String[] enums = new String[Color.values().length];
+        for(Color color: Color.values()) {
+            enums[color.ordinal()] = ResourceBundle.getBundle("properties.Table", locale).getString(color.getColor());
+        }
+        ChoiceBox<String> colors = controller.getField("colorChoice");
+        colors.getItems().setAll(enums);
+    }
+
+    public void changeTypeLanguage(Locale locale) {
+        String[] enums = new String[DragonType.values().length];
+        for(DragonType type: DragonType.values()) {
+            enums[type.ordinal()] = ResourceBundle.getBundle("properties.Table", locale).getString(type.getType());
+        }
+        ChoiceBox<String> colors = controller.getField("typeChoice");
+        colors.getItems().setAll(enums);
+    }
+
+    public void changeCharacterLanguage(Locale locale) {
+        String[] enums = new String[DragonCharacter.values().length];
+        for(DragonCharacter character: DragonCharacter.values()) {
+            enums[character.ordinal()] = ResourceBundle.getBundle("properties.Table", locale).
+                    getString(character.getCharacter());
+        }
+        ChoiceBox<String> colors = controller.getField("characterChoice");
+        colors.getItems().setAll(enums);
     }
 }
