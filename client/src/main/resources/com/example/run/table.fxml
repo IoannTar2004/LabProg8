@@ -80,7 +80,7 @@
                <children>
                   <AnchorPane fx:id="exit" prefHeight="116.0" prefWidth="119.0" style="-fx-background-color: red;">
                      <children>
-                        <Label fx:id="exitButton" layoutY="71.0" prefHeight="30.0" prefWidth="133.0" style="-fx-alignment: center;" styleClass="login" stylesheets="@../../../CSS/buttons.css" text="Label" />
+                        <Label fx:id="exitButton" layoutY="71.0" onMouseClicked="#exitFromTable" prefHeight="30.0" prefWidth="133.0" style="-fx-alignment: center;" styleClass="login" stylesheets="@../../../CSS/buttons.css" text="Label" />
                      </children>
                   </AnchorPane>
                   <ImageView fitHeight="52.0" fitWidth="49.0" layoutX="14.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">

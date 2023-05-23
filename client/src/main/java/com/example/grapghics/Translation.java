@@ -48,15 +48,17 @@ public class Translation {
 
         for (String bundle: bundles) {
             for (Field field : fields) {
-                field.setAccessible(true);
                 try {
                     String data = ResourceBundle.getBundle("properties." + bundle, locale).getString(field.getName());
                     if (field.getType() == TextField.class || field.getType() == PasswordField.class) {
                         TextInputControl textInputControl = (TextInputControl) field.get(controller.getControllerClass());
                         textInputControl.setPromptText(data);
-                    } else if (field.getType() == Button.class) {
+                    } else if (field.getType() == Button.class || field.getType() == Label.class) {
                         Labeled button = (Labeled) field.get(controller.getControllerClass());
                         button.setText(data);
+                    } else if (field.getType() == TableColumn.class) {
+                        TableColumn<?,?> tableColumn = (TableColumn<?, ?>) field.get(controller.getControllerClass());
+                        tableColumn.setText(data);
                     }
                 } catch (MissingResourceException | IllegalAccessException ignored) {}
             }

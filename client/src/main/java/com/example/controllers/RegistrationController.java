@@ -34,9 +34,6 @@ public class RegistrationController implements Initializable {
     private TextField host;
 
     @FXML
-    private Label hostEmpty;
-
-    @FXML
     private Label hostInput;
 
     @FXML

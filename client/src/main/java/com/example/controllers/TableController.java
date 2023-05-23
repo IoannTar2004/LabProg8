@@ -101,4 +101,9 @@ public class TableController implements Initializable {
         Animations animations = new Animations();
         animations.pathTransition(Duration.millis(250), exit,65,50,65,0);
     }
+
+    @FXML
+    protected void exitFromTable() {
+        ProxyController.changeScene(exitButton, "registration.fxml");
+    }
 }
