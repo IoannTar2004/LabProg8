@@ -20,7 +20,7 @@ public class ShowCommand implements Command {
      * It can print some fields in relation to numbers.
      */
     @Override
-    public ServerSender<List<Dragon>> execute(String command, String mode, Object... args) {
+    public ServerSender<List<Dragon>> execute(Object... args) {
         List<Dragon> dragonList = new LinkedList<>(new ObjectsCollectionManager().getAll());
 
         return new ServerSender<>(dragonList);

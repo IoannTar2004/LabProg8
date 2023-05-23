@@ -8,22 +8,16 @@ import java.util.Arrays;
  */
 public class DataToServer<T> implements Serializable {
     private final String commandString;
-    private final String mode;
     private final T[] objects;
 
     @SafeVarargs
-    public DataToServer(String commandString, String mode, T... objects) {
+    public DataToServer(String commandString, T... objects) {
         this.commandString = commandString;
-        this.mode = mode;
         this.objects = objects;
     }
 
     public String getCommandString() {
         return commandString;
-    }
-
-    public String getMode() {
-        return mode;
     }
 
     public Object[] getObjects() {
@@ -34,7 +28,6 @@ public class DataToServer<T> implements Serializable {
     public String toString() {
         return "DataToServer{" +
                 "commandString=" + commandString +
-                ", mode='" + mode + '\'' +
                 ", objects=" + Arrays.toString(objects) +
                 '}';
     }

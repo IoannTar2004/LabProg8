@@ -42,8 +42,8 @@ public class Connection {
         return false;
     }
 
-    public <S,G> G exchange(String input, String mode, S... objects) {
-        DataToServer<S> sender = new DataToServer<>(input, mode, objects);
+    public <S,G> G exchange(String input, S... objects) {
+        DataToServer<S> sender = new DataToServer<>(input, objects);
         System.out.println(sender);
 
         try {

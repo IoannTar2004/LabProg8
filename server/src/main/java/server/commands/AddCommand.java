@@ -18,12 +18,10 @@ public class AddCommand implements Command {
     /**
      * Add object to collection.
      *
-     * @param mode
-     * @param command
      * @param args
      */
     @Override
-    public ServerSender<Long> execute(String command, String mode, Object... args) {
+    public ServerSender<Long> execute(Object... args) {
             Long id = new ObjectsManager().insert((Dragon) args[0]);
             return new ServerSender<>(id);
     }

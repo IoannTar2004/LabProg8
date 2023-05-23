@@ -163,6 +163,6 @@ public class TableController implements Initializable {
                 DragonCharacter.values()[typeChoice.getSelectionModel().getSelectedIndex()],
                 (DragonCave) elements[4]);
 
-        //Long id = StaticData.getData().getConnection().<Dragon, Long>exchange()
+        //Long id = StaticData.getData().getConnection().<Dragon, Long>exchange("add", null, )
     }
 }

@@ -19,8 +19,6 @@ public class ServerReader {
     }
 
     private Command command;
-    private String commandString;
-    private String mode;
     private Object[] objects;
     private Socket socket;
 
@@ -36,8 +34,6 @@ public class ServerReader {
             DataToServer<?> dataToServer = (DataToServer<?>) in.readObject();
 
             command = commands.get(dataToServer.getCommandString());
-            commandString = dataToServer.getCommandString();
-            mode = dataToServer.getMode();
             objects = dataToServer.getObjects();
             this.socket = socket;
 
@@ -63,14 +59,6 @@ public class ServerReader {
         return null;
     }
 
-    public String getCommandString() {
-        return commandString;
-    }
-
-    public String getMode() {
-        return mode;
-    }
-
     public Object[] getObjects() {
         return objects;
     }
@@ -83,8 +71,6 @@ public class ServerReader {
     public String toString() {
         return "ServerReader{" +
                 "command=" + command +
-                ", commandString=" + commandString +
-                ", mode='" + mode + '\'' +
                 ", objects=" + Arrays.toString(objects) +
                 '}';
     }
