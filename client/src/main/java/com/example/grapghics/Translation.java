@@ -83,11 +83,17 @@ public class Translation {
 
     public void changeColorLanguage(Locale locale) {
         String[] enums = new String[Color.values().length];
+        ResourceBundle bundle = ResourceBundle.getBundle("properties.Table", locale);
         for(Color color: Color.values()) {
-            enums[color.ordinal()] = ResourceBundle.getBundle("properties.Table", locale).getString(color.getColor());
+            enums[color.ordinal()] = bundle.getString(color.getColor());
         }
+
         ChoiceBox<String> colors = controller.getField("colorChoice");
+        int index = colors.getSelectionModel().getSelectedIndex();
         colors.getItems().setAll(enums);
+        if (index >= 0) {
+            colors.setValue(enums[index]);
+        }
     }
 
     public void changeTypeLanguage(Locale locale) {
@@ -95,8 +101,13 @@ public class Translation {
         for(DragonType type: DragonType.values()) {
             enums[type.ordinal()] = ResourceBundle.getBundle("properties.Table", locale).getString(type.getType());
         }
-        ChoiceBox<String> colors = controller.getField("typeChoice");
-        colors.getItems().setAll(enums);
+
+        ChoiceBox<String> type = controller.getField("typeChoice");
+        int index = type.getSelectionModel().getSelectedIndex();
+        type.getItems().setAll(enums);
+        if (index >= 0) {
+            type.setValue(enums[index]);
+        }
     }
 
     public void changeCharacterLanguage(Locale locale) {
@@ -105,7 +116,12 @@ public class Translation {
             enums[character.ordinal()] = ResourceBundle.getBundle("properties.Table", locale).
                     getString(character.getCharacter());
         }
-        ChoiceBox<String> colors = controller.getField("characterChoice");
-        colors.getItems().setAll(enums);
+
+        ChoiceBox<String> character = controller.getField("characterChoice");
+        int index = character.getSelectionModel().getSelectedIndex();
+        character.getItems().setAll(enums);
+        if (index >= 0) {
+            character.setValue(enums[index]);
+        }
     }
 }
