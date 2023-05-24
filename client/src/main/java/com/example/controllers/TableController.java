@@ -7,6 +7,8 @@ import com.example.modules.DragonTable;
 import com.example.modules.StaticData;
 import com.example.modules.Validation;
 import com.example.run.ProxyController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -17,14 +19,12 @@ import org.example.collections.*;
 import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.sql.Timestamp;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class TableController implements Initializable {
     private long idBuffer;
     private Timestamp dateBuffer;
+    private ObservableList<Dragon> currentList;
 
     @FXML
     private TableView<Dragon> dragonsTable;
@@ -109,6 +109,7 @@ public class TableController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         exit.setVisible(false);
         ProxyController.setController(TableController.class, this);
+        currentList = DragonTable.getDragons();
 
         languages.setItems(Translation.getAllLanguages());
         languages.setValue(Translation.getLanguage());
@@ -150,7 +151,7 @@ public class TableController implements Initializable {
         if (index < 0) {
             return;
         }
-        Dragon dragon = DragonTable.getDragons().get(index);
+        Dragon dragon = currentList.get(index);
         idBuffer = dragon.getId();
         nameField.setText(dragon.getName());
         xField.setText(dragon.getCoordinates().split("; ")[0]);
@@ -192,7 +193,7 @@ public class TableController implements Initializable {
             Dragon dragon = new Validation().getDragon(idBuffer);
             dragon.setCreation(dateBuffer);
             new Connection(StaticData.getData().getConnection().getSocket()).sendToServer("update", dragon);
-        } catch (NullPointerException e) {e.printStackTrace();}
+        } catch (NullPointerException ignored) {} //Неверный ввод некоторых данных. Игнорирую
     }
 
     @FXML
@@ -201,6 +202,45 @@ public class TableController implements Initializable {
             Dragon dragon = new Validation().getDragon(idBuffer);
             dragon.setCreation(dateBuffer);
             new Connection(StaticData.getData().getConnection().getSocket()).sendToServer("remove", dragon);
-        } catch (NullPointerException e) {e.printStackTrace();}
+        } catch (NullPointerException ignored) {} //Неверный ввод некоторых данных. Игнорирую
+    }
+
+    @FXML
+    protected void filterClick() {
+        List<Dragon> filtered = new LinkedList<>(DragonTable.getDragons());
+        if (idBuffer > 0) {
+            filtered = filtered.stream().filter(d -> d.getId() == idBuffer).toList();
+        }
+        if (nameField.getText().length() > 0) {
+            filtered = filtered.stream().filter(d -> d.getName().equals(nameField.getText())).toList();
+        }
+        if (xField.getText().length() > 0) {
+            filtered = filtered.stream().filter(d -> d.getCoordinates().split("; ")[0]
+                    .equals(xField.getText())).toList();
+        }
+        if (yField.getText().length() > 0) {
+            filtered = filtered.stream().filter(d -> d.getCoordinates().split("; ")[1]
+                    .equals(yField.getText())).toList();
+        }
+        if (ageField.getText().length() > 0) {
+            filtered = filtered.stream().filter(d -> d.getAge() == Integer.parseInt(ageField.getText())).toList();
+        }
+        if (caveField.getText().length() > 0) {
+            filtered = filtered.stream().filter(d -> d.getCave() == Double.parseDouble(caveField.getText())).toList();
+        }
+        if (colorChoice.getValue() != null) {
+            filtered = filtered.stream().filter(d -> d.getColor().equals(
+                    Color.values()[colorChoice.getSelectionModel().getSelectedIndex()].getColor())).toList();
+        }
+        if (typeChoice.getValue() != null) {
+            filtered = filtered.stream().filter(d -> d.getType().equals(
+                    DragonType.values()[typeChoice.getSelectionModel().getSelectedIndex()].getType())).toList();
+        }
+        if (characterChoice.getValue() != null) {
+            filtered = filtered.stream().filter(d -> d.getCharacter().equals(
+                    DragonCharacter.values()[characterChoice.getSelectionModel().getSelectedIndex()].getCharacter())).toList();
+        }
+        currentList = FXCollections.observableArrayList(filtered);
+        dragonsTable.setItems(currentList);
     }
 }

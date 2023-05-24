@@ -39,11 +39,7 @@ public class DragonTable {
     public void add(Dragon dragon) {
         Platform.runLater(() -> {
             ProxyController controller = new ProxyController(TableController.class);
-
-            for (DragonFields fields : DragonFields.values()) {
-                TableColumn<Dragon, ?> column = controller.getField(fields.getField());
-                column.setCellValueFactory(new PropertyValueFactory<>(fields.getField()));
-            }
+            setRows();
 
             dragons.add(dragon);
             ((TableView<Dragon>) controller.getField("dragonsTable")).setItems(dragons);
@@ -55,11 +51,7 @@ public class DragonTable {
         if (dragonIndex != null) {
             Platform.runLater(() -> {
                 ProxyController controller = new ProxyController(TableController.class);
-
-                for (DragonFields fields : DragonFields.values()) {
-                    TableColumn<Dragon, ?> column = controller.getField(fields.getField());
-                    column.setCellValueFactory(new PropertyValueFactory<>(fields.getField()));
-                }
+                setRows();
 
                 dragons.set(dragons.indexOf(dragonIndex), dragon);
                 ((TableView<Dragon>) controller.getField("dragonsTable")).setItems(dragons);
@@ -71,16 +63,19 @@ public class DragonTable {
         Platform.runLater(() -> {
             ProxyController controller = new ProxyController(TableController.class);
 
-//            for (DragonFields fields : DragonFields.values()) {
-//                TableColumn<Dragon, ?> column = controller.getField(fields.getField());
-//                column.setCellValueFactory(new PropertyValueFactory<>(fields.getField()));
-//            }
-
             Dragon collection = dragons.stream().filter(f -> f.getId() == dragon.getId()).findFirst().orElse(null);
             dragons.remove(collection);
             ((TableView<Dragon>) controller.getField("dragonsTable")).setItems(dragons);
         });
     }
+
+    public void setRows() {
+        ProxyController controller = new ProxyController(TableController.class);
+
+        for (DragonFields fields : DragonFields.values()) {
+        TableColumn<Dragon, ?> column = controller.getField(fields.getField());
+        column.setCellValueFactory(new PropertyValueFactory<>(fields.getField()));
+    }}
 
     public static ObservableList<Dragon> getDragons() {
         return dragons;
