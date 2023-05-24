@@ -49,4 +49,8 @@ public class DragonTable {
             ((TableView<Dragon>) controller.getField("dragonsTable")).setItems(dragons);
         });
     }
+
+    public static ObservableList<Dragon> getDragons() {
+        return dragons;
+    }
 }

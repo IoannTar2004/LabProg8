@@ -17,6 +17,7 @@ public class ServerReader {
         commands.put("user_access", new UserAccess());
         commands.put("show", new ShowCommand());
         commands.put("add", new AddCommand());
+        commands.put("update", new UpdateCommand());
     }
 
     private Command command;

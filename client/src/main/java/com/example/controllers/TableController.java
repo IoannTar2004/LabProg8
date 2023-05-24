@@ -3,6 +3,7 @@ package com.example.controllers;
 import com.example.grapghics.Animations;
 import com.example.grapghics.Translation;
 import com.example.modules.Connection;
+import com.example.modules.DragonTable;
 import com.example.modules.StaticData;
 import com.example.modules.Validation;
 import com.example.run.ProxyController;
@@ -142,6 +143,17 @@ public class TableController implements Initializable {
     @FXML
     protected void getItem() {
         int index = dragonsTable.getSelectionModel().getSelectedIndex();
+        Dragon dragon = DragonTable.getDragons().get(index);
+        nameField.setText(dragon.getName());
+        xField.setText(dragon.getCoordinates().split("; ")[0]);
+        yField.setText(dragon.getCoordinates().split("; ")[1]);
+        ageField.setText(String.valueOf(dragon.getAge()));
+        caveField.setText(String.valueOf(dragon.getCave()));
+
+        colorChoice.getSelectionModel().select(Color.getEnumColor(dragon.getColor()).ordinal());
+        typeChoice.getSelectionModel().select(DragonType.getEnumType(dragon.getType()).ordinal());
+        characterChoice.getSelectionModel().select(DragonCharacter.getEnumCharacter(dragon.getCharacter()).ordinal());
+
     }
 
     @FXML
@@ -157,27 +169,15 @@ public class TableController implements Initializable {
 
     @FXML
     protected void addClick() {
-        Object[] elements = new Object[5];
-        Validation validation = new Validation();
-        elements[0] = validation.string(nameField);
-        elements[1] = validation.integer(xField);
-        elements[2] = validation.along(yField);
-        elements[3] = validation.integer(ageField);
-        elements[4] = validation.cave(caveField);
-
         try {
-            Arrays.stream(elements).filter(Objects::isNull).findFirst();
-        } catch (NullPointerException e) {
-            return;
-        }
+            Dragon dragon = new Validation().getDragon();
+            new Connection(StaticData.getData().getConnection().getSocket()).sendToServer("add", dragon);
+        } catch (NullPointerException ignored) {} //неверный ввод некоторых данных. Игнорирую
+    }
 
-        Dragon dragon = new Dragon(StaticData.getData().getLogin(), (String) elements[0],
-                new Coordinates((int) elements[1], (long) elements[2]).toString(), (int) elements[3],
-                Color.values()[colorChoice.getSelectionModel().getSelectedIndex()].getColor(),
-                DragonType.values()[typeChoice.getSelectionModel().getSelectedIndex()].getType(),
-                DragonCharacter.values()[characterChoice.getSelectionModel().getSelectedIndex()].getCharacter(),
-                ((DragonCave) elements[4]).getDepth());
-
-        new Connection(StaticData.getData().getConnection().getSocket()).sendToServer("add", dragon);
+    @FXML
+    protected void updateClick()  {
+        Dragon dragon = new Validation().getDragon();
+        new Connection(StaticData.getData().getConnection().getSocket()).sendToServer("update", dragon);
     }
 }

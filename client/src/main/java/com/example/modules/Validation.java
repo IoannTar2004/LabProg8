@@ -1,14 +1,19 @@
 package com.example.modules;
 
 import com.example.controllers.RegistrationController;
+import com.example.controllers.TableController;
 import com.example.grapghics.NodeManager;
 import com.example.grapghics.Translation;
 import com.example.run.ProxyController;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import org.example.collections.DragonCave;
+import org.example.collections.*;
 
+import java.time.temporal.TemporalAccessor;
+import java.util.Arrays;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class Validation {
@@ -125,5 +130,35 @@ public class Validation {
             new NodeManager().textFieldError(field);
         }
         return null;
+    }
+
+    public Dragon getDragon() {
+        Object[] elements = new Object[5];
+        ProxyController controller = new ProxyController(TableController.class);
+        Validation validation = new Validation();
+        elements[0] = validation.string(controller.getField("nameField"));
+        elements[1] = validation.integer(controller.getField("xField"));
+        elements[2] = validation.along(controller.getField("yField"));
+        elements[3] = validation.integer(controller.getField("ageField"));
+        elements[4] = validation.cave(controller.getField("caveField"));
+
+        try {
+            Arrays.stream(elements).filter(Objects::isNull).findFirst();
+        } catch (NullPointerException e) {
+            throw new NullPointerException();
+        }
+
+        ChoiceBox<String> colorChoice = controller.getField("colorChoice");
+        ChoiceBox<String> typeChoice = controller.getField("colorChoice");
+        ChoiceBox<String> characterChoice = controller.getField("colorChoice");
+
+        Dragon dragon = new Dragon(StaticData.getData().getLogin(), (String) elements[0],
+                new Coordinates((int) elements[1], (long) elements[2]).toString(), (int) elements[3],
+                Color.values()[colorChoice.getSelectionModel().getSelectedIndex()].getColor(),
+                DragonType.values()[typeChoice.getSelectionModel().getSelectedIndex()].getType(),
+                DragonCharacter.values()[characterChoice.getSelectionModel().getSelectedIndex()].getCharacter(),
+                ((DragonCave) elements[4]).getDepth());
+
+        return dragon;
     }
 }
