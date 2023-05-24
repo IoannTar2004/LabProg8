@@ -18,10 +18,13 @@ import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class TableController implements Initializable {
+    private long idBuffer;
+    private Timestamp dateBuffer;
 
     @FXML
     private TableView<Dragon> dragonsTable;
@@ -144,6 +147,7 @@ public class TableController implements Initializable {
     protected void getItem() {
         int index = dragonsTable.getSelectionModel().getSelectedIndex();
         Dragon dragon = DragonTable.getDragons().get(index);
+        idBuffer = dragon.getId();
         nameField.setText(dragon.getName());
         xField.setText(dragon.getCoordinates().split("; ")[0]);
         yField.setText(dragon.getCoordinates().split("; ")[1]);
@@ -153,6 +157,8 @@ public class TableController implements Initializable {
         colorChoice.getSelectionModel().select(Color.getEnumColor(dragon.getColor()).ordinal());
         typeChoice.getSelectionModel().select(DragonType.getEnumType(dragon.getType()).ordinal());
         characterChoice.getSelectionModel().select(DragonCharacter.getEnumCharacter(dragon.getCharacter()).ordinal());
+
+        dateBuffer = dragon.getCreation();
 
     }
 
@@ -170,14 +176,18 @@ public class TableController implements Initializable {
     @FXML
     protected void addClick() {
         try {
-            Dragon dragon = new Validation().getDragon();
+            Dragon dragon = new Validation().getDragon(0);
+            dragon.setCreation(new Timestamp(new Date().getTime()));
             new Connection(StaticData.getData().getConnection().getSocket()).sendToServer("add", dragon);
-        } catch (NullPointerException ignored) {} //неверный ввод некоторых данных. Игнорирую
+        } catch (NullPointerException ignored) {} //Неверный ввод некоторых данных. Игнорирую
     }
 
     @FXML
     protected void updateClick()  {
-        Dragon dragon = new Validation().getDragon();
-        new Connection(StaticData.getData().getConnection().getSocket()).sendToServer("update", dragon);
+        try {
+            Dragon dragon = new Validation().getDragon(idBuffer);
+            dragon.setCreation(dateBuffer);
+            new Connection(StaticData.getData().getConnection().getSocket()).sendToServer("update", dragon);
+        } catch (NullPointerException e) {e.printStackTrace();}
     }
 }

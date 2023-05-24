@@ -132,7 +132,7 @@ public class Validation {
         return null;
     }
 
-    public Dragon getDragon() {
+    public Dragon getDragon(long id) {
         Object[] elements = new Object[5];
         ProxyController controller = new ProxyController(TableController.class);
         Validation validation = new Validation();
@@ -149,16 +149,16 @@ public class Validation {
         }
 
         ChoiceBox<String> colorChoice = controller.getField("colorChoice");
-        ChoiceBox<String> typeChoice = controller.getField("colorChoice");
-        ChoiceBox<String> characterChoice = controller.getField("colorChoice");
+        ChoiceBox<String> typeChoice = controller.getField("typeChoice");
+        ChoiceBox<String> characterChoice = controller.getField("characterChoice");
 
-        Dragon dragon = new Dragon(StaticData.getData().getLogin(), (String) elements[0],
+        Dragon dragon = new Dragon(id, StaticData.getData().getLogin(), (String) elements[0],
                 new Coordinates((int) elements[1], (long) elements[2]).toString(), (int) elements[3],
                 Color.values()[colorChoice.getSelectionModel().getSelectedIndex()].getColor(),
                 DragonType.values()[typeChoice.getSelectionModel().getSelectedIndex()].getType(),
                 DragonCharacter.values()[characterChoice.getSelectionModel().getSelectedIndex()].getCharacter(),
                 ((DragonCave) elements[4]).getDepth());
-
+        System.out.println(dragon);
         return dragon;
     }
 }

@@ -74,10 +74,11 @@ public class Connection implements Runnable {
             try {
                 Object[] objects = getFromServer();
                 String action = (String) objects[1];
+                System.out.println(Arrays.toString(objects));
                 Platform.runLater(() -> {
                     try {
                         dragonTableClass.getDeclaredMethod(action, Dragon.class).
-                                invoke(new DragonTable(), (Dragon) objects[0]);
+                                invoke(new DragonTable(), objects[0]);
                     } catch (ReflectiveOperationException e) {
                         e.printStackTrace();
                     }

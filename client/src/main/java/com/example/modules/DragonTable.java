@@ -50,6 +50,23 @@ public class DragonTable {
         });
     }
 
+    public void update(Dragon dragon) {
+        Dragon dragonIndex = dragons.stream().filter(d -> d.getId() == dragon.getId()).findFirst().orElse(null);
+        if (dragonIndex != null) {
+            Platform.runLater(() -> {
+                ProxyController controller = new ProxyController(TableController.class);
+
+                for (DragonFields fields : DragonFields.values()) {
+                    TableColumn<Dragon, ?> column = controller.getField(fields.getField());
+                    column.setCellValueFactory(new PropertyValueFactory<>(fields.getField()));
+                }
+
+                dragons.set(dragons.indexOf(dragonIndex), dragon);
+                ((TableView<Dragon>) controller.getField("dragonsTable")).setItems(dragons);
+            });
+        }
+    }
+
     public static ObservableList<Dragon> getDragons() {
         return dragons;
     }

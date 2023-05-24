@@ -33,8 +33,9 @@ public class Dragon implements Serializable {
      * @param character {@link DragonCharacter character}
      * @param cave fractional number separated by a dot {@link DragonCave}
      */
-    public Dragon(String login, String name, String coordinates, int age, String color, String type,
+    public Dragon(long id, String login, String name, String coordinates, int age, String color, String type,
                   String character, Double cave) {
+        this.id = id;
         this.login = login;
         this.name = name;
         this.coordinates = coordinates;
@@ -43,7 +44,6 @@ public class Dragon implements Serializable {
         this.type = type;
         this.character = character;
         this.cave = cave;
-        creation = new Timestamp(new Date().getTime());
     }
 
     public Dragon() {

@@ -3,6 +3,7 @@ package server.commands;
 import org.example.collections.Dragon;
 import server.database.DataBaseDragons;
 import server.database.IdGenerator;
+import server.manager.ObjectsManager;
 import server.modules.ServerSender;
 import server.multithreading.DataSentException;
 import server.run.ServerExchanger;
@@ -16,6 +17,7 @@ public class UpdateCommand implements Command {
     public ServerSender<?> execute(Object... args) throws DataSentException {
         Dragon dragon = (Dragon) args[0];
         new DataBaseDragons().merge(dragon);
+        new ObjectsManager().replace(dragon);
 
         ExecutorService service = Executors.newFixedThreadPool(3);
         ServerSender<Object[]> serverSender = new ServerSender<>(new Object[]{dragon, "update"});

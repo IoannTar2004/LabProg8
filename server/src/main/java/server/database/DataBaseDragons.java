@@ -18,8 +18,6 @@ public class DataBaseDragons {
         transaction.commit();
         session.close();
 
-        new ObjectsManager().add(dragon);
-
     }
 
     public void remove(Dragon dragon) {

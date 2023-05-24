@@ -27,6 +27,7 @@ public class AddCommand implements Command {
         Dragon dragon = (Dragon) args[0];
         dragon.setId(IdGenerator.getId());
         new DataBaseDragons().merge(dragon);
+        new ObjectsManager().add(dragon);
 
         ExecutorService service = Executors.newFixedThreadPool(3);
         ServerSender<Object[]> serverSender = new ServerSender<>(new Object[]{dragon, "add"});
