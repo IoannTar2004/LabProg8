@@ -3,7 +3,6 @@ package server.database;
 import server.modules.ServerSender;
 import server.commands.Command;
 
-import java.net.Socket;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,38 +12,19 @@ public class UserAccess implements Command {
 
     @Override
     public ServerSender<String> execute(Object... args) {
-        if(args[0].equals("newUser")) {
-            return newUser((String) args[1], (String) args[2]);
-        } else if (args[0].equals("existedUser")) {
-            return existedUser((String) args[1], (String) args[2]);
-        }
-        return null;
-    }
+        List<Users> list = new DataBaseUsers().getAll();
+        Users user = list.stream().filter(d -> d.getLogin().equals(args[1]) && d.getPassword().
+                equals(args[2])).findFirst().orElse(null);
 
-    private static ServerSender<String> newUser(String login, String password) {
-        DataBaseStuds studs = new DataBaseStuds();
-        try {
-            PreparedStatement statement = studs.getConnection().prepareStatement("INSERT INTO users VALUES (?,?)");
-            statement.setString(1, login);
-            statement.setString(2, password);
-            statement.execute();
+        if (user != null) {
             return new ServerSender<>("access");
-        } catch (SQLException e) {
-            return new ServerSender<>("existedUser");
         }
-    }
 
-    private static ServerSender<String> existedUser(String login, String password) {
-        DataBaseStuds studs = new DataBaseStuds();
-        try {
-            ResultSet set = studs.getConnection().createStatement().executeQuery("SELECT * FROM users");
-            while (set.next()) {
-                if (set.getString(1).equals(login) && set.getString(2).equals(password)) {
-                    return new ServerSender<>("access");
-                }
-            }
+        if(args[0].equals("newUser")) {
+            return new ServerSender<>("existedUser");
+        } else if (args[0].equals("existedUser")) {
             return new ServerSender<>("UserNotFound");
-        } catch (SQLException e) {e.printStackTrace();}
+        }
         return null;
     }
 }
