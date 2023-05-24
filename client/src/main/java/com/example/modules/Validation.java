@@ -158,7 +158,6 @@ public class Validation {
                 DragonType.values()[typeChoice.getSelectionModel().getSelectedIndex()].getType(),
                 DragonCharacter.values()[characterChoice.getSelectionModel().getSelectedIndex()].getCharacter(),
                 ((DragonCave) elements[4]).getDepth());
-        System.out.println(dragon);
         return dragon;
     }
 }

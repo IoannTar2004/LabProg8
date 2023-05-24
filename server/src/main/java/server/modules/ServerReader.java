@@ -18,6 +18,7 @@ public class ServerReader {
         commands.put("show", new ShowCommand());
         commands.put("add", new AddCommand());
         commands.put("update", new UpdateCommand());
+        commands.put("remove", new RemoveCommand());
     }
 
     private Command command;

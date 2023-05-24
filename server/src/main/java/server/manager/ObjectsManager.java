@@ -18,4 +18,8 @@ public class ObjectsManager extends CollectionManager {
         Dragon oldDragon = new ObjectsCollectionManager().getDragonById(dragon.getId());
         dragons.set(dragons.indexOf(oldDragon), dragon);
     }
+
+    public void remove(Dragon dragon) {
+        dragons.remove(dragon);
+    }
 }

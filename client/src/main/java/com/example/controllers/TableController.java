@@ -147,6 +147,9 @@ public class TableController implements Initializable {
     @FXML
     protected void getItem() {
         int index = dragonsTable.getSelectionModel().getSelectedIndex();
+        if (index < 0) {
+            return;
+        }
         Dragon dragon = DragonTable.getDragons().get(index);
         idBuffer = dragon.getId();
         nameField.setText(dragon.getName());
@@ -189,6 +192,15 @@ public class TableController implements Initializable {
             Dragon dragon = new Validation().getDragon(idBuffer);
             dragon.setCreation(dateBuffer);
             new Connection(StaticData.getData().getConnection().getSocket()).sendToServer("update", dragon);
+        } catch (NullPointerException e) {e.printStackTrace();}
+    }
+
+    @FXML
+    protected void removeClick() {
+        try {
+            Dragon dragon = new Validation().getDragon(idBuffer);
+            dragon.setCreation(dateBuffer);
+            new Connection(StaticData.getData().getConnection().getSocket()).sendToServer("remove", dragon);
         } catch (NullPointerException e) {e.printStackTrace();}
     }
 }

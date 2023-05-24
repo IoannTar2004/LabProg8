@@ -57,7 +57,7 @@
                             <children>
                                 <Button fx:id="add" mnemonicParsing="false" onMouseClicked="#addClick" prefHeight="38.0" prefWidth="124.0" styleClass="add" stylesheets="@../../../CSS/buttons.css" text="Button" />
                                 <Button fx:id="edit" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#updateClick" prefHeight="38.0" prefWidth="124.0" styleClass="edit" stylesheets="@../../../CSS/buttons.css" text="Button" />
-                                <Button fx:id="remove" layoutX="154.0" layoutY="10.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="124.0" styleClass="remove" stylesheets="@../../../CSS/buttons.css" text="Button" />
+                                <Button fx:id="remove" layoutX="154.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#removeClick" prefHeight="38.0" prefWidth="124.0" styleClass="remove" stylesheets="@../../../CSS/buttons.css" text="Button" />
                                 <Button fx:id="filter" layoutX="298.0" layoutY="10.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="124.0" styleClass="filter" stylesheets="@../../../CSS/buttons.css" text="Button" />
                             </children>
                             <padding>

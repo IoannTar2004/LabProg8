@@ -23,7 +23,7 @@ public class AddCommand implements Command {
      * @param args
      */
     @Override
-    public ServerSender<Dragon> execute(Object... args) throws DataSentException {
+    public ServerSender<Object[]> execute(Object... args) throws DataSentException {
         Dragon dragon = (Dragon) args[0];
         dragon.setId(IdGenerator.getId());
         new DataBaseDragons().merge(dragon);
