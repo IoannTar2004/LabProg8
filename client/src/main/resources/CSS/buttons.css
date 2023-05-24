@@ -18,6 +18,8 @@
 .filter {
     -fx-background-color: blue;
 }
+
+
 .login {
     -fx-text-fill: white;
     -fx-font-size: 18;

@@ -104,6 +104,9 @@ public class TableController implements Initializable {
     @FXML
     private ChoiceBox<String> characterChoice;
 
+    @FXML
+    private Button clear;
+
 
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -111,6 +114,7 @@ public class TableController implements Initializable {
         ProxyController.setController(TableController.class, this);
         currentList = DragonTable.getDragons();
 
+        System.out.println(colorChoice.getValue());
         languages.setItems(Translation.getAllLanguages());
         languages.setValue(Translation.getLanguage());
         new Translation(TableController.class).changeLanguage(null);
@@ -241,6 +245,20 @@ public class TableController implements Initializable {
                     DragonCharacter.values()[characterChoice.getSelectionModel().getSelectedIndex()].getCharacter())).toList();
         }
         currentList = FXCollections.observableArrayList(filtered);
+        dragonsTable.setItems(currentList);
+    }
+
+    @FXML
+    protected void clearClick() {
+        TextField[] fields = {nameField, xField, yField, ageField, caveField};
+        for (TextField field: fields) {
+            field.setText("");
+        }
+        colorChoice.setValue(null);
+        typeChoice.setValue(null);
+        characterChoice.setValue(null);
+
+        currentList = DragonTable.getDragons();
         dragonsTable.setItems(currentList);
     }
 }

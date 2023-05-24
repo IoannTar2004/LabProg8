@@ -53,12 +53,13 @@
                         <TextField fx:id="caveField" onMouseClicked="#enterAgain" prefHeight="26.0" prefWidth="163.0" />
                             </children>
                         </HBox>
-                        <HBox layoutX="93.0" layoutY="577.0" prefHeight="53.0" prefWidth="662.0" spacing="50.0">
+                        <HBox layoutX="44.0" layoutY="576.0" prefHeight="54.0" prefWidth="759.0" spacing="35.0">
                             <children>
-                                <Button fx:id="add" mnemonicParsing="false" onMouseClicked="#addClick" prefHeight="38.0" prefWidth="124.0" styleClass="add" stylesheets="@../../../CSS/buttons.css" text="Button" />
-                                <Button fx:id="edit" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#updateClick" prefHeight="38.0" prefWidth="124.0" styleClass="edit" stylesheets="@../../../CSS/buttons.css" text="Button" />
-                                <Button fx:id="remove" layoutX="154.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#removeClick" prefHeight="38.0" prefWidth="124.0" styleClass="remove" stylesheets="@../../../CSS/buttons.css" text="Button" />
-                                <Button fx:id="filter" layoutX="298.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#filterClick" prefHeight="38.0" prefWidth="124.0" styleClass="filter" stylesheets="@../../../CSS/buttons.css" text="Button" />
+                                <Button fx:id="add" mnemonicParsing="false" onMouseClicked="#addClick" prefHeight="38.0" prefWidth="134.0" styleClass="add" stylesheets="@../../../CSS/buttons.css" text="Button" />
+                                <Button fx:id="edit" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#updateClick" prefHeight="38.0" prefWidth="134.0" styleClass="edit" stylesheets="@../../../CSS/buttons.css" text="Button" />
+                                <Button fx:id="remove" layoutX="154.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#removeClick" prefHeight="38.0" prefWidth="138.0" styleClass="remove" stylesheets="@../../../CSS/buttons.css" text="Button" />
+                                <Button fx:id="filter" layoutX="298.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#filterClick" prefHeight="38.0" prefWidth="137.0" styleClass="filter" stylesheets="@../../../CSS/buttons.css" text="Button" />
+                        <Button fx:id="clear" layoutX="488.0" layoutY="18.0" mnemonicParsing="false" onMouseClicked="#clearClick" prefHeight="38.0" prefWidth="131.0" style="-fx-text-fill: black;" stylesheets="@../../../CSS/buttons.css" text="Button" />
                             </children>
                             <padding>
                                 <Insets top="8.0" />
