@@ -13,7 +13,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+import org.example.collections.Dragon;
 
+import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -95,21 +97,24 @@ public class Registration implements Runnable {
         String password = hash(((TextField) controller.getField("password")).getText());
         Connection connection = new Connection(host, Integer.parseInt(port));
 
-        if (connection.run()) {
-            String key = connection.<String, String>exchange("user_access", mode, login, password);
-            if (!key.equals("access")) {
-                Platform.runLater(() -> new NodeManager().setText(RegistrationController.class,
-                        bundle, locale, new String[]{"loginLabel"}, new String[]{key}));
-                connection.close();
-            } else {
-                Platform.runLater(() -> {
-                    ProxyController.changeScene(controller.getField("enter"), "table.fxml");
-                    new DragonTable().getAndFill(connection.getSocket());
+        if (connection.connect()) {
+            connection.sendToServer("user_access", mode, login, password);
+            try {
+                String key = connection.getFromServer();
+
+                if (!key.equals("access")) {
+                    Platform.runLater(() -> new NodeManager().setText(RegistrationController.class,
+                            bundle, locale, new String[]{"loginLabel"}, new String[]{key}));
+
+                    connection.close();
+                } else {
+                    Platform.runLater(() -> ProxyController.changeScene(controller.getField("enter"), "table.fxml"));
+                    new DragonTable().getAndAdd(connection.getSocket());
+                    StaticData.getData().setLogin(login);
+                    StaticData.getData().setConnection(connection);
+                    new Thread(connection).start();
                 }
-                );
-                StaticData.getData().setLogin(login);
-                StaticData.getData().setConnection(connection);
-            }
+            } catch (IOException e) {e.printStackTrace();}
             cancel();
         }
     }

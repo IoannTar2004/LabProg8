@@ -2,7 +2,7 @@ package com.example.controllers;
 
 import com.example.grapghics.Animations;
 import com.example.grapghics.Translation;
-import com.example.modules.DragonTable;
+import com.example.modules.Connection;
 import com.example.modules.StaticData;
 import com.example.modules.Validation;
 import com.example.run.ProxyController;
@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import org.example.collections.*;
 
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.util.Arrays;
@@ -133,6 +134,8 @@ public class TableController implements Initializable {
 
     @FXML
     protected void exitFromTable() {
+        StaticData.getData().getConnection().close();
+        Connection.stop();
         ProxyController.changeScene(exitButton, "registration.fxml");
     }
 
@@ -175,8 +178,6 @@ public class TableController implements Initializable {
                 DragonCharacter.values()[typeChoice.getSelectionModel().getSelectedIndex()],
                 (DragonCave) elements[4]);
 
-        Long id = StaticData.getData().getConnection().<Dragon, Long>exchange("add", dragon);
-        dragon.setId(id);
-        new DragonTable().fill(dragon);
+        new Connection(StaticData.getData().getConnection().getSocket()).sendToServer("add", dragon);
     }
 }

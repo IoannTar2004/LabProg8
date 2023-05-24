@@ -25,7 +25,7 @@ public class Consumer implements Runnable {
                         TaskQueue.getQueue().wait();
                     } catch (InterruptedException ignored) {}
                 }
-            }
+            } catch (DataSentException ignored) {} //данные уже отправлены. Перейти к следующему task'у.
         }
     }
 }
