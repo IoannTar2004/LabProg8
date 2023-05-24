@@ -2,7 +2,6 @@ package server.database;
 
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
-import org.example.collections.Dragon;
 import org.hibernate.Session;
 
 import java.util.List;

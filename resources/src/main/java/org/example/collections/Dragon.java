@@ -4,9 +4,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 /**
  * Class Dragon whose objects stored in Java Collection
@@ -17,13 +15,13 @@ public class Dragon implements Serializable {
     private long id;
     private String user;
     private String name;
-    private Coordinates coordinates;
+    private String coordinates;
     private Integer age;
     private String color;
     private String type;
     private String character;
-    private DragonCave cave;
-    private Timestamp creationDate;
+    private Double cave;
+    private Timestamp creation;
 
     /**
      *
@@ -36,9 +34,8 @@ public class Dragon implements Serializable {
      * @param character {@link DragonCharacter character}
      * @param cave fractional number separated by a dot {@link DragonCave}
      */
-    public Dragon(long id, String user, String name, Coordinates coordinates, int age, String color, String type,
-                  String character, DragonCave cave) {
-        this.id = id;
+    public Dragon(String user, String name, String coordinates, int age, String color, String type,
+                  String character, Double cave) {
         this.user = user;
         this.name = name;
         this.coordinates = coordinates;
@@ -47,27 +44,29 @@ public class Dragon implements Serializable {
         this.type = type;
         this.character = character;
         this.cave = cave;
-        creationDate = new Timestamp(new Date().getTime());
+        creation = new Timestamp(new Date().getTime());
     }
 
     public Dragon() {
-        creationDate = new Timestamp(new Date().getTime());
+
     }
 
     @Override
     public String toString() {
         return "| id: " + this.id + " | " +
                 "Имя: " + this.name + " | "+
-                "координаты: " + this.coordinates.toString() + " | " +
+                "координаты: " + this.coordinates + " | " +
                 "возраст: " + this.age + " | " +
                 "цвет: " + this.color + " | " +
                 "тип: " + this.type + " | " +
                 "характер: " + this.character + " | " +
-                "глубина пещеры: " + this.cave.getDepth() + " | " +
-                "дата создания: " + this.getCreationDate();
+                "глубина пещеры: " + this.cave + " | " +
+                "дата создания: " + this.getCreation();
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dragon_id")
+    @SequenceGenerator(name = "dragon_id", allocationSize = 1, sequenceName = "dragon_id")
     public long getId() {
         return id;
     }
@@ -80,7 +79,7 @@ public class Dragon implements Serializable {
         return name;
     }
 
-    public Coordinates getCoordinates() {
+    public String getCoordinates() {
         return coordinates;
     }
 
@@ -100,12 +99,12 @@ public class Dragon implements Serializable {
         return character;
     }
 
-    public DragonCave getCave() {
+    public Double getCave() {
         return cave;
     }
 
-    public Timestamp getCreationDate() {
-        return creationDate;
+    public Timestamp getCreation() {
+        return creation;
     }
 
     public void setId(long id) {
@@ -120,7 +119,7 @@ public class Dragon implements Serializable {
         this.name = name;
     }
 
-    public void setCoordinates(Coordinates coordinates) {
+    public void setCoordinates(String coordinates) {
         this.coordinates = coordinates;
     }
 
@@ -140,11 +139,11 @@ public class Dragon implements Serializable {
         this.character = character;
     }
 
-    public void setCave(DragonCave cave) {
+    public void setCave(Double cave) {
         this.cave = cave;
     }
 
-    public void setCreationDate(Timestamp creationDate) {
-        this.creationDate = creationDate;
+    public void setCreation(Timestamp creation) {
+        this.creation = creation;
     }
 }

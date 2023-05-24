@@ -6,20 +6,21 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
 public abstract class HibernateUtils {
-    private static SessionFactory sessionFactory;
+    private static SessionFactory sessionDragonFactory;
+    private static SessionFactory sessionUsersFactory;
 
     private HibernateUtils() {}
 
     public static SessionFactory getSessionFactory(Class<?> clas) {
-        if (sessionFactory == null) {
+        if (sessionDragonFactory == null) {
             try {
                 Configuration configuration = new Configuration().configure();
-                configuration.addAnnotatedClass(clas);
+                configuration.addAnnotatedClass(Dragon.class);
                 StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
-                sessionFactory = configuration.buildSessionFactory(builder.build());
+                sessionDragonFactory = configuration.buildSessionFactory(builder.build());
 
             } catch (Exception e) {e.printStackTrace();}
         }
-        return sessionFactory;
+        return sessionDragonFactory;
     }
 }

@@ -1,10 +1,7 @@
 package server.commands;
 
 import org.example.collections.Dragon;
-import org.example.tools.OutputText;
 import server.manager.ObjectsCollectionManager;
-import server.manager.ObjectsElements;
-import server.manager.ObjectsManager;
 import server.modules.ServerSender;
 
 import java.util.LinkedList;

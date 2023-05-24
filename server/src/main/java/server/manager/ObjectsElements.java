@@ -28,7 +28,7 @@ public class ObjectsElements extends CollectionManager {
             elements.put("6", "тип: " + dragon.getType());
             elements.put("7", "характер: " + dragon.getCharacter());
             elements.put("8", "глубина пещеры: " + dragon.getCave());
-            elements.put("9", "дата создания: " + dragon.getCreationDate());
+            elements.put("9", "дата создания: " + dragon.getCreation());
 
             String show = "| ";
             boolean unknownNumber = false;

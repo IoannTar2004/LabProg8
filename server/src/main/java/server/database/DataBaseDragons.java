@@ -5,9 +5,7 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import org.example.collections.*;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import server.manager.ObjectsManager;
 import java.util.List;
 
 public class DataBaseDragons {
@@ -18,6 +16,8 @@ public class DataBaseDragons {
         Transaction transaction = session.beginTransaction();
         session.merge(dragon);
         transaction.commit();
+
+        new ObjectsManager().add(dragon);
         session.close();
     }
 
@@ -31,10 +31,14 @@ public class DataBaseDragons {
 
     public List<Dragon> getAll() {
         Session session = HibernateUtils.getSessionFactory(dragonClass).openSession();
+        Transaction transaction = session.beginTransaction();
 
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Dragon> create = builder.createQuery(dragonClass);
         create.select(create.from(dragonClass));
-        return session.createQuery(create).getResultList();
+        List<Dragon> list = session.createQuery(create).getResultList();
+        transaction.commit();
+        session.close();
+        return list;
     }
 }

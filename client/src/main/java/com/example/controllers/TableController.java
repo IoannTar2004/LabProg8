@@ -171,11 +171,11 @@ public class TableController implements Initializable {
             return;
         }
 
-        Dragon dragon = new Dragon(0L, StaticData.getData().getLogin(), (String) elements[0],
+        Dragon dragon = new Dragon(StaticData.getData().getLogin(), (String) elements[0],
                 new Coordinates((int) elements[1], (long) elements[2]), (int) elements[3],
-                Color.values()[colorChoice.getSelectionModel().getSelectedIndex()],
-                DragonType.values()[typeChoice.getSelectionModel().getSelectedIndex()],
-                DragonCharacter.values()[typeChoice.getSelectionModel().getSelectedIndex()],
+                Color.values()[colorChoice.getSelectionModel().getSelectedIndex()].getColor(),
+                DragonType.values()[typeChoice.getSelectionModel().getSelectedIndex()].getType(),
+                DragonCharacter.values()[typeChoice.getSelectionModel().getSelectedIndex()].getCharacter(),
                 (DragonCave) elements[4]);
 
         new Connection(StaticData.getData().getConnection().getSocket()).sendToServer("add", dragon);
