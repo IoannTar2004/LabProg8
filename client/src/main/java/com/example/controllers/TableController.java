@@ -139,6 +139,7 @@ public class TableController implements Initializable {
     @FXML
     protected void exitFromTable() {
         StaticData.getData().getConnection().close();
+        DragonTable.getDragons().clear();
         Connection.stop();
         ProxyController.changeScene(exitButton, "registration.fxml");
     }
