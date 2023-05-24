@@ -1,6 +1,7 @@
 package com.example.modules;
 
 import javafx.application.Platform;
+import org.example.collections.Dragon;
 import org.example.transmission.DataToClient;
 import org.example.transmission.DataToServer;
 
@@ -8,6 +9,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Connection implements Runnable {

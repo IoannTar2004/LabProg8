@@ -1,5 +1,7 @@
-package server.database;
+package server.commands;
 
+import server.database.DataBaseUsers;
+import server.database.Users;
 import server.modules.ServerSender;
 import server.commands.Command;
 

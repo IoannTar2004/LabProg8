@@ -13,7 +13,7 @@ import jakarta.persistence.*;
 @Table(name = "dragons")
 public class Dragon implements Serializable {
     private long id;
-    private String user;
+    private String login;
     private String name;
     private String coordinates;
     private Integer age;
@@ -25,7 +25,6 @@ public class Dragon implements Serializable {
 
     /**
      *
-     * @param id "Long"; 12-digit number
      * @param name notNull string
      * @param coordinates {@link Coordinates coordinates (x, y)}
      * @param age integer positive number
@@ -34,9 +33,9 @@ public class Dragon implements Serializable {
      * @param character {@link DragonCharacter character}
      * @param cave fractional number separated by a dot {@link DragonCave}
      */
-    public Dragon(String user, String name, String coordinates, int age, String color, String type,
+    public Dragon(String login, String name, String coordinates, int age, String color, String type,
                   String character, Double cave) {
-        this.user = user;
+        this.login = login;
         this.name = name;
         this.coordinates = coordinates;
         this.age = age;
@@ -53,26 +52,27 @@ public class Dragon implements Serializable {
 
     @Override
     public String toString() {
-        return "| id: " + this.id + " | " +
-                "Имя: " + this.name + " | "+
-                "координаты: " + this.coordinates + " | " +
-                "возраст: " + this.age + " | " +
-                "цвет: " + this.color + " | " +
-                "тип: " + this.type + " | " +
-                "характер: " + this.character + " | " +
-                "глубина пещеры: " + this.cave + " | " +
-                "дата создания: " + this.getCreation();
+        return "Dragon{" +
+                "id=" + id +
+                ", user='" + login + '\'' +
+                ", name='" + name + '\'' +
+                ", coordinates='" + coordinates + '\'' +
+                ", age=" + age +
+                ", color='" + color + '\'' +
+                ", type='" + type + '\'' +
+                ", character='" + character + '\'' +
+                ", cave=" + cave +
+                ", creation=" + creation +
+                '}';
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dragon_id")
-    @SequenceGenerator(name = "dragon_id", allocationSize = 1, sequenceName = "dragon_id")
     public long getId() {
         return id;
     }
 
-    public String getUser() {
-        return user;
+    public String getLogin() {
+        return login;
     }
 
     public String getName() {
@@ -111,8 +111,8 @@ public class Dragon implements Serializable {
         this.id = id;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public void setName(String name) {

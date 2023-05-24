@@ -2,7 +2,7 @@ package server.modules;
 
 import org.example.transmission.DataToServer;
 import server.commands.*;
-import server.database.UserAccess;
+import server.commands.UserAccess;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

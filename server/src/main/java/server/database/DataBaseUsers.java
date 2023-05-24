@@ -8,14 +8,15 @@ import java.util.List;
 
 public class DataBaseUsers {
 
-    private final Class<Users> usersClass = Users.class;
-
     public List<Users> getAll() {
-        Session session = HibernateUtils.getSessionFactory(usersClass).openSession();
+        Session session = HibernateUtils.getUsersFactory().openSession();
 
         CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Users> create = builder.createQuery(usersClass);
-        create.select(create.from(usersClass));
-        return session.createQuery(create).getResultList();
+        CriteriaQuery<Users> create = builder.createQuery(Users.class);
+        create.select(create.from(Users.class));
+
+        List<Users> users = session.createQuery(create).getResultList();
+        session.close();
+        return users;
     }
 }

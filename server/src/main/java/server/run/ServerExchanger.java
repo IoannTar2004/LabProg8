@@ -26,7 +26,6 @@ public class ServerExchanger {
         int port = scanner.nextInt();
 
         new ObjectsManager().addAll(new DataBaseDragons().getAll());
-        System.out.println(IdGenerator.getId());
         System.out.println("Running!");
         try (ServerSocket serverSocket = new ServerSocket(port)) {
             serverSocket.setReuseAddress(false);

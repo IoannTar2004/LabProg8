@@ -38,7 +38,7 @@ public class TableController implements Initializable {
     private TableColumn<Dragon, String> color;
 
     @FXML
-    private TableColumn<Dragon, Timestamp> creationDate;
+    private TableColumn<Dragon, Timestamp> creation;
 
     @FXML
     private TableColumn<Dragon, Long> id;
@@ -53,7 +53,7 @@ public class TableController implements Initializable {
     private TableColumn<Dragon, String> coordinates;
 
     @FXML
-    private TableColumn<Dragon, String> user;
+    private TableColumn<Dragon, String> login;
 
     @FXML
     private Button add;
@@ -172,11 +172,11 @@ public class TableController implements Initializable {
         }
 
         Dragon dragon = new Dragon(StaticData.getData().getLogin(), (String) elements[0],
-                new Coordinates((int) elements[1], (long) elements[2]), (int) elements[3],
+                new Coordinates((int) elements[1], (long) elements[2]).toString(), (int) elements[3],
                 Color.values()[colorChoice.getSelectionModel().getSelectedIndex()].getColor(),
                 DragonType.values()[typeChoice.getSelectionModel().getSelectedIndex()].getType(),
-                DragonCharacter.values()[typeChoice.getSelectionModel().getSelectedIndex()].getCharacter(),
-                (DragonCave) elements[4]);
+                DragonCharacter.values()[characterChoice.getSelectionModel().getSelectedIndex()].getCharacter(),
+                ((DragonCave) elements[4]).getDepth());
 
         new Connection(StaticData.getData().getConnection().getSocket()).sendToServer("add", dragon);
     }

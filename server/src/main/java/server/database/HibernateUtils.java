@@ -11,7 +11,7 @@ public abstract class HibernateUtils {
 
     private HibernateUtils() {}
 
-    public static SessionFactory getSessionFactory(Class<?> clas) {
+    public static SessionFactory getDragonFactory() {
         if (sessionDragonFactory == null) {
             try {
                 Configuration configuration = new Configuration().configure();
@@ -22,5 +22,18 @@ public abstract class HibernateUtils {
             } catch (Exception e) {e.printStackTrace();}
         }
         return sessionDragonFactory;
+    }
+
+    public static SessionFactory getUsersFactory() {
+        if (sessionUsersFactory == null) {
+            try {
+                Configuration configuration = new Configuration().configure();
+                configuration.addAnnotatedClass(Users.class);
+                StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
+                sessionUsersFactory = configuration.buildSessionFactory(builder.build());
+
+            } catch (Exception e) {e.printStackTrace();}
+        }
+        return sessionUsersFactory;
     }
 }
