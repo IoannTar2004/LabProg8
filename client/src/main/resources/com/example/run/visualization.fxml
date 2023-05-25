@@ -14,13 +14,13 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="742.0" prefWidth="892.0" styleClass="air" stylesheets="@../../../CSS/background.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.VisualizationController">
+<BorderPane fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="742.0" prefWidth="892.0" styleClass="air" stylesheets="@../../../CSS/background.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.VisualizationController">
    <center>
       <Group>
          <children>
             <AnchorPane layoutX="-245.0" layoutY="-54.0" prefWidth="920.0">
                <children>
-                  <ImageView fitHeight="518.0" fitWidth="534.0" layoutY="-38.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="80.0" AnchorPane.rightAnchor="500.0654296875">
+                  <ImageView fx:id="object" fitHeight="518.0" fitWidth="534.0" layoutY="-38.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="80.0" AnchorPane.rightAnchor="500.0654296875">
                      <image>
                         <Image url="@../../../images/yellow_dragon.png" />
                      </image>
@@ -33,25 +33,25 @@
                               <Font size="21.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="nameEmpty" prefHeight="26.0" prefWidth="226.0" style="-fx-border-color: black;" />
-                        <Label layoutX="10.0" layoutY="10.0" prefHeight="18.0" prefWidth="186.0" style="-fx-font-weight: bold;" text="x - координата" fx:id="xField">
+                        <TextField fx:id="nameField" onMouseClicked="#enterAgain" prefHeight="26.0" prefWidth="226.0" style="-fx-border-color: black;" />
+                        <Label layoutX="10.0" layoutY="10.0" prefHeight="18.0" prefWidth="186.0" style="-fx-font-weight: bold;" text="x">
                            <font>
                               <Font size="21.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="numberError" prefHeight="26.0" prefWidth="226.0" style="-fx-border-color: black;" />
-                        <Label layoutX="10.0" layoutY="78.0" prefHeight="18.0" prefWidth="186.0" style="-fx-font-weight: bold;" text="y - координата" fx:id="xField">
+                        <TextField onMouseClicked="#enterAgain" prefHeight="26.0" prefWidth="226.0" style="-fx-border-color: black;" fx:id="xField" />
+                        <Label layoutX="10.0" layoutY="78.0" prefHeight="18.0" prefWidth="186.0" style="-fx-font-weight: bold;" text="y">
                            <font>
                               <Font size="21.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="numberError" layoutX="10.0" layoutY="114.0" prefHeight="26.0" prefWidth="226.0" style="-fx-border-color: black;" />
+                        <TextField fx:id="yField" layoutX="10.0" layoutY="114.0" onMouseClicked="#enterAgain" prefHeight="26.0" prefWidth="226.0" style="-fx-border-color: black;" />
                         <Label fx:id="age" layoutX="10.0" layoutY="146.0" prefHeight="18.0" prefWidth="186.0" style="-fx-font-weight: bold;" text="Возраст">
                            <font>
                               <Font size="21.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="numberError" layoutX="10.0" layoutY="182.0" prefHeight="26.0" prefWidth="226.0" style="-fx-border-color: black;" />
+                        <TextField fx:id="ageField" layoutX="10.0" layoutY="182.0" onMouseClicked="#enterAgain" prefHeight="26.0" prefWidth="226.0" style="-fx-border-color: black;" />
                         <Label fx:id="color" layoutX="10.0" layoutY="214.0" prefHeight="18.0" prefWidth="186.0" style="-fx-font-weight: bold;" text="Цвет">
                            <font>
                               <Font size="21.0" />
@@ -70,16 +70,16 @@
                            </font>
                         </Label>
                         <ChoiceBox fx:id="characterChoice" layoutX="10.0" layoutY="385.0" prefHeight="26.0" prefWidth="166.0" />
-                        <Label fx:id="caveField" layoutX="10.0" layoutY="416.0" prefHeight="18.0" prefWidth="186.0" style="-fx-font-weight: bold;" text="Глубина пещеры">
+                        <Label fx:id="cave" layoutX="10.0" layoutY="416.0" prefHeight="18.0" prefWidth="186.0" style="-fx-font-weight: bold;" text="Глубина пещеры">
                            <font>
                               <Font size="21.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="numberError" layoutX="10.0" layoutY="250.0" prefHeight="26.0" prefWidth="226.0" style="-fx-border-color: black;" />
+                        <TextField fx:id="caveField" layoutX="10.0" layoutY="250.0" onMouseClicked="#enterAgain" prefHeight="26.0" prefWidth="226.0" style="-fx-border-color: black;" />
                      </children>
                   </VBox>
-                  <Button fx:id="save" layoutX="739.0" layoutY="588.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="122.0" style="-fx-border-width: 3;" styleClass="save" stylesheets="@../../../CSS/buttons.css" text="Button" />
-                  <Button fx:id="cancel" layoutX="593.0" layoutY="588.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="122.0" style="-fx-border-width: 3;" styleClass="cancel" stylesheets="@../../../CSS/buttons.css" text="Button" />
+                  <Button fx:id="save" layoutX="739.0" layoutY="588.0" mnemonicParsing="false" onMouseClicked="#saveClick" prefHeight="44.0" prefWidth="122.0" style="-fx-border-width: 3;" styleClass="save" stylesheets="@../../../CSS/buttons.css" text="Button" />
+                  <Button fx:id="back" layoutX="593.0" layoutY="588.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="122.0" style="-fx-border-width: 3;" styleClass="cancel" stylesheets="@../../../CSS/buttons.css" text="Button" />
                </children>
             </AnchorPane>
          </children>

@@ -1,7 +1,7 @@
 package com.example.controllers;
 
 import com.example.grapghics.Animations;
-import com.example.grapghics.BoxInitialize;
+import com.example.grapghics.NodeManager;
 import com.example.grapghics.Translation;
 import com.example.misc.FlowText;
 import com.example.modules.Connection;
@@ -123,7 +123,7 @@ public class TableController implements Initializable {
         currentList = DragonTable.getDragons();
         loginText.setText(StaticData.getData().getLogin());
 
-        new BoxInitialize().initialize(TableController.class, languages, colorChoice, characterChoice, typeChoice);
+        new NodeManager().boxInitialize(TableController.class, languages, colorChoice, characterChoice, typeChoice);
     }
 
     @FXML
@@ -170,25 +170,19 @@ public class TableController implements Initializable {
         dateBuffer = dragon.getCreation();
 
         if (event.getClickCount() > 1) {
-            System.out.println("yes");
+            ProxyController.changeScene(dragonsTable, "visualization.fxml");
         }
      }
 
     @FXML
     protected void enterAgain() {
-        ProxyController proxyController = new ProxyController(TableController.class);
-        String[] fields = {"nameField", "xField", "yField", "ageField", "caveField"};
-        for (String field: fields) {
-            TextField textField = proxyController.getField(field);
-            textField.setStyle("");
-            textField.setPromptText(ResourceBundle.getBundle("properties.Table", Translation.getLocale()).getString(field));
-        }
+        new NodeManager().enterAgain(TableController.class);
     }
 
     @FXML
     protected void addClick() {
         try {
-            Dragon dragon = new Validation().getDragon(0);
+            Dragon dragon = new Validation().getDragon(0, TableController.class);
             dragon.setCreation(new Timestamp(new Date().getTime()));
             new Connection(StaticData.getData().getConnection().getSocket()).sendToServer("add", dragon);
         } catch (NullPointerException ignored) {} //Неверный ввод некоторых данных. Игнорирую
@@ -197,7 +191,7 @@ public class TableController implements Initializable {
     @FXML
     protected void updateClick()  {
         try {
-            Dragon dragon = new Validation().getDragon(idBuffer);
+            Dragon dragon = new Validation().getDragon(idBuffer, TableController.class);
             dragon.setCreation(dateBuffer);
             new Connection(StaticData.getData().getConnection().getSocket()).sendToServer("update", dragon);
         } catch (NullPointerException ignored) {} //Неверный ввод некоторых данных. Игнорирую
@@ -206,7 +200,7 @@ public class TableController implements Initializable {
     @FXML
     protected void removeClick() {
         try {
-            Dragon dragon = new Validation().getDragon(idBuffer);
+            Dragon dragon = new Validation().getDragon(idBuffer, TableController.class);
             dragon.setCreation(dateBuffer);
             new Connection(StaticData.getData().getConnection().getSocket()).sendToServer("remove", dragon);
         } catch (NullPointerException ignored) {} //Неверный ввод некоторых данных. Игнорирую

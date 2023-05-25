@@ -138,9 +138,9 @@ public class Validation {
         return null;
     }
 
-    public Object[] validate() {
+    public Object[] validate(Class<?> controllerClass) {
         Object[] elements = new Object[8];
-        ProxyController controller = new ProxyController(TableController.class);
+        ProxyController controller = new ProxyController(controllerClass);
         elements[0] = string(controller.getField("nameField"));
         elements[1] = integer(controller.getField("xField"));
         elements[2] = along(controller.getField("yField"));
@@ -153,8 +153,8 @@ public class Validation {
         return elements;
     }
 
-    public Dragon getDragon(long id) {
-        Object[] elements = validate();
+    public Dragon getDragon(long id, Class<?> controllerClass) {
+        Object[] elements = validate(controllerClass);
         try {
             Arrays.stream(elements).filter(Objects::isNull).findFirst();
         } catch (NullPointerException e) {
