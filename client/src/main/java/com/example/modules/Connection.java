@@ -1,6 +1,10 @@
 package com.example.modules;
 
+import com.example.controllers.TableController;
+import com.example.grapghics.Translation;
+import com.example.run.ProxyController;
 import javafx.application.Platform;
+import javafx.scene.control.Label;
 import org.example.collections.Dragon;
 import org.example.transmission.DataToClient;
 import org.example.transmission.DataToServer;
@@ -10,6 +14,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Arrays;
+import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Connection implements Runnable {
@@ -39,7 +44,9 @@ public class Connection implements Runnable {
             try {
                 socket = new Socket(host, port);
                 return true;
-            } catch (IOException ignored) {} //повторяет подключение
+            } catch (IOException e) {
+                socket = null;
+            }
         }
         connection.set(true);
         return false;
@@ -83,11 +90,21 @@ public class Connection implements Runnable {
                     }
                 });
             } catch (IOException e) {
+                reconnectActions();
                 if (!connect()) {
                     return;
                 }
             }
+            Label label = new ProxyController(TableController.class).getField("reconnect");
+            Platform.runLater(() -> label.setText(""));
         }
+    }
+
+    private void reconnectActions() {
+        Platform.runLater(() -> {
+            Label label = new ProxyController(TableController.class).getField("reconnect");
+            label.setText(ResourceBundle.getBundle("properties.Table", Translation.getLocale()).getString("reconnect"));
+        });
     }
 
     public void close() {

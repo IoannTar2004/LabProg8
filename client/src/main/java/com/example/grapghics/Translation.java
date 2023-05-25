@@ -1,5 +1,6 @@
 package com.example.grapghics;
 
+import com.example.misc.FlowText;
 import com.example.run.ProxyController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -45,7 +46,7 @@ public class Translation {
      */
     public void changeLanguage(ActionEvent event) {
         String[] bundles = {"Registration", "Table"};
-        setLanguage(((ChoiceBox<String>)controller.getField("languages")).getValue());
+        setLanguage(((ChoiceBox<String>) controller.getField("languages")).getValue());
         Field[] fields = controller.getAllFields();
         Locale locale = getLocale();
 
@@ -57,12 +58,16 @@ public class Translation {
                         TextInputControl textInputControl = (TextInputControl) field.get(controller.getControllerClass());
                         textInputControl.setPromptText(data);
                     } else if (field.getType() == Button.class || field.getType() == Label.class) {
-                        Labeled button = (Labeled) field.get(controller.getControllerClass());
-                        button.setText(data);
+                        Labeled label = (Labeled) field.get(controller.getControllerClass());
+                        if (!field.isAnnotationPresent(FlowText.class) || label.getText().length() > 0) {
+                            label.setText(data);
+                        }
+
                     } else if (field.getType() == TableColumn.class) {
                         TableColumn<?,?> tableColumn = (TableColumn<?, ?>) field.get(controller.getControllerClass());
                         tableColumn.setText(data);
                     }
+
                     changeColorLanguage(locale);
                     changeTypeLanguage(locale);
                     changeCharacterLanguage(locale);

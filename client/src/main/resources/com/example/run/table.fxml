@@ -65,6 +65,11 @@
                                 <Insets top="8.0" />
                             </padding>
                         </HBox>
+                  <Label fx:id="reconnect" layoutX="206.0" layoutY="14.0" prefHeight="31.0" prefWidth="499.0" textFill="WHITE">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </Label>
                     </children>
                 </AnchorPane>
             </children>

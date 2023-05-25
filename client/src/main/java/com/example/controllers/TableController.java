@@ -2,6 +2,7 @@ package com.example.controllers;
 
 import com.example.grapghics.Animations;
 import com.example.grapghics.Translation;
+import com.example.misc.FlowText;
 import com.example.modules.Connection;
 import com.example.modules.DragonTable;
 import com.example.modules.StaticData;
@@ -107,6 +108,9 @@ public class TableController implements Initializable {
     @FXML
     private Button clear;
 
+    @FlowText
+    @FXML
+    private Label reconnect;
 
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -114,7 +118,6 @@ public class TableController implements Initializable {
         ProxyController.setController(TableController.class, this);
         currentList = DragonTable.getDragons();
 
-        System.out.println(colorChoice.getValue());
         languages.setItems(Translation.getAllLanguages());
         languages.setValue(Translation.getLanguage());
         new Translation(TableController.class).changeLanguage(null);
@@ -257,7 +260,7 @@ public class TableController implements Initializable {
         colorChoice.setValue(null);
         typeChoice.setValue(null);
         characterChoice.setValue(null);
-
+        idBuffer = 0;
         currentList = DragonTable.getDragons();
         dragonsTable.setItems(currentList);
     }

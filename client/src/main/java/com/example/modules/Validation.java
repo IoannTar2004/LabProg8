@@ -120,10 +120,9 @@ public class Validation {
         return null;
     }
 
-    public DragonCave cave(TextField field) {
+    public Double cave(TextField field) {
         try {
-            double depth = Double.parseDouble(field.getText());
-            return new DragonCave(depth);
+            return Double.parseDouble(field.getText());
         } catch (NumberFormatException e) {
             field.setText("");
             field.setPromptText(ResourceBundle.getBundle("properties.Table", Translation.getLocale()).getString("numberError"));
@@ -132,32 +131,41 @@ public class Validation {
         return null;
     }
 
-    public Dragon getDragon(long id) {
-        Object[] elements = new Object[5];
-        ProxyController controller = new ProxyController(TableController.class);
-        Validation validation = new Validation();
-        elements[0] = validation.string(controller.getField("nameField"));
-        elements[1] = validation.integer(controller.getField("xField"));
-        elements[2] = validation.along(controller.getField("yField"));
-        elements[3] = validation.integer(controller.getField("ageField"));
-        elements[4] = validation.cave(controller.getField("caveField"));
+    public Integer choiceBox(ChoiceBox<String> choiceBox) {
+        if (choiceBox.getValue() != null) {
+           return choiceBox.getSelectionModel().getSelectedIndex();
+        }
+        return null;
+    }
 
+    public Object[] validate() {
+        Object[] elements = new Object[8];
+        ProxyController controller = new ProxyController(TableController.class);
+        elements[0] = string(controller.getField("nameField"));
+        elements[1] = integer(controller.getField("xField"));
+        elements[2] = along(controller.getField("yField"));
+        elements[3] = integer(controller.getField("ageField"));
+        elements[4] = choiceBox(controller.getField("colorChoice"));
+        elements[5] = choiceBox(controller.getField("typeChoice"));
+        elements[6] = choiceBox(controller.getField("characterChoice"));
+        elements[7] = cave(controller.getField("caveField"));
+
+        return elements;
+    }
+
+    public Dragon getDragon(long id) {
+        Object[] elements = validate();
         try {
             Arrays.stream(elements).filter(Objects::isNull).findFirst();
         } catch (NullPointerException e) {
             throw new NullPointerException();
         }
 
-        ChoiceBox<String> colorChoice = controller.getField("colorChoice");
-        ChoiceBox<String> typeChoice = controller.getField("typeChoice");
-        ChoiceBox<String> characterChoice = controller.getField("characterChoice");
-
         Dragon dragon = new Dragon(id, StaticData.getData().getLogin(), (String) elements[0],
                 new Coordinates((int) elements[1], (long) elements[2]).toString(), (int) elements[3],
-                Color.values()[colorChoice.getSelectionModel().getSelectedIndex()].getColor(),
-                DragonType.values()[typeChoice.getSelectionModel().getSelectedIndex()].getType(),
-                DragonCharacter.values()[characterChoice.getSelectionModel().getSelectedIndex()].getCharacter(),
-                ((DragonCave) elements[4]).getDepth());
+                Color.values()[(int) elements[4]].getColor(),
+                DragonType.values()[(int) elements[5]].getType(), DragonCharacter.values()[(int) elements[6]].getCharacter(),
+                (double) elements[7]);
         return dragon;
     }
 }
