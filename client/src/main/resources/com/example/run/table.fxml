@@ -65,7 +65,7 @@
                                 <Insets top="8.0" />
                             </padding>
                         </HBox>
-                  <Label fx:id="reconnect" layoutX="206.0" layoutY="14.0" prefHeight="31.0" prefWidth="499.0" textFill="WHITE">
+                  <Label fx:id="reconnect" layoutX="206.0" layoutY="14.0" prefHeight="31.0" prefWidth="499.0" style="-fx-alignment: center;" textFill="WHITE">
                      <font>
                         <Font size="21.0" />
                      </font>
@@ -94,7 +94,7 @@
                         <Image url="@../../../images/icon.jpg" />
                      </image>
                   </ImageView>
-                  <Label layoutX="70.0" layoutY="19.0" prefHeight="26.0" prefWidth="131.0" styleClass="login" stylesheets="@../../../CSS/buttons.css" text="ivan" textFill="WHITE">
+                  <Label fx:id="loginText" layoutX="70.0" layoutY="19.0" prefHeight="26.0" prefWidth="131.0" styleClass="login" stylesheets="@../../../CSS/buttons.css" textFill="WHITE">
                      <font>
                         <Font size="17.0" />
                      </font>

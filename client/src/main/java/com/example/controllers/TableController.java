@@ -1,6 +1,7 @@
 package com.example.controllers;
 
 import com.example.grapghics.Animations;
+import com.example.grapghics.BoxInitialize;
 import com.example.grapghics.Translation;
 import com.example.misc.FlowText;
 import com.example.modules.Connection;
@@ -13,11 +14,11 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import org.example.collections.*;
 
-import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.util.*;
@@ -108,6 +109,9 @@ public class TableController implements Initializable {
     @FXML
     private Button clear;
 
+    @FXML
+    private Label loginText;
+
     @FlowText
     @FXML
     private Label reconnect;
@@ -117,16 +121,9 @@ public class TableController implements Initializable {
         exit.setVisible(false);
         ProxyController.setController(TableController.class, this);
         currentList = DragonTable.getDragons();
+        loginText.setText(StaticData.getData().getLogin());
 
-        languages.setItems(Translation.getAllLanguages());
-        languages.setValue(Translation.getLanguage());
-        new Translation(TableController.class).changeLanguage(null);
-
-        colorChoice.getSelectionModel().selectFirst();
-        typeChoice.getSelectionModel().selectFirst();
-        characterChoice.getSelectionModel().selectFirst();
-
-        languages.setOnAction(new Translation(TableController.class)::changeLanguage);
+        new BoxInitialize().initialize(TableController.class, languages, colorChoice, characterChoice, typeChoice);
     }
 
     @FXML
@@ -153,7 +150,7 @@ public class TableController implements Initializable {
     }
 
     @FXML
-    protected void getItem() {
+    protected void getItem(MouseEvent event) {
         int index = dragonsTable.getSelectionModel().getSelectedIndex();
         if (index < 0) {
             return;
@@ -172,7 +169,10 @@ public class TableController implements Initializable {
 
         dateBuffer = dragon.getCreation();
 
-    }
+        if (event.getClickCount() > 1) {
+            System.out.println("yes");
+        }
+     }
 
     @FXML
     protected void enterAgain() {
