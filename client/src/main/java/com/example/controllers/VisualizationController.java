@@ -105,7 +105,7 @@ public class VisualizationController implements Initializable {
         dateBuffer = proxyController.getField("dateBuffer");
 
         new NodeManager().boxInitialize(VisualizationController.class,languages, colorChoice, characterChoice, typeChoice);
-        //colorChoice.setOnAction(new ImageSelection()::changeObjectImage);
+        colorChoice.setOnAction(new ImageSelection()::changeObjectImage);
 //        typeChoice.setOnAction(new ImageSelection()::changeBackgroundImage);
     }
 

@@ -12,15 +12,25 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "dragons")
 public class Dragon implements Serializable {
+    @Id
     private long id;
+    @Column
     private String login;
+    @Column
     private String name;
+    @Column
     private String coordinates;
+    @Column
     private Integer age;
+    @Column
     private String color;
+    @Column
     private String type;
+    @Column
     private String character;
+    @Column
     private Double cave;
+    @Column
     private Timestamp creation;
 
     /**
@@ -66,7 +76,6 @@ public class Dragon implements Serializable {
                 '}';
     }
 
-    @Id
     public long getId() {
         return id;
     }
