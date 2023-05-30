@@ -16,19 +16,17 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="708.0" prefWidth="928.0" styleClass="table" stylesheets="@../../../CSS/background.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.TableController">
     <center>
         <Group BorderPane.alignment="CENTER">
             <children>
-                <AnchorPane layoutX="72.0" layoutY="265.0" prefHeight="611.0" prefWidth="850.0">
+                <AnchorPane layoutX="22.0" layoutY="265.0" prefHeight="630.0" prefWidth="795.0">
                     <children>
-                        <TableView fx:id="dragonsTable" layoutY="55.0" onMouseClicked="#getItem" prefHeight="393.0" prefWidth="849.0" AnchorPane.topAnchor="55.0">
+                        <TableView fx:id="dragonsTable" layoutX="42.0" layoutY="67.0" onMouseClicked="#getItem" prefHeight="394.0" prefWidth="718.0" AnchorPane.topAnchor="67.0">
                             <columns>
                                 <TableColumn fx:id="id" prefWidth="43.20001566410065" text="id" />
                                 <TableColumn fx:id="login" prefWidth="95.99998474121094" text="Пользователь" />
                                 <TableColumn fx:id="name" prefWidth="77.5999755859375" text="Имя" />
-                                <TableColumn fx:id="coordinates" prefWidth="123.20001220703125" text="Координаты" />
                                 <TableColumn fx:id="age" prefWidth="67.20001220703125" text="Возраст" />
                                 <TableColumn fx:id="color" prefWidth="71.20001220703125" text="Цвет" />
                                 <TableColumn fx:id="type" prefWidth="72.00006103515625" text="Тип" />
@@ -37,23 +35,21 @@
                                 <TableColumn fx:id="creation" prefWidth="140.0" text="Дата создания" />
                             </columns>
                         </TableView>
-                        <HBox layoutX="85.0" layoutY="487.0" prefHeight="26.0" prefWidth="666.0" spacing="10.0">
+                        <HBox layoutX="138.0" layoutY="485.0" prefHeight="26.0" prefWidth="519.0" spacing="10.0">
                             <children>
                                 <TextField fx:id="nameField" onMouseClicked="#enterAgain" prefHeight="26.0" prefWidth="166.0" />
-                        <TextField layoutX="10.0" layoutY="10.0" onMouseClicked="#enterAgain" prefHeight="26.0" prefWidth="166.0" fx:id="xField" />
-                        <TextField fx:id="yField" layoutX="187.0" layoutY="10.0" onMouseClicked="#enterAgain" prefHeight="26.0" prefWidth="166.0" />
                         <TextField fx:id="ageField" layoutX="364.0" layoutY="10.0" onMouseClicked="#enterAgain" prefHeight="26.0" prefWidth="166.0" />
+                        <TextField fx:id="caveField" onMouseClicked="#enterAgain" prefHeight="26.0" prefWidth="160.0" />
                             </children>
                         </HBox>
-                        <HBox layoutX="85.0" layoutY="534.0" prefHeight="26.0" prefWidth="669.0" spacing="10.0">
+                        <HBox layoutX="138.0" layoutY="530.0" prefHeight="26.0" prefWidth="513.0" spacing="10.0">
                             <children>
+                        <ChoiceBox fx:id="typeChoice" layoutX="10.0" layoutY="10.0" prefHeight="26.0" prefWidth="167.0" />
+                        <ChoiceBox fx:id="characterChoice" layoutX="179.0" layoutY="10.0" prefHeight="26.0" prefWidth="165.0" />
                                 <ChoiceBox fx:id="colorChoice" prefHeight="26.0" prefWidth="158.0" />
-                        <ChoiceBox fx:id="typeChoice" layoutX="10.0" layoutY="10.0" prefHeight="26.0" prefWidth="158.0" />
-                        <ChoiceBox fx:id="characterChoice" layoutX="179.0" layoutY="10.0" prefHeight="26.0" prefWidth="158.0" />
-                        <TextField fx:id="caveField" onMouseClicked="#enterAgain" prefHeight="26.0" prefWidth="163.0" />
                             </children>
                         </HBox>
-                        <HBox layoutX="44.0" layoutY="576.0" prefHeight="54.0" prefWidth="759.0" spacing="35.0">
+                        <HBox layoutX="22.0" layoutY="576.0" prefHeight="54.0" prefWidth="759.0" spacing="35.0">
                             <children>
                                 <Button fx:id="add" mnemonicParsing="false" onMouseClicked="#addClick" prefHeight="38.0" prefWidth="134.0" styleClass="add" stylesheets="@../../../CSS/buttons.css" text="Button" />
                                 <Button fx:id="edit" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#updateClick" prefHeight="38.0" prefWidth="134.0" styleClass="edit" stylesheets="@../../../CSS/buttons.css" text="Button" />

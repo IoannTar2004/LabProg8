@@ -1,7 +1,7 @@
 package org.example.collections;
 
 public enum DragonFields {
-    ID("id"), USER("login"), NAME("name"), COORDINATES("coordinates"), AGE("age"), COLOR("color"), TYPE("type"),
+    ID("id"), USER("login"), NAME("name"), AGE("age"), COLOR("color"), TYPE("type"),
     CHARACTER("character"), CAVE("cave"), DATE("creation");
 
     private String field;
