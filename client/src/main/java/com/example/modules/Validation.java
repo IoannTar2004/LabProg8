@@ -1,7 +1,6 @@
 package com.example.modules;
 
 import com.example.controllers.RegistrationController;
-import com.example.controllers.TableController;
 import com.example.grapghics.NodeManager;
 import com.example.grapghics.Translation;
 import com.example.run.ProxyController;
@@ -10,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.example.collections.*;
 
-import java.time.temporal.TemporalAccessor;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.Objects;
@@ -153,7 +151,7 @@ public class Validation {
         return elements;
     }
 
-    public Dragon getDragon(long id, Class<?> controllerClass) {
+    public ProxyDragon getDragon(long id, Class<?> controllerClass) {
         Object[] elements = validate(controllerClass);
         try {
             Arrays.stream(elements).filter(Objects::isNull).findFirst();
@@ -161,11 +159,11 @@ public class Validation {
             throw new NullPointerException();
         }
 
-        Dragon dragon = new Dragon(id, StaticData.getData().getLogin(), (String) elements[0],
+        ProxyDragon proxyDragon = new ProxyDragon(id, StaticData.getData().getLogin(), (String) elements[0],
                 new Coordinates((int) elements[1], (long) elements[2]).toString(), (int) elements[3],
                 Color.values()[(int) elements[4]].getColor(),
                 DragonType.values()[(int) elements[5]].getType(), DragonCharacter.values()[(int) elements[6]].getCharacter(),
                 (double) elements[7]);
-        return dragon;
+        return proxyDragon;
     }
 }

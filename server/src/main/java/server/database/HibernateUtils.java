@@ -1,6 +1,6 @@
 package server.database;
 
-import org.example.collections.Dragon;
+import org.example.collections.ProxyDragon;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -15,7 +15,7 @@ public abstract class HibernateUtils {
         if (sessionDragonFactory == null) {
             try {
                 Configuration configuration = new Configuration().configure();
-                configuration.addAnnotatedClass(Dragon.class);
+                configuration.addAnnotatedClass(ProxyDragon.class);
                 StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
                 sessionDragonFactory = configuration.buildSessionFactory(builder.build());
 

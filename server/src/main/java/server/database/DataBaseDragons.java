@@ -5,36 +5,36 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import org.example.collections.*;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import server.manager.ObjectsManager;
+
 import java.util.List;
 
 public class DataBaseDragons {
-    private final Class<Dragon> dragonClass = Dragon.class;
+    private final Class<ProxyDragon> dragonClass = ProxyDragon.class;
 
-    public void merge(Dragon dragon) {
+    public void merge(ProxyDragon proxyDragon) {
         Session session = HibernateUtils.getDragonFactory().openSession();
         Transaction transaction = session.beginTransaction();
-        session.merge(dragon);
+        session.merge(proxyDragon);
         transaction.commit();
         session.close();
 
     }
 
-    public void remove(Dragon dragon) {
+    public void remove(ProxyDragon proxyDragon) {
         Session session = HibernateUtils.getDragonFactory().openSession();
         Transaction transaction = session.beginTransaction();
-        session.remove(dragon);
+        session.remove(proxyDragon);
         transaction.commit();
         session.close();
     }
 
-    public List<Dragon> getAll() {
+    public List<ProxyDragon> getAll() {
         Session session = HibernateUtils.getDragonFactory().openSession();
 
         CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Dragon> create = builder.createQuery(dragonClass);
+        CriteriaQuery<ProxyDragon> create = builder.createQuery(dragonClass);
         create.select(create.from(dragonClass));
-        List<Dragon> list = session.createQuery(create).getResultList();
+        List<ProxyDragon> list = session.createQuery(create).getResultList();
         session.close();
         return list;
     }

@@ -2,7 +2,6 @@ package org.example.collections;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Date;
 
 import jakarta.persistence.*;
 
@@ -11,7 +10,7 @@ import jakarta.persistence.*;
  */
 @Entity
 @Table(name = "dragons")
-public class Dragon implements Serializable {
+public class ProxyDragon implements Serializable {
     @Id
     private long id;
     @Column
@@ -43,8 +42,8 @@ public class Dragon implements Serializable {
      * @param character {@link DragonCharacter character}
      * @param cave fractional number separated by a dot {@link DragonCave}
      */
-    public Dragon(long id, String login, String name, String coordinates, int age, String color, String type,
-                  String character, Double cave) {
+    public ProxyDragon(long id, String login, String name, String coordinates, int age, String color, String type,
+                       String character, Double cave) {
         this.id = id;
         this.login = login;
         this.name = name;
@@ -56,7 +55,7 @@ public class Dragon implements Serializable {
         this.cave = cave;
     }
 
-    public Dragon() {
+    public ProxyDragon() {
 
     }
 

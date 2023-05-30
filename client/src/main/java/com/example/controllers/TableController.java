@@ -2,7 +2,6 @@ package com.example.controllers;
 
 import com.example.grapghics.Animations;
 import com.example.grapghics.NodeManager;
-import com.example.grapghics.Translation;
 import com.example.misc.FlowText;
 import com.example.modules.Connection;
 import com.example.modules.DragonTable;
@@ -26,40 +25,40 @@ import java.util.*;
 public class TableController implements Initializable {
     private long idBuffer;
     private Timestamp dateBuffer;
-    private ObservableList<Dragon> currentList;
+    private ObservableList<ProxyDragon> currentList;
 
     @FXML
-    private TableView<Dragon> dragonsTable;
+    private TableView<ProxyDragon> dragonsTable;
 
     @FXML
-    private TableColumn<Dragon, Integer> age;
+    private TableColumn<ProxyDragon, Integer> age;
 
     @FXML
-    private TableColumn<Dragon, Double> cave;
+    private TableColumn<ProxyDragon, Double> cave;
 
     @FXML
-    private TableColumn<Dragon, String> character;
+    private TableColumn<ProxyDragon, String> character;
 
     @FXML
-    private TableColumn<Dragon, String> color;
+    private TableColumn<ProxyDragon, String> color;
 
     @FXML
-    private TableColumn<Dragon, Timestamp> creation;
+    private TableColumn<ProxyDragon, Timestamp> creation;
 
     @FXML
-    private TableColumn<Dragon, Long> id;
+    private TableColumn<ProxyDragon, Long> id;
 
     @FXML
-    private TableColumn<Dragon, String> name;
+    private TableColumn<ProxyDragon, String> name;
 
     @FXML
-    private TableColumn<Dragon, String> type;
+    private TableColumn<ProxyDragon, String> type;
 
     @FXML
-    private TableColumn<Dragon, String> coordinates;
+    private TableColumn<ProxyDragon, String> coordinates;
 
     @FXML
-    private TableColumn<Dragon, String> login;
+    private TableColumn<ProxyDragon, String> login;
 
     @FXML
     private Button add;
@@ -155,19 +154,19 @@ public class TableController implements Initializable {
         if (index < 0) {
             return;
         }
-        Dragon dragon = currentList.get(index);
-        idBuffer = dragon.getId();
-        nameField.setText(dragon.getName());
-        xField.setText(dragon.getCoordinates().split("; ")[0]);
-        yField.setText(dragon.getCoordinates().split("; ")[1]);
-        ageField.setText(String.valueOf(dragon.getAge()));
-        caveField.setText(String.valueOf(dragon.getCave()));
+        ProxyDragon proxyDragon = currentList.get(index);
+        idBuffer = proxyDragon.getId();
+        nameField.setText(proxyDragon.getName());
+        xField.setText(proxyDragon.getCoordinates().split("; ")[0]);
+        yField.setText(proxyDragon.getCoordinates().split("; ")[1]);
+        ageField.setText(String.valueOf(proxyDragon.getAge()));
+        caveField.setText(String.valueOf(proxyDragon.getCave()));
 
-        colorChoice.getSelectionModel().select(Color.getEnumColor(dragon.getColor()).ordinal());
-        typeChoice.getSelectionModel().select(DragonType.getEnumType(dragon.getType()).ordinal());
-        characterChoice.getSelectionModel().select(DragonCharacter.getEnumCharacter(dragon.getCharacter()).ordinal());
+        colorChoice.getSelectionModel().select(Color.getEnumColor(proxyDragon.getColor()).ordinal());
+        typeChoice.getSelectionModel().select(DragonType.getEnumType(proxyDragon.getType()).ordinal());
+        characterChoice.getSelectionModel().select(DragonCharacter.getEnumCharacter(proxyDragon.getCharacter()).ordinal());
 
-        dateBuffer = dragon.getCreation();
+        dateBuffer = proxyDragon.getCreation();
 
         if (event.getClickCount() > 1) {
             ProxyController.changeScene(dragonsTable, "visualization.fxml");
@@ -182,33 +181,33 @@ public class TableController implements Initializable {
     @FXML
     protected void addClick() {
         try {
-            Dragon dragon = new Validation().getDragon(0, TableController.class);
-            dragon.setCreation(new Timestamp(new Date().getTime()));
-            new Connection(StaticData.getData().getConnection().getSocket()).sendToServer("add", dragon);
+            ProxyDragon proxyDragon = new Validation().getDragon(0, TableController.class);
+            proxyDragon.setCreation(new Timestamp(new Date().getTime()));
+            new Connection(StaticData.getData().getConnection().getSocket()).sendToServer("add", proxyDragon);
         } catch (NullPointerException ignored) {} //Неверный ввод некоторых данных. Игнорирую
     }
 
     @FXML
     protected void updateClick()  {
         try {
-            Dragon dragon = new Validation().getDragon(idBuffer, TableController.class);
-            dragon.setCreation(dateBuffer);
-            new Connection(StaticData.getData().getConnection().getSocket()).sendToServer("update", dragon);
+            ProxyDragon proxyDragon = new Validation().getDragon(idBuffer, TableController.class);
+            proxyDragon.setCreation(dateBuffer);
+            new Connection(StaticData.getData().getConnection().getSocket()).sendToServer("update", proxyDragon);
         } catch (NullPointerException ignored) {} //Неверный ввод некоторых данных. Игнорирую
     }
 
     @FXML
     protected void removeClick() {
         try {
-            Dragon dragon = new Validation().getDragon(idBuffer, TableController.class);
-            dragon.setCreation(dateBuffer);
-            new Connection(StaticData.getData().getConnection().getSocket()).sendToServer("remove", dragon);
+            ProxyDragon proxyDragon = new Validation().getDragon(idBuffer, TableController.class);
+            proxyDragon.setCreation(dateBuffer);
+            new Connection(StaticData.getData().getConnection().getSocket()).sendToServer("remove", proxyDragon);
         } catch (NullPointerException ignored) {} //Неверный ввод некоторых данных. Игнорирую
     }
 
     @FXML
     protected void filterClick() {
-        List<Dragon> filtered = new LinkedList<>(DragonTable.getDragons());
+        List<ProxyDragon> filtered = new LinkedList<>(DragonTable.getDragons());
         if (idBuffer > 0) {
             filtered = filtered.stream().filter(d -> d.getId() == idBuffer).toList();
         }

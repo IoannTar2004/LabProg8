@@ -1,13 +1,11 @@
 package com.example.grapghics;
 
-import com.example.controllers.TableController;
-import com.example.modules.DragonTable;
 import com.example.run.ProxyController;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.TextField;
-import org.example.collections.Dragon;
+import org.example.collections.ProxyDragon;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -53,7 +51,7 @@ public class NodeManager {
         }
     }
 
-    public void setItems(Dragon dragon) {
+    public void setItems(ProxyDragon proxyDragon) {
 
     }
 }

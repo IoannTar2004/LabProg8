@@ -5,7 +5,7 @@ import com.example.grapghics.Translation;
 import com.example.run.ProxyController;
 import javafx.application.Platform;
 import javafx.scene.control.Label;
-import org.example.collections.Dragon;
+import org.example.collections.ProxyDragon;
 import org.example.transmission.DataToClient;
 import org.example.transmission.DataToServer;
 
@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -83,7 +82,7 @@ public class Connection implements Runnable {
                 String action = (String) objects[1];
                 Platform.runLater(() -> {
                     try {
-                        dragonTableClass.getDeclaredMethod(action, Dragon.class).
+                        dragonTableClass.getDeclaredMethod(action, ProxyDragon.class).
                                 invoke(new DragonTable(), objects[0]);
                     } catch (ReflectiveOperationException e) {
                         e.printStackTrace();

@@ -1,6 +1,6 @@
 package org.example.tools;
 
-import org.example.collections.Dragon;
+import org.example.collections.ProxyDragon;
 import org.example.collections.DragonFields;
 
 import java.lang.reflect.Field;
@@ -34,18 +34,18 @@ public class DragonOptions {
 
     /**
      * Adds or changes dragon's fields
-     * @param dragon that you need to change
+     * @param proxyDragon that you need to change
      * @param fields which field you want to change
      * @param element value of field
      * @return changed dragon
      */
-    public Dragon dragonInput(Dragon dragon, DragonFields fields, Object element) {
-        Class<Dragon> dragonClass = Dragon.class;
+    public ProxyDragon dragonInput(ProxyDragon proxyDragon, DragonFields fields, Object element) {
+        Class<ProxyDragon> dragonClass = ProxyDragon.class;
         try {
             Field field = dragonClass.getDeclaredField(fields.getField());
             field.setAccessible(true);
-            field.set(dragon, element);
+            field.set(proxyDragon, element);
         } catch (NoSuchFieldException | IllegalAccessException ignored) {}
-        return dragon;
+        return proxyDragon;
     }
 }

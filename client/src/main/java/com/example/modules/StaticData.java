@@ -2,13 +2,13 @@ package com.example.modules;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.example.collections.Dragon;
+import org.example.collections.ProxyDragon;
 
 public class StaticData {
     private static StaticData staticData;
     private String login;
     private Connection connection;
-    private ObservableList<Dragon> dragons = FXCollections.observableArrayList();
+    private ObservableList<ProxyDragon> proxyDragons = FXCollections.observableArrayList();
 
     public static StaticData getData() {
         if (staticData == null) {
@@ -27,8 +27,8 @@ public class StaticData {
         return connection;
     }
 
-    public ObservableList<Dragon> getDragons() {
-        return dragons;
+    public ObservableList<ProxyDragon> getDragons() {
+        return proxyDragons;
     }
 
     public void setLogin(String login) {
@@ -39,8 +39,8 @@ public class StaticData {
         this.connection = connection;
     }
 
-    public void add(Dragon dragon) {
-        dragons.add(dragon);
+    public void add(ProxyDragon proxyDragon) {
+        proxyDragons.add(proxyDragon);
         //new DragonTable().fill(dragon);
     }
 }

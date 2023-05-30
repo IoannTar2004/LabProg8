@@ -1,6 +1,6 @@
 package server.manager;
 
-import org.example.collections.Dragon;
+import org.example.collections.ProxyDragon;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,23 +12,23 @@ public class ObjectsElements extends CollectionManager {
 
     /**
      * Method which can build string with dragon's elements in relation on entered numbers.
-     * @param dragon
+     * @param proxyDragon
      * @param fields if filter by elements is required
      */
-    public String element(Dragon dragon, String... fields) {
-        if (fields.length == 1) {return dragon.toString();}
+    public String element(ProxyDragon proxyDragon, String... fields) {
+        if (fields.length == 1) {return proxyDragon.toString();}
         else {
             Map<String, String> elements = new HashMap<>();
 
-            elements.put("1", "id: " + dragon.getId());
-            elements.put("2", "Имя: " + dragon.getName());
-            elements.put("3", "координаты: " + dragon.getCoordinates());
-            elements.put("4", "возраст: " + dragon.getAge());
-            elements.put("5", "цвет: " + dragon.getColor());
-            elements.put("6", "тип: " + dragon.getType());
-            elements.put("7", "характер: " + dragon.getCharacter());
-            elements.put("8", "глубина пещеры: " + dragon.getCave());
-            elements.put("9", "дата создания: " + dragon.getCreation());
+            elements.put("1", "id: " + proxyDragon.getId());
+            elements.put("2", "Имя: " + proxyDragon.getName());
+            elements.put("3", "координаты: " + proxyDragon.getCoordinates());
+            elements.put("4", "возраст: " + proxyDragon.getAge());
+            elements.put("5", "цвет: " + proxyDragon.getColor());
+            elements.put("6", "тип: " + proxyDragon.getType());
+            elements.put("7", "характер: " + proxyDragon.getCharacter());
+            elements.put("8", "глубина пещеры: " + proxyDragon.getCave());
+            elements.put("9", "дата создания: " + proxyDragon.getCreation());
 
             String show = "| ";
             boolean unknownNumber = false;

@@ -1,18 +1,18 @@
 package server.manager;
 
-import org.example.collections.Dragon;
+import org.example.collections.ProxyDragon;
 
 import java.util.List;
 
 public class ObjectsCollectionManager extends CollectionManager {
-    public Dragon getDragonById(long id) {
-        Dragon dragon = dragons.stream().filter(dragon1 -> dragon1.getId() == id)
+    public ProxyDragon getDragonById(long id) {
+        ProxyDragon proxyDragon = proxyDragons.stream().filter(dragon1 -> dragon1.getId() == id)
                 .findFirst().orElse(null);
-        if (dragon != null) {
-            return dragon;
+        if (proxyDragon != null) {
+            return proxyDragon;
         }
         throw new NullPointerException();
     }
 
-    public List<Dragon> getAll() {return dragons;}
+    public List<ProxyDragon> getAll() {return proxyDragons;}
 }

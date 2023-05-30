@@ -15,11 +15,10 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.util.Duration;
-import org.example.collections.Dragon;
+import org.example.collections.ProxyDragon;
 
 import java.net.URL;
 import java.sql.Timestamp;
@@ -135,9 +134,9 @@ public class VisualizationController implements Initializable {
     @FXML
     void saveClick() {
         try {
-            Dragon dragon = new Validation().getDragon(idBuffer, VisualizationController.class);
-            dragon.setCreation(dateBuffer);
-            new Connection(StaticData.getData().getConnection().getSocket()).sendToServer("update", dragon);
+            ProxyDragon proxyDragon = new Validation().getDragon(idBuffer, VisualizationController.class);
+            proxyDragon.setCreation(dateBuffer);
+            new Connection(StaticData.getData().getConnection().getSocket()).sendToServer("update", proxyDragon);
         } catch (NullPointerException ignored) {} //Неверный ввод некоторых данных. Игнорирую
     }
 
