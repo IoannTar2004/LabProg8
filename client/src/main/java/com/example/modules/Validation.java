@@ -159,11 +159,9 @@ public class Validation {
             throw new NullPointerException();
         }
 
-        ProxyDragon proxyDragon = new ProxyDragon(id, StaticData.getData().getLogin(), (String) elements[0],
-                new Coordinates((int) elements[1], (long) elements[2]).toString(), (int) elements[3],
-                Color.values()[(int) elements[4]].getColor(),
-                DragonType.values()[(int) elements[5]].getType(), DragonCharacter.values()[(int) elements[6]].getCharacter(),
-                (double) elements[7]);
+        ProxyDragon proxyDragon = new ProxyDragon(id, StaticData.getData().getLogin(), (String) elements[0], (int) elements[3],
+                Color.values()[(int) elements[4]].getColor(), DragonType.values()[(int) elements[5]].getType(),
+                DragonCharacter.values()[(int) elements[6]].getCharacter(), (double) elements[7]);
         return proxyDragon;
     }
 }

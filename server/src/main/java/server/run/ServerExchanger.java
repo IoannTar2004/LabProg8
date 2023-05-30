@@ -1,12 +1,8 @@
 package server.run;
 
 import server.database.DataBaseDragons;
-import server.database.IdGenerator;
-import server.manager.ObjectsCollectionManager;
 import server.manager.ObjectsManager;
 import server.multithreading.Consumer;
-import org.example.tools.OutputText;
-import server.database.HibernateUtils;
 import server.multithreading.Producer;
 
 import java.io.IOException;

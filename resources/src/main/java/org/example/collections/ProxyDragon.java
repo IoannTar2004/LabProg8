@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 import jakarta.persistence.*;
 
 /**
- * Class Dragon whose objects stored in Java Collection
+ * Class Dragon whose objects stored in database
  */
 @Entity
 @Table(name = "dragons")
@@ -17,8 +17,6 @@ public class ProxyDragon implements Serializable {
     private String login;
     @Column
     private String name;
-    @Column
-    private String coordinates;
     @Column
     private Integer age;
     @Column
@@ -35,19 +33,17 @@ public class ProxyDragon implements Serializable {
     /**
      *
      * @param name notNull string
-     * @param coordinates {@link Coordinates coordinates (x, y)}
      * @param age integer positive number
      * @param color {@link Color color}
      * @param type {@link DragonType type}
      * @param character {@link DragonCharacter character}
      * @param cave fractional number separated by a dot {@link DragonCave}
      */
-    public ProxyDragon(long id, String login, String name, String coordinates, int age, String color, String type,
+    public ProxyDragon(long id, String login, String name, int age, String color, String type,
                        String character, Double cave) {
         this.id = id;
         this.login = login;
         this.name = name;
-        this.coordinates = coordinates;
         this.age = age;
         this.color = color;
         this.type = type;
@@ -65,7 +61,6 @@ public class ProxyDragon implements Serializable {
                 "id=" + id +
                 ", user='" + login + '\'' +
                 ", name='" + name + '\'' +
-                ", coordinates='" + coordinates + '\'' +
                 ", age=" + age +
                 ", color='" + color + '\'' +
                 ", type='" + type + '\'' +
@@ -85,10 +80,6 @@ public class ProxyDragon implements Serializable {
 
     public String getName() {
         return name;
-    }
-
-    public String getCoordinates() {
-        return coordinates;
     }
 
     public Integer getAge() {
@@ -125,10 +116,6 @@ public class ProxyDragon implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setCoordinates(String coordinates) {
-        this.coordinates = coordinates;
     }
 
     public void setAge(Integer age) {

@@ -55,9 +55,6 @@ public class TableController implements Initializable {
     private TableColumn<ProxyDragon, String> type;
 
     @FXML
-    private TableColumn<ProxyDragon, String> coordinates;
-
-    @FXML
     private TableColumn<ProxyDragon, String> login;
 
     @FXML
@@ -157,8 +154,6 @@ public class TableController implements Initializable {
         ProxyDragon proxyDragon = currentList.get(index);
         idBuffer = proxyDragon.getId();
         nameField.setText(proxyDragon.getName());
-        xField.setText(proxyDragon.getCoordinates().split("; ")[0]);
-        yField.setText(proxyDragon.getCoordinates().split("; ")[1]);
         ageField.setText(String.valueOf(proxyDragon.getAge()));
         caveField.setText(String.valueOf(proxyDragon.getCave()));
 
@@ -213,14 +208,6 @@ public class TableController implements Initializable {
         }
         if (nameField.getText().length() > 0) {
             filtered = filtered.stream().filter(d -> d.getName().equals(nameField.getText())).toList();
-        }
-        if (xField.getText().length() > 0) {
-            filtered = filtered.stream().filter(d -> d.getCoordinates().split("; ")[0]
-                    .equals(xField.getText())).toList();
-        }
-        if (yField.getText().length() > 0) {
-            filtered = filtered.stream().filter(d -> d.getCoordinates().split("; ")[1]
-                    .equals(yField.getText())).toList();
         }
         if (ageField.getText().length() > 0) {
             filtered = filtered.stream().filter(d -> d.getAge() == Integer.parseInt(ageField.getText())).toList();
