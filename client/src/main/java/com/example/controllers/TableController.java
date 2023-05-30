@@ -11,16 +11,21 @@ import com.example.modules.Connection;
 import com.example.modules.DragonTable;
 import com.example.modules.StaticData;
 import com.example.modules.Validation;
+import com.example.run.ClientMain;
 import com.example.run.ProxyController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.util.*;
@@ -240,5 +245,16 @@ public class TableController implements Initializable {
         idBuffer = 0;
         currentList = DragonTable.getDragons();
         dragonsTable.setItems(currentList);
+    }
+
+    @FXML
+    protected void visualize() {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(ClientMain.class.getResource("visualization.fxml"));
+        try {
+            Scene scene = new Scene(fxmlLoader.load());
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {e.printStackTrace();}
     }
 }

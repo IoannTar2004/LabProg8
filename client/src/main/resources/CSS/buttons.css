@@ -18,6 +18,9 @@
 .filter {
     -fx-background-color: blue;
 }
+.visualize {
+    -fx-background-color: linear-gradient(greenyellow, magenta, orangered);
+}
 
 
 .login {

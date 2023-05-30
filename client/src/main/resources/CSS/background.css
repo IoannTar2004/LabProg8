@@ -6,3 +6,7 @@
     -fx-background-image: url("../images/table_background.jpg");
     -fx-background-size: cover;
 }
+.vis {
+    -fx-background-image: url("../images/background_vis.jpg");
+    -fx-background-size: cover;
+}
