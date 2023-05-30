@@ -5,9 +5,9 @@ import com.example.grapghics.Translation;
 import com.example.run.ProxyController;
 import javafx.application.Platform;
 import javafx.scene.control.Label;
-import org.example.collections.Dragon;
-import org.example.transmission.DataToClient;
-import org.example.transmission.DataToServer;
+import com.example.collections.Dragon;
+import com.example.run.DataToClient;
+import com.example.run.DataToServer;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

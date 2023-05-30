@@ -1,6 +1,6 @@
 package server.database;
 
-import org.example.collections.Dragon;
+import com.example.collections.Dragon;
 import server.manager.ObjectsCollectionManager;
 
 import java.util.ArrayList;

@@ -6,9 +6,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
-import org.example.collections.Color;
-import org.example.collections.DragonCharacter;
-import org.example.collections.DragonType;
+import com.example.collections.Color;
+import com.example.collections.DragonCharacter;
+import com.example.collections.DragonType;
 
 import java.lang.reflect.Field;
 import java.util.*;

@@ -1,4 +1,4 @@
-package org.example.collections;
+package com.example.collections;
 
 public enum DragonFields {
     ID("id"), USER("login"), NAME("name"), AGE("age"), COLOR("color"), TYPE("type"),

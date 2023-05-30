@@ -6,7 +6,3 @@
     -fx-background-image: url("../images/table_background.jpg");
     -fx-background-size: cover;
 }
-.air {
-    -fx-background-image: url("../images/fire_background.jpg");
-    -fx-background-size: cover;
-}

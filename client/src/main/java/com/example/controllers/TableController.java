@@ -1,5 +1,9 @@
 package com.example.controllers;
 
+import com.example.collections.Color;
+import com.example.collections.Dragon;
+import com.example.collections.DragonCharacter;
+import com.example.collections.DragonType;
 import com.example.grapghics.Animations;
 import com.example.grapghics.NodeManager;
 import com.example.misc.FlowText;
@@ -16,7 +20,6 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
-import org.example.collections.*;
 
 import java.net.URL;
 import java.sql.Timestamp;

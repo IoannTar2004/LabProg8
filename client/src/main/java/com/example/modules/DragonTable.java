@@ -1,6 +1,7 @@
 package com.example.modules;
 
 import com.example.controllers.TableController;
+import com.example.grapghics.AnimatedDragon;
 import com.example.run.ProxyController;
 
 import javafx.application.Platform;
@@ -9,8 +10,8 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import org.example.collections.Dragon;
-import org.example.collections.DragonFields;
+import com.example.collections.Dragon;
+import com.example.collections.DragonFields;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -42,6 +43,7 @@ public class DragonTable {
             setRows();
 
             dragons.add(dragon);
+            dragon.start();
             ((TableView<Dragon>) controller.getField("dragonsTable")).setItems(dragons);
         });
     }

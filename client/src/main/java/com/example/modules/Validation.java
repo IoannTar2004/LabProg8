@@ -1,5 +1,9 @@
 package com.example.modules;
 
+import com.example.collections.Color;
+import com.example.collections.Dragon;
+import com.example.collections.DragonCharacter;
+import com.example.collections.DragonType;
 import com.example.controllers.RegistrationController;
 import com.example.grapghics.NodeManager;
 import com.example.grapghics.Translation;
@@ -7,7 +11,6 @@ import com.example.run.ProxyController;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import org.example.collections.*;
 
 import java.util.Arrays;
 import java.util.Locale;

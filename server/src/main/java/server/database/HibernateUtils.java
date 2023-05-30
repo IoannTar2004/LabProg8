@@ -1,6 +1,6 @@
 package server.database;
 
-import org.example.collections.Dragon;
+import com.example.collections.Dragon;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;

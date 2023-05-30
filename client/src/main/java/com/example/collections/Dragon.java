@@ -1,8 +1,9 @@
-package org.example.collections;
+package com.example.collections;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+import com.example.grapghics.AnimatedDragon;
 import jakarta.persistence.*;
 
 /**
@@ -30,6 +31,8 @@ public class Dragon implements Serializable {
     @Column
     private Timestamp creation;
 
+    private transient AnimatedDragon animatedDragon;
+
     /**
      *
      * @param name notNull string
@@ -37,7 +40,7 @@ public class Dragon implements Serializable {
      * @param color {@link Color color}
      * @param type {@link DragonType type}
      * @param character {@link DragonCharacter character}
-     * @param cave fractional number separated by a dot {@link DragonCave}
+     * @param cave fractional number separated by a dot
      */
     public Dragon(long id, String login, String name, int age, String color, String type,
                   String character, Double cave) {
@@ -51,8 +54,20 @@ public class Dragon implements Serializable {
         this.cave = cave;
     }
 
-    public Dragon() {
+    public Dragon() {}
 
+    public void start() {
+        animatedDragon = new AnimatedDragon(color, type);
+        animatedDragon.initialize();
+    }
+
+    public void update() {
+        animatedDragon.setColor(color);
+        animatedDragon.setType(type);
+    }
+
+    public void finish() {
+        animatedDragon.remove();
     }
 
     @Override

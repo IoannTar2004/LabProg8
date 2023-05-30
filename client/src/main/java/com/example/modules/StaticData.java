@@ -2,7 +2,7 @@ package com.example.modules;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.example.collections.Dragon;
+import com.example.collections.Dragon;
 
 public class StaticData {
     private static StaticData staticData;

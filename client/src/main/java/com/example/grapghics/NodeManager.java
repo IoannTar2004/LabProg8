@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.TextField;
-import org.example.collections.Dragon;
+import com.example.collections.Dragon;
 
 import java.util.Locale;
 import java.util.ResourceBundle;

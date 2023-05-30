@@ -1,4 +1,4 @@
-package org.example.collections;
+package com.example.collections;
 
 import java.io.Serializable;
 

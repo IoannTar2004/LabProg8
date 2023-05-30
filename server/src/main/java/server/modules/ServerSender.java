@@ -1,11 +1,11 @@
 package server.modules;
 
-import org.example.transmission.DataToClient;
+
+import com.example.run.DataToClient;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.List;
 
 public class ServerSender<T> implements Runnable {
 

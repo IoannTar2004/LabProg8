@@ -1,6 +1,6 @@
 package server.commands;
 
-import org.example.collections.Dragon;
+import com.example.collections.Dragon;
 import server.database.DataBaseDragons;
 import server.manager.ObjectsManager;
 import server.modules.ServerSender;

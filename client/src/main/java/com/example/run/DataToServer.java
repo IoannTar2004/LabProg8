@@ -1,4 +1,4 @@
-package org.example.transmission;
+package com.example.run;
 
 import java.io.Serializable;
 import java.util.Arrays;

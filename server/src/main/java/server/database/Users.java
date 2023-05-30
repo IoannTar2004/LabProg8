@@ -1,5 +1,6 @@
 package server.database;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -7,10 +8,11 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "users")
 public class Users {
+    @Id
     private String login;
+    @Column
     private String password;
 
-    @Id
     public String getLogin() {
         return login;
     }

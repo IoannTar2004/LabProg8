@@ -1,6 +1,6 @@
 package server.modules;
 
-import org.example.transmission.DataToServer;
+import com.example.run.DataToServer;
 import server.commands.*;
 import server.commands.UserAccess;
 

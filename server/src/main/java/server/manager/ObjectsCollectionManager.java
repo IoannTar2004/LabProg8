@@ -1,6 +1,6 @@
 package server.manager;
 
-import org.example.collections.Dragon;
+import com.example.collections.Dragon;
 
 import java.util.List;
 

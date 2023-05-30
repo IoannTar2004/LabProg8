@@ -1,8 +1,6 @@
-package org.example.collections;
+package com.example.collections;
 
 import java.io.Serializable;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 /**
  * Enums of dragon's color
