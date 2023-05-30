@@ -10,7 +10,7 @@ import jakarta.persistence.*;
  */
 @Entity
 @Table(name = "dragons")
-public class ProxyDragon implements Serializable {
+public class Dragon implements Serializable {
     @Id
     private long id;
     @Column
@@ -39,8 +39,8 @@ public class ProxyDragon implements Serializable {
      * @param character {@link DragonCharacter character}
      * @param cave fractional number separated by a dot {@link DragonCave}
      */
-    public ProxyDragon(long id, String login, String name, int age, String color, String type,
-                       String character, Double cave) {
+    public Dragon(long id, String login, String name, int age, String color, String type,
+                  String character, Double cave) {
         this.id = id;
         this.login = login;
         this.name = name;
@@ -51,7 +51,7 @@ public class ProxyDragon implements Serializable {
         this.cave = cave;
     }
 
-    public ProxyDragon() {
+    public Dragon() {
 
     }
 

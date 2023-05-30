@@ -149,7 +149,7 @@ public class Validation {
         return elements;
     }
 
-    public ProxyDragon getDragon(long id, Class<?> controllerClass) {
+    public Dragon getDragon(long id, Class<?> controllerClass) {
         Object[] elements = validate(controllerClass);
         try {
             Arrays.stream(elements).filter(Objects::isNull).findFirst();
@@ -157,7 +157,7 @@ public class Validation {
             throw new NullPointerException();
         }
 
-        return new ProxyDragon(id, StaticData.getData().getLogin(), (String) elements[0], (int) elements[1],
+        return new Dragon(id, StaticData.getData().getLogin(), (String) elements[0], (int) elements[1],
                 Color.values()[(int) elements[2]].getColor(), DragonType.values()[(int) elements[3]].getType(),
                 DragonCharacter.values()[(int) elements[4]].getCharacter(), (double) elements[5]);
     }

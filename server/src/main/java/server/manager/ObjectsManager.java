@@ -1,25 +1,25 @@
 package server.manager;
 
-import org.example.collections.ProxyDragon;
+import org.example.collections.Dragon;
 
 import java.util.List;
 
 public class ObjectsManager extends CollectionManager {
 
-    public void add(ProxyDragon proxyDragon) {
-        proxyDragons.add(proxyDragon);
+    public void add(Dragon dragon) {
+        dragons.add(dragon);
     }
 
-    public void addAll(List<ProxyDragon> proxyDragonList) {
-        proxyDragons.addAll(proxyDragonList);
+    public void addAll(List<Dragon> dragonList) {
+        dragons.addAll(dragonList);
     }
 
-    public void replace(ProxyDragon proxyDragon) {
-        ProxyDragon oldProxyDragon = new ObjectsCollectionManager().getDragonById(proxyDragon.getId());
-        proxyDragons.set(proxyDragons.indexOf(oldProxyDragon), proxyDragon);
+    public void replace(Dragon dragon) {
+        Dragon oldDragon = new ObjectsCollectionManager().getDragonById(dragon.getId());
+        dragons.set(dragons.indexOf(oldDragon), dragon);
     }
 
-    public void remove(ProxyDragon proxyDragon) {
-        proxyDragons.remove(proxyDragon);
+    public void remove(Dragon dragon) {
+        dragons.remove(dragon);
     }
 }

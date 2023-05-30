@@ -1,6 +1,6 @@
 package server.commands;
 
-import org.example.collections.ProxyDragon;
+import org.example.collections.Dragon;
 import server.manager.ObjectsCollectionManager;
 import server.modules.ServerSender;
 
@@ -17,8 +17,8 @@ public class ShowCommand implements Command {
      * It can print some fields in relation to numbers.
      */
     @Override
-    public ServerSender<List<ProxyDragon>> execute(Object... args) {
-        List<ProxyDragon> proxyDragonList = new LinkedList<>(new ObjectsCollectionManager().getAll());
-        return new ServerSender<>(proxyDragonList);
+    public ServerSender<List<Dragon>> execute(Object... args) {
+        List<Dragon> dragonList = new LinkedList<>(new ObjectsCollectionManager().getAll());
+        return new ServerSender<>(dragonList);
     }
 }

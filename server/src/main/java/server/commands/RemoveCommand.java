@@ -1,6 +1,6 @@
 package server.commands;
 
-import org.example.collections.ProxyDragon;
+import org.example.collections.Dragon;
 import server.database.DataBaseDragons;
 import server.manager.ObjectsManager;
 import server.modules.ServerSender;
@@ -15,12 +15,12 @@ public class RemoveCommand implements Command {
 
     @Override
     public ServerSender<?> execute(Object... args) throws DataSentException {
-        ProxyDragon proxyDragon = (ProxyDragon) args[0];
-        new DataBaseDragons().remove(proxyDragon);
-        new ObjectsManager().remove(proxyDragon);
+        Dragon dragon = (Dragon) args[0];
+        new DataBaseDragons().remove(dragon);
+        new ObjectsManager().remove(dragon);
 
         ExecutorService service = Executors.newFixedThreadPool(3);
-        ServerSender<Object[]> serverSender = new ServerSender<>(new Object[]{proxyDragon, "remove"});
+        ServerSender<Object[]> serverSender = new ServerSender<>(new Object[]{dragon, "remove"});
 
         for (Socket socket: ServerExchanger.getSockets()) {
             serverSender.setSocket(socket);

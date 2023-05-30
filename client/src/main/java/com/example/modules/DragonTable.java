@@ -9,7 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import org.example.collections.ProxyDragon;
+import org.example.collections.Dragon;
 import org.example.collections.DragonFields;
 
 import java.io.IOException;
@@ -19,16 +19,16 @@ import java.util.List;
 
 public class DragonTable {
 
-    private static ObservableList<ProxyDragon> proxyDragons = FXCollections.observableArrayList();
+    private static ObservableList<Dragon> dragons = FXCollections.observableArrayList();
 
     public void getAndAdd(Socket socket) {
         Connection connection = new Connection(socket);
         connection.sendToServer("show");
         try {
-            List<ProxyDragon> proxyDragonList = connection.getFromServer();
-            List<Long> dragonsId = proxyDragons.stream().map(ProxyDragon::getId).toList();
+            List<Dragon> dragonList = connection.getFromServer();
+            List<Long> dragonsId = dragons.stream().map(Dragon::getId).toList();
 
-            proxyDragonList.stream().forEach(d -> {
+            dragonList.stream().forEach(d -> {
                 if (Collections.binarySearch(dragonsId, d.getId()) < 0) {
                     add(d);
                 }
@@ -36,36 +36,36 @@ public class DragonTable {
         } catch (IOException e) {e.printStackTrace();}
     }
 
-    public void add(ProxyDragon proxyDragon) {
+    public void add(Dragon dragon) {
         Platform.runLater(() -> {
             ProxyController controller = new ProxyController(TableController.class);
             setRows();
 
-            proxyDragons.add(proxyDragon);
-            ((TableView<ProxyDragon>) controller.getField("dragonsTable")).setItems(proxyDragons);
+            dragons.add(dragon);
+            ((TableView<Dragon>) controller.getField("dragonsTable")).setItems(dragons);
         });
     }
 
-    public void update(ProxyDragon proxyDragon) {
-        ProxyDragon proxyDragonIndex = proxyDragons.stream().filter(d -> d.getId() == proxyDragon.getId()).findFirst().orElse(null);
-        if (proxyDragonIndex != null) {
+    public void update(Dragon dragon) {
+        Dragon dragonIndex = dragons.stream().filter(d -> d.getId() == dragon.getId()).findFirst().orElse(null);
+        if (dragonIndex != null) {
             Platform.runLater(() -> {
                 ProxyController controller = new ProxyController(TableController.class);
                 setRows();
 
-                proxyDragons.set(proxyDragons.indexOf(proxyDragonIndex), proxyDragon);
-                ((TableView<ProxyDragon>) controller.getField("dragonsTable")).setItems(proxyDragons);
+                dragons.set(dragons.indexOf(dragonIndex), dragon);
+                ((TableView<Dragon>) controller.getField("dragonsTable")).setItems(dragons);
             });
         }
     }
 
-    public void remove(ProxyDragon proxyDragon) {
+    public void remove(Dragon dragon) {
         Platform.runLater(() -> {
             ProxyController controller = new ProxyController(TableController.class);
 
-            ProxyDragon collection = proxyDragons.stream().filter(f -> f.getId() == proxyDragon.getId()).findFirst().orElse(null);
-            proxyDragons.remove(collection);
-            ((TableView<ProxyDragon>) controller.getField("dragonsTable")).setItems(proxyDragons);
+            Dragon collection = dragons.stream().filter(f -> f.getId() == dragon.getId()).findFirst().orElse(null);
+            dragons.remove(collection);
+            ((TableView<Dragon>) controller.getField("dragonsTable")).setItems(dragons);
         });
     }
 
@@ -73,11 +73,11 @@ public class DragonTable {
         ProxyController controller = new ProxyController(TableController.class);
 
         for (DragonFields fields : DragonFields.values()) {
-        TableColumn<ProxyDragon, ?> column = controller.getField(fields.getField());
+        TableColumn<Dragon, ?> column = controller.getField(fields.getField());
         column.setCellValueFactory(new PropertyValueFactory<>(fields.getField()));
     }}
 
-    public static ObservableList<ProxyDragon> getDragons() {
-        return proxyDragons;
+    public static ObservableList<Dragon> getDragons() {
+        return dragons;
     }
 }

@@ -9,32 +9,32 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 public class DataBaseDragons {
-    private final Class<ProxyDragon> dragonClass = ProxyDragon.class;
+    private final Class<Dragon> dragonClass = Dragon.class;
 
-    public void merge(ProxyDragon proxyDragon) {
+    public void merge(Dragon dragon) {
         Session session = HibernateUtils.getDragonFactory().openSession();
         Transaction transaction = session.beginTransaction();
-        session.merge(proxyDragon);
+        session.merge(dragon);
         transaction.commit();
         session.close();
 
     }
 
-    public void remove(ProxyDragon proxyDragon) {
+    public void remove(Dragon dragon) {
         Session session = HibernateUtils.getDragonFactory().openSession();
         Transaction transaction = session.beginTransaction();
-        session.remove(proxyDragon);
+        session.remove(dragon);
         transaction.commit();
         session.close();
     }
 
-    public List<ProxyDragon> getAll() {
+    public List<Dragon> getAll() {
         Session session = HibernateUtils.getDragonFactory().openSession();
 
         CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<ProxyDragon> create = builder.createQuery(dragonClass);
+        CriteriaQuery<Dragon> create = builder.createQuery(dragonClass);
         create.select(create.from(dragonClass));
-        List<ProxyDragon> list = session.createQuery(create).getResultList();
+        List<Dragon> list = session.createQuery(create).getResultList();
         session.close();
         return list;
     }

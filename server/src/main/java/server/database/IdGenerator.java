@@ -1,6 +1,6 @@
 package server.database;
 
-import org.example.collections.ProxyDragon;
+import org.example.collections.Dragon;
 import server.manager.ObjectsCollectionManager;
 
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ public class IdGenerator {
 
     public static Long getId() {
         if (id == 0) {
-            List<Long> ids = new ArrayList<>(new ObjectsCollectionManager().getAll().stream().map(ProxyDragon::getId).toList());
+            List<Long> ids = new ArrayList<>(new ObjectsCollectionManager().getAll().stream().map(Dragon::getId).toList());
             Collections.sort(ids);
             if (ids.size() > 0) {
                 return ids.get(ids.size() - 1) + 1;

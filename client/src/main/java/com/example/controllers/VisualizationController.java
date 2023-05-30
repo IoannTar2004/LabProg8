@@ -17,7 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.util.Duration;
-import org.example.collections.ProxyDragon;
+import org.example.collections.Dragon;
 
 import java.net.URL;
 import java.sql.Timestamp;
@@ -133,9 +133,9 @@ public class VisualizationController implements Initializable {
     @FXML
     void saveClick() {
         try {
-            ProxyDragon proxyDragon = new Validation().getDragon(idBuffer, VisualizationController.class);
-            proxyDragon.setCreation(dateBuffer);
-            new Connection(StaticData.getData().getConnection().getSocket()).sendToServer("update", proxyDragon);
+            Dragon dragon = new Validation().getDragon(idBuffer, VisualizationController.class);
+            dragon.setCreation(dateBuffer);
+            new Connection(StaticData.getData().getConnection().getSocket()).sendToServer("update", dragon);
         } catch (NullPointerException ignored) {} //Неверный ввод некоторых данных. Игнорирую
     }
 
