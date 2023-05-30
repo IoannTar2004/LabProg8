@@ -24,7 +24,6 @@ public class ServerExchanger {
         new ObjectsManager().addAll(new DataBaseDragons().getAll());
         System.out.println("Running!");
         try (ServerSocket serverSocket = new ServerSocket(port)) {
-            serverSocket.setReuseAddress(false);
             ExecutorService consumers = Executors.newCachedThreadPool();
             consumers.submit(new Consumer());
             while (true) {

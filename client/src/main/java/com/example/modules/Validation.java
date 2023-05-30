@@ -137,16 +137,14 @@ public class Validation {
     }
 
     public Object[] validate(Class<?> controllerClass) {
-        Object[] elements = new Object[8];
+        Object[] elements = new Object[6];
         ProxyController controller = new ProxyController(controllerClass);
         elements[0] = string(controller.getField("nameField"));
-        elements[1] = integer(controller.getField("xField"));
-        elements[2] = along(controller.getField("yField"));
-        elements[3] = integer(controller.getField("ageField"));
-        elements[4] = choiceBox(controller.getField("colorChoice"));
-        elements[5] = choiceBox(controller.getField("typeChoice"));
-        elements[6] = choiceBox(controller.getField("characterChoice"));
-        elements[7] = cave(controller.getField("caveField"));
+        elements[1] = integer(controller.getField("ageField"));
+        elements[2] = choiceBox(controller.getField("colorChoice"));
+        elements[3] = choiceBox(controller.getField("typeChoice"));
+        elements[4] = choiceBox(controller.getField("characterChoice"));
+        elements[5] = cave(controller.getField("caveField"));
 
         return elements;
     }
@@ -159,9 +157,8 @@ public class Validation {
             throw new NullPointerException();
         }
 
-        ProxyDragon proxyDragon = new ProxyDragon(id, StaticData.getData().getLogin(), (String) elements[0], (int) elements[3],
-                Color.values()[(int) elements[4]].getColor(), DragonType.values()[(int) elements[5]].getType(),
-                DragonCharacter.values()[(int) elements[6]].getCharacter(), (double) elements[7]);
-        return proxyDragon;
+        return new ProxyDragon(id, StaticData.getData().getLogin(), (String) elements[0], (int) elements[1],
+                Color.values()[(int) elements[2]].getColor(), DragonType.values()[(int) elements[3]].getType(),
+                DragonCharacter.values()[(int) elements[4]].getCharacter(), (double) elements[5]);
     }
 }

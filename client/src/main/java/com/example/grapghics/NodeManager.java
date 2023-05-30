@@ -43,7 +43,7 @@ public class NodeManager {
     @FXML
     public void enterAgain(Class<?> controllerClass) {
         ProxyController proxyController = new ProxyController(controllerClass);
-        String[] fields = {"nameField", "xField", "yField", "ageField", "caveField"};
+        String[] fields = {"nameField", "ageField", "caveField"};
         for (String field: fields) {
             TextField textField = proxyController.getField(field);
             textField.setStyle("");

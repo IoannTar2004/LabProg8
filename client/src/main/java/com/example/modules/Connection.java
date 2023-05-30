@@ -66,6 +66,7 @@ public class Connection implements Runnable {
         try {
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
             DataToClient<G> result = (DataToClient) in.readObject();
+            System.out.println(result);
             return result.getResult();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

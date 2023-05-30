@@ -82,12 +82,6 @@ public class TableController implements Initializable {
     private TextField nameField;
 
     @FXML
-    private TextField xField;
-
-    @FXML
-    private TextField yField;
-
-    @FXML
     private TextField ageField;
 
     @FXML
@@ -233,7 +227,7 @@ public class TableController implements Initializable {
 
     @FXML
     protected void clearClick() {
-        TextField[] fields = {nameField, xField, yField, ageField, caveField};
+        TextField[] fields = {nameField, ageField, caveField};
         for (TextField field: fields) {
             field.setText("");
         }
