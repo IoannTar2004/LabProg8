@@ -26,9 +26,8 @@ public class AnimatedDragon extends VisualizationController implements Serializa
     private String color;
     private String type;
 
-
-//    private AnchorPane main = new ProxyController(VisualizationController.class).getField("main");
-//    private ExecutorService service = new ProxyController(VisualizationController.class).getField("service");
+    private AnchorPane main = new ProxyController(VisualizationController.class).getField("main");
+    private ExecutorService service = new ProxyController(VisualizationController.class).getField("service");
 
     double x;
     double y;
@@ -69,7 +68,7 @@ public class AnimatedDragon extends VisualizationController implements Serializa
                     } catch (InterruptedException e) {throw new RuntimeException(e);}
                 }
             });
-        } catch (InterruptedException | NullPointerException ignored) {}
+        } catch (InterruptedException | NullPointerException e) {e.printStackTrace();}
     }
 
     public void run() {

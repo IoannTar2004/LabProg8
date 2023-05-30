@@ -57,8 +57,10 @@ public class Dragon implements Serializable {
     public Dragon() {}
 
     public void start() {
-        animatedDragon = new AnimatedDragon(color, type);
-        animatedDragon.initialize();
+        try {
+            animatedDragon = new AnimatedDragon(color, type);
+            animatedDragon.initialize();
+        } catch (NullPointerException e) {e.printStackTrace();}
     }
 
     public void update() {
