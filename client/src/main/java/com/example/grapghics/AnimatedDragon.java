@@ -4,6 +4,7 @@ import com.example.controllers.VisualizationCloseAction;
 import com.example.run.ProxyController;
 import javafx.animation.Animation;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -42,6 +43,7 @@ public class AnimatedDragon extends VisualizationCloseAction implements Serializ
     }
 
     public void initialize() {
+        work.set(true);
         try {
             Thread.sleep(100);
 
@@ -50,7 +52,7 @@ public class AnimatedDragon extends VisualizationCloseAction implements Serializ
                 image.setTranslateY(Math.random() * 530);
                 image.setFitWidth(300);
                 image.setFitHeight(250);
-                main.getChildren().add(image);
+                Platform.runLater(() -> main.getChildren().add(image));
 
                 int i = 0;
                 while (work.get()) {
