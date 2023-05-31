@@ -30,6 +30,5 @@ public class Producer implements Runnable {
             }
         }
         ServerExchanger.getSockets().remove(reader.getSocket());
-        System.out.println(ServerExchanger.getSockets());
     }
 }

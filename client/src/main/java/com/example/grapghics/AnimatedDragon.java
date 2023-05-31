@@ -23,13 +23,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class AnimatedDragon implements Serializable {
 
     private String color;
-    private String type;
+    private int strength = 100;
+    private double x;
+    private double y;
 
     private AnchorPane main;
     private ExecutorService service;
-
-    double x;
-    double y;
 
     private final TranslateTransition flyTransition = new TranslateTransition();
     private TranslateTransition bumpTransition = new TranslateTransition(Duration.seconds(0.5));
@@ -39,7 +38,7 @@ public class AnimatedDragon implements Serializable {
 
     public AnimatedDragon(String color, String type) {
         this.color = color;
-        this.type = type;
+        image.setId(type);
     }
 
     public void initialize() {
@@ -61,7 +60,7 @@ public class AnimatedDragon implements Serializable {
                     setImage(i);
                     i++;
                     run();
-                    bump(120);
+                    bump(strength);
                     if (i == 15) {
                         i = 0;
                     }
@@ -101,6 +100,11 @@ public class AnimatedDragon implements Serializable {
         if (list.size() > 0) {
             ImageView bump = (ImageView) list.stream().filter(i -> distance((ImageView) i, image) < 120).findFirst().orElse(null);
             if (bump != null && bumpTransition.getStatus() == Animation.Status.STOPPED) {
+                try {
+                    typeAbility(bump);
+                } catch (NullPointerException e) {
+                    return;
+                }
                 bumpTransition.setNode(image);
                 if (bump.getScaleX() == image.getScaleX()) {
                     if (image.getScaleX() == 1 && x < bump.getTranslateX() || image.getScaleX() == -1 && x > bump.getTranslateX()) {
@@ -134,6 +138,15 @@ public class AnimatedDragon implements Serializable {
                 + Math.pow(dragon.getTranslateY() - dragon1.getTranslateY(), 2));
     }
 
+    private void typeAbility(ImageView aDragon) throws NullPointerException {
+        if (image.getId().equals("air") || aDragon.getId().equals("air")) {
+            throw new NullPointerException();
+        }
+        if (aDragon.getId().equals("underground")) {
+            strength = 250;
+        }
+    }
+
     public void remove() {
         work.set(false);
         main.getChildren().remove(image);
@@ -158,7 +171,7 @@ public class AnimatedDragon implements Serializable {
     }
 
     public String getType() {
-        return type;
+        return image.getId();
     }
 
     public void setColor(String color) {
@@ -166,6 +179,6 @@ public class AnimatedDragon implements Serializable {
     }
 
     public void setType(String type) {
-        this.type = type;
+        image.setId(type);
     }
 }
