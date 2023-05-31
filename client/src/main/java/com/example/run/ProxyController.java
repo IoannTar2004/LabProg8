@@ -1,15 +1,15 @@
 package com.example.run;
 
+import com.example.controllers.CloseAction;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.Window;
+import org.hibernate.annotations.NotFound;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.*;
 
@@ -67,13 +67,15 @@ public class ProxyController {
         return controllerClass;
     }
 
-    public static void changeScene(Node node, String fxml) {
-        Stage stage = (Stage) node.getScene().getWindow();
+    public static void changeScene(Stage stage, String fxml) {
         FXMLLoader fxmlLoader = new FXMLLoader(ClientMain.class.getResource(fxml));
         try {
             Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);
             stage.show();
+
+            CloseAction action = fxmlLoader.getController();
+            stage.setOnCloseRequest(action.close());
         } catch (IOException e) {e.printStackTrace();}
     }
 

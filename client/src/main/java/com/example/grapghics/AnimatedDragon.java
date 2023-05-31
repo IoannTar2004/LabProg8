@@ -1,8 +1,6 @@
 package com.example.grapghics;
 
-import com.example.collections.Color;
-import com.example.collections.DragonType;
-import com.example.controllers.VisualizationController;
+import com.example.controllers.VisualizationCloseAction;
 import com.example.run.ProxyController;
 import javafx.animation.Animation;
 import javafx.animation.TranslateTransition;
@@ -21,13 +19,13 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * Class Dragon whose objects stored in Java Collection
  */
-public class AnimatedDragon extends VisualizationController implements Serializable {
+public class AnimatedDragon extends VisualizationCloseAction implements Serializable {
 
     private String color;
     private String type;
 
-    private AnchorPane main = new ProxyController(VisualizationController.class).getField("main");
-    private ExecutorService service = new ProxyController(VisualizationController.class).getField("service");
+    private AnchorPane main = new ProxyController(VisualizationCloseAction.class).getField("main");
+    private ExecutorService service = new ProxyController(VisualizationCloseAction.class).getField("service");
 
     double x;
     double y;
@@ -36,7 +34,7 @@ public class AnimatedDragon extends VisualizationController implements Serializa
     private TranslateTransition bumpTransition = new TranslateTransition(Duration.seconds(0.5));
     private final ImageView image = new ImageView();
 
-    private AtomicBoolean work = new AtomicBoolean(true);
+    private static AtomicBoolean work = new AtomicBoolean(true);
 
     public AnimatedDragon(String color, String type) {
         this.color = color;
@@ -145,6 +143,10 @@ public class AnimatedDragon extends VisualizationController implements Serializa
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static void setWork(boolean work) {
+        AnimatedDragon.work.set(work);
     }
 
     public String getColor() {

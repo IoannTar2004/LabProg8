@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -107,7 +108,8 @@ public class Registration implements Runnable {
 
                     connection.close();
                 } else {
-                    Platform.runLater(() -> ProxyController.changeScene(controller.getField("enter"), "table.fxml"));
+                    Stage stage = (Stage) ((Node) controller.getField("enter")).getScene().getWindow();
+                    Platform.runLater(() -> ProxyController.changeScene(stage, "table.fxml"));
                     new DragonTable().getAndAdd(connection.getSocket());
                     StaticData.getData().setLogin(login);
                     StaticData.getData().setConnection(connection);

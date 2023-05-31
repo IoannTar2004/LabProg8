@@ -4,6 +4,7 @@ import com.example.collections.Color;
 import com.example.collections.Dragon;
 import com.example.collections.DragonCharacter;
 import com.example.collections.DragonType;
+import com.example.grapghics.AnimatedDragon;
 import com.example.grapghics.Animations;
 import com.example.grapghics.NodeManager;
 import com.example.misc.FlowText;
@@ -15,6 +16,7 @@ import com.example.run.ClientMain;
 import com.example.run.ProxyController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,6 +25,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -30,7 +33,7 @@ import java.net.URL;
 import java.sql.Timestamp;
 import java.util.*;
 
-public class TableController implements Initializable {
+public class TableController implements Initializable, CloseAction {
     private long idBuffer;
     private Timestamp dateBuffer;
     private ObservableList<Dragon> currentList;
@@ -144,7 +147,7 @@ public class TableController implements Initializable {
         StaticData.getData().getConnection().close();
         DragonTable.getDragons().clear();
         Connection.stop();
-        ProxyController.changeScene(exitButton, "registration.fxml");
+        ProxyController.changeScene((Stage) exitButton.getScene().getWindow(), "registration.fxml");
     }
 
     @FXML
@@ -164,10 +167,6 @@ public class TableController implements Initializable {
         characterChoice.getSelectionModel().select(DragonCharacter.getEnumCharacter(dragon.getCharacter()).ordinal());
 
         dateBuffer = dragon.getCreation();
-
-        if (event.getClickCount() > 1) {
-            ProxyController.changeScene(dragonsTable, "visualization.fxml");
-        }
      }
 
     @FXML
@@ -249,12 +248,16 @@ public class TableController implements Initializable {
 
     @FXML
     protected void visualize() {
-        Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(ClientMain.class.getResource("visualization.fxml"));
-        try {
-            Scene scene = new Scene(fxmlLoader.load());
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {e.printStackTrace();}
+        ProxyController.changeScene(new Stage(), "visualization.fxml");
+    }
+
+    private final EventHandler<WindowEvent> closeEvent = event -> {
+        StaticData.getData().getConnection().close();
+        Connection.stop();
+    };
+
+    @Override
+    public EventHandler<WindowEvent> close() {
+        return closeEvent;
     }
 }

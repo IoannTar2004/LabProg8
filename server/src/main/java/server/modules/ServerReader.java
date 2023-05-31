@@ -41,7 +41,6 @@ public class ServerReader {
             this.socket = socket;
 
             System.out.println(Thread.currentThread().getName()+ " - " + this);
-
             return true;
         } catch (IOException e) {
             try {

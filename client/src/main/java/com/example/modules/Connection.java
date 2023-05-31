@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Connection implements Runnable {
-    private static volatile AtomicBoolean connection = new AtomicBoolean(true);
+    private static AtomicBoolean connection = new AtomicBoolean(true);
 
     private String host;
     private int port;
@@ -66,7 +66,6 @@ public class Connection implements Runnable {
         try {
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
             DataToClient<G> result = (DataToClient) in.readObject();
-            System.out.println(result);
             return result.getResult();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -77,7 +76,7 @@ public class Connection implements Runnable {
     @Override
     public void run() {
         Class<DragonTable> dragonTableClass = DragonTable.class;
-        while (true) {
+        while (connection.get()) {
             try {
                 Object[] objects = getFromServer();
                 String action = (String) objects[1];
