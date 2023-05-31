@@ -1,7 +1,7 @@
 package server.multithreading;
 
 import server.modules.ServerReader;
-import server.run.ServerExchanger;
+import server.run.ServerMain;
 
 import java.net.Socket;
 
@@ -29,6 +29,6 @@ public class Producer implements Runnable {
                 }
             }
         }
-        ServerExchanger.getSockets().remove(reader.getSocket());
+        ServerMain.getSockets().remove(reader.getSocket());
     }
 }

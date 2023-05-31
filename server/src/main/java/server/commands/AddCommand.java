@@ -7,7 +7,7 @@ import server.database.IdGenerator;
 import server.manager.ObjectsManager;
 import server.modules.ServerSender;
 import server.multithreading.DataSentException;
-import server.run.ServerExchanger;
+import server.run.ServerMain;
 
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
@@ -33,7 +33,7 @@ public class AddCommand implements Command {
         ExecutorService service = Executors.newFixedThreadPool(3);
         DataToClient<Object[]> dataToClient = new DataToClient<>(new Object[]{dragon, "add"});
 
-        for (Socket socket: ServerExchanger.getSockets()) {
+        for (Socket socket: ServerMain.getSockets()) {
             ServerSender serverSender = new ServerSender(dataToClient, socket);
             service.submit(serverSender);
         }

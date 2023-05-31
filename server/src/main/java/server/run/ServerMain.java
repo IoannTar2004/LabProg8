@@ -1,8 +1,6 @@
 package server.run;
 
 import server.database.DataBaseDragons;
-import server.database.DataBaseUsers;
-import server.manager.ObjectsCollectionManager;
 import server.manager.ObjectsManager;
 import server.multithreading.Consumer;
 import server.multithreading.Producer;
@@ -14,7 +12,7 @@ import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class ServerExchanger {
+public class ServerMain {
     private static List<Socket> sockets = Collections.synchronizedList(new LinkedList<>());
 
     public static void main(String[] args) {
