@@ -81,6 +81,9 @@ public class Connection implements Runnable {
             try {
                 Object[] objects = getFromServer();
                 String action = (String) objects[1];
+                if (action == null) {
+                    continue;
+                }
                 Platform.runLater(() -> {
                     try {
                         dragonTableClass.getDeclaredMethod(action, Dragon.class).

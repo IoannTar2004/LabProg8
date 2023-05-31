@@ -20,7 +20,9 @@ public class ObjectsManager extends CollectionManager {
     }
 
     public void remove(Dragon dragon) {
-        Dragon oldDragon = new ObjectsCollectionManager().getDragonById(dragon.getId());
-        dragons.remove(oldDragon);
+        try {
+            Dragon oldDragon = new ObjectsCollectionManager().getDragonById(dragon.getId());
+            dragons.remove(oldDragon);
+        } catch (NullPointerException ignored) {}
     }
 }

@@ -160,6 +160,9 @@ public class TableController implements Initializable, CloseAction {
             return;
         }
         Dragon dragon = currentList.get(index);
+        if (!dragon.getLogin().equals(StaticData.getData().getLogin())) {
+            return;
+        }
         idBuffer = dragon.getId();
         nameField.setText(dragon.getName());
         ageField.setText(String.valueOf(dragon.getAge()));
