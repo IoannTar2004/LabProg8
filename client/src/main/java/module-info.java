@@ -1,7 +1,6 @@
 module com.example.client {
     requires javafx.controls;
     requires javafx.fxml;
-    requires resources;
 
     requires org.hibernate.orm.core;
     requires org.kordamp.bootstrapfx.core;

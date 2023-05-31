@@ -1,7 +1,6 @@
 package com.example.controllers;
 
 import com.example.collections.Dragon;
-import com.example.grapghics.AnimatedDragon;
 import com.example.modules.DragonTable;
 import com.example.run.ProxyController;
 import javafx.event.EventHandler;
