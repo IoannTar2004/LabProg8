@@ -50,7 +50,7 @@ public class AnimatedDragon implements Serializable {
 
             service.submit(() -> {
                 image.setTranslateX(Math.random() * 803 - 65);
-                image.setTranslateY(Math.random() * 530);
+                image.setTranslateY(Math.random() * 458);
                 image.setFitWidth(300);
                 image.setFitHeight(250);
                 Platform.runLater(() -> main.getChildren().add(image));
@@ -60,7 +60,7 @@ public class AnimatedDragon implements Serializable {
                     setImage(i);
                     i++;
                     run();
-                    bump(strength);
+                    bump();
                     if (i == 15) {
                         i = 0;
                     }
@@ -79,7 +79,7 @@ public class AnimatedDragon implements Serializable {
             return;
         }
         double endX = Math.random() * 803 - 70;
-        double endY = Math.random() * 530;
+        double endY = Math.random() * 458;
 
         double len = Math.sqrt(Math.pow(endX - x, 2) + Math.pow(endY - y, 2));
         flyTransition.setDuration(Duration.seconds(len / 205));
@@ -94,7 +94,7 @@ public class AnimatedDragon implements Serializable {
         flyTransition.play();
     }
 
-    public void bump(int z) {
+    public void bump() {
         List<?> list = new ArrayList<>(main.getChildren());
         list.remove(image);
         if (list.size() > 0) {
@@ -111,14 +111,15 @@ public class AnimatedDragon implements Serializable {
                         return;
                     }
                     flyTransition.stop();
-                    double destination = x + image.getScaleX() * z;
+                    double destination = x + image.getScaleX() * strength;
                     push(destination);
                 } else {
                     flyTransition.stop();
-                    double destination = x - image.getScaleX() * z;
+                    double destination = x - image.getScaleX() * strength;
                     push(destination);
                 }
             }
+            strength = 100;
         }
     }
 
