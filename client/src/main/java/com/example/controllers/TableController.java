@@ -118,6 +118,9 @@ public class TableController implements Initializable, CloseAction {
     private Label reconnect;
 
     @FXML
+    private Button visualize;
+
+    @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
         exit.setVisible(false);
         ProxyController.setController(TableController.class, this);

@@ -61,12 +61,7 @@
                                 <Insets top="8.0" />
                             </padding>
                         </HBox>
-                  <Label fx:id="reconnect" layoutX="206.0" layoutY="14.0" prefHeight="31.0" prefWidth="499.0" style="-fx-alignment: center;" textFill="WHITE">
-                     <font>
-                        <Font size="21.0" />
-                     </font>
-                  </Label>
-                  <Button layoutX="325.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#visualize" prefHeight="41.0" prefWidth="138.0" styleClass="visualize" stylesheets="@../../../CSS/buttons.css" text="Button" />
+                  <Button fx:id="visualize" layoutX="310.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#visualize" prefHeight="42.0" prefWidth="166.0" styleClass="visualize" stylesheets="@../../../CSS/buttons.css" text="Визуализация" />
                     </children>
                 </AnchorPane>
             </children>
@@ -98,6 +93,11 @@
                   </Label>
                </children>
             </Group>
+            <Label fx:id="reconnect" layoutX="383.0" layoutY="17.0" prefHeight="31.0" prefWidth="499.0" style="-fx-alignment: center;" textFill="WHITE">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Label>
             </children>
       </Pane>
     </top>

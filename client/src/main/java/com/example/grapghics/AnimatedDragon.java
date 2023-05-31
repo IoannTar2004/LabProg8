@@ -31,7 +31,7 @@ public class AnimatedDragon implements Serializable {
     private ExecutorService service;
 
     private final TranslateTransition flyTransition = new TranslateTransition();
-    private TranslateTransition bumpTransition = new TranslateTransition(Duration.seconds(0.5));
+    private TranslateTransition bumpTransition = new TranslateTransition();
     private final ImageView image = new ImageView();
 
     private AtomicBoolean work = new AtomicBoolean(true);
@@ -139,11 +139,33 @@ public class AnimatedDragon implements Serializable {
     }
 
     private void typeAbility(ImageView aDragon) throws NullPointerException {
-        if (image.getId().equals("air") || aDragon.getId().equals("air")) {
+        if (aDragon.getId().equals("fire") && Math.random() < 0.5) {
+            try {
+                flyTransition.stop();
+                ImageView fire = new ImageView(new Image(getClass().getResource("/images/fire.gif").toURI().toString()));
+                fire.setTranslateX(x + 50);
+                fire.setTranslateY(y + 40);
+                fire.setFitHeight(161);
+                fire.setFitWidth(232);
+                Platform.runLater(() -> main.getChildren().add(fire));
+                Thread.sleep(2000);
+                Platform.runLater(() -> main.getChildren().remove(fire));
+
+                throw new NullPointerException();
+            } catch (InterruptedException | URISyntaxException e) {
+                throw new RuntimeException(e);
+            }
+        } else if (image.getId().equals("air") || aDragon.getId().equals("air")) {
             throw new NullPointerException();
-        }
-        if (aDragon.getId().equals("underground")) {
-            strength = 250;
+        } else if (aDragon.getId().equals("underground")) {
+            if (image.getId().equals("water")) {
+                strength = 80;
+            } else {
+                strength = 250;
+            }
+        } else if (image.getId().equals("water")) {
+            strength = 20;
+            bumpTransition.setDuration(Duration.seconds(0.3));
         }
     }
 
@@ -180,5 +202,7 @@ public class AnimatedDragon implements Serializable {
 
     public void setType(String type) {
         image.setId(type);
+        strength = 100;
+        bumpTransition.setDuration(Duration.seconds(0.5));
     }
 }
