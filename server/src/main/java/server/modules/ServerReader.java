@@ -40,7 +40,6 @@ public class ServerReader {
             objects = dataToServer.getObjects();
             this.socket = socket;
 
-            System.out.println(Thread.currentThread().getName()+ " - " + this);
             return true;
         } catch (IOException e) {
             try {

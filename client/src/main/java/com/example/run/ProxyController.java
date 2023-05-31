@@ -63,6 +63,10 @@ public class ProxyController {
         controllers.put(key, initializable);
     }
 
+    public static void remove(Class<?> key) {
+        controllers.remove(key);
+    }
+
     public Initializable getControllerClass() {
         return controllerClass;
     }

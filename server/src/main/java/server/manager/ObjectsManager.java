@@ -20,6 +20,7 @@ public class ObjectsManager extends CollectionManager {
     }
 
     public void remove(Dragon dragon) {
-        dragons.remove(dragon);
+        Dragon oldDragon = new ObjectsCollectionManager().getDragonById(dragon.getId());
+        dragons.remove(oldDragon);
     }
 }

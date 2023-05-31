@@ -1,6 +1,7 @@
 package server.commands;
 
 import com.example.collections.Dragon;
+import com.example.run.DataToClient;
 import server.manager.ObjectsCollectionManager;
 import server.modules.ServerSender;
 
@@ -17,8 +18,8 @@ public class ShowCommand implements Command {
      * It can print some fields in relation to numbers.
      */
     @Override
-    public ServerSender<List<Dragon>> execute(Object... args) {
+    public DataToClient<List<Dragon>> execute(Object... args) {
         List<Dragon> dragonList = new LinkedList<>(new ObjectsCollectionManager().getAll());
-        return new ServerSender<>(dragonList);
+        return new DataToClient<>(dragonList);
     }
 }

@@ -1,32 +1,25 @@
 package server.modules;
 
 
-import com.example.run.DataToClient;
-
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-public class ServerSender<T> implements Runnable {
+public class ServerSender implements Runnable {
 
-    private T result;
+    private com.example.run.DataToClient<?> dataToClient;
     private Socket socket;
 
-    public ServerSender(T result) {
-        this.result = result;
-    }
-
-    public T getResult() {
-        return result;
+    public ServerSender(com.example.run.DataToClient<?> dataToClient, Socket socket) {
+        this.dataToClient = dataToClient;
+        this.socket = socket;
     }
 
     @Override
     public void run() {
         try {
-            DataToClient<T> dataToClient = new DataToClient<>(result);
             ObjectOutputStream stream = new ObjectOutputStream(socket.getOutputStream());
             stream.writeObject(dataToClient);
-
         } catch (IOException ignored) {} //возникает, когда клиент отключается
 
     }
@@ -38,7 +31,7 @@ public class ServerSender<T> implements Runnable {
     @Override
     public String toString() {
         return "ServerSender{" +
-                "result=" + result +
+                "data=" + dataToClient +
                 '}';
     }
 }

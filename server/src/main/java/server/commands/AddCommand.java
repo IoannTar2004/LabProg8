@@ -1,6 +1,7 @@
 package server.commands;
 
 import com.example.collections.Dragon;
+import com.example.run.DataToClient;
 import server.database.DataBaseDragons;
 import server.database.IdGenerator;
 import server.manager.ObjectsManager;
@@ -23,17 +24,17 @@ public class AddCommand implements Command {
      * @param args
      */
     @Override
-    public ServerSender<Object[]> execute(Object... args) throws DataSentException {
+    public DataToClient<Object[]> execute(Object... args) throws DataSentException {
         Dragon dragon = (Dragon) args[0];
         dragon.setId(IdGenerator.getId());
         new DataBaseDragons().merge(dragon);
         new ObjectsManager().add(dragon);
 
         ExecutorService service = Executors.newFixedThreadPool(3);
-        ServerSender<Object[]> serverSender = new ServerSender<>(new Object[]{dragon, "add"});
+        DataToClient<Object[]> dataToClient = new DataToClient<>(new Object[]{dragon, "add"});
 
         for (Socket socket: ServerExchanger.getSockets()) {
-            serverSender.setSocket(socket);
+            ServerSender serverSender = new ServerSender(dataToClient, socket);
             service.submit(serverSender);
         }
         throw new DataSentException();

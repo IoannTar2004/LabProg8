@@ -1,6 +1,7 @@
 package server.commands;
 
 import com.example.collections.Dragon;
+import com.example.run.DataToClient;
 import server.database.DataBaseDragons;
 import server.manager.ObjectsManager;
 import server.modules.ServerSender;
@@ -14,16 +15,16 @@ import java.util.concurrent.Executors;
 public class RemoveCommand implements Command {
 
     @Override
-    public ServerSender<?> execute(Object... args) throws DataSentException {
+    public DataToClient<Object[]> execute(Object... args) throws DataSentException {
         Dragon dragon = (Dragon) args[0];
         new DataBaseDragons().remove(dragon);
         new ObjectsManager().remove(dragon);
 
         ExecutorService service = Executors.newFixedThreadPool(3);
-        ServerSender<Object[]> serverSender = new ServerSender<>(new Object[]{dragon, "remove"});
+        DataToClient<Object[]> dataToClient = new DataToClient<>(new Object[]{dragon, "remove"});
 
         for (Socket socket: ServerExchanger.getSockets()) {
-            serverSender.setSocket(socket);
+            ServerSender serverSender = new ServerSender(dataToClient, socket);
             service.submit(serverSender);
         }
         throw new DataSentException();

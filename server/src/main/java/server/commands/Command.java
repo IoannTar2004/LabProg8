@@ -1,6 +1,6 @@
 package server.commands;
 
-import server.modules.ServerSender;
+import com.example.run.DataToClient;
 import server.multithreading.DataSentException;
 
 import java.io.Serializable;
@@ -12,5 +12,5 @@ public interface Command extends Serializable {
     /**
      * @param args    arguments are supplied to execute(). Contains some special objects.
      */
-    ServerSender<?> execute(Object... args) throws DataSentException;
+    DataToClient<?> execute(Object... args) throws DataSentException;
 }

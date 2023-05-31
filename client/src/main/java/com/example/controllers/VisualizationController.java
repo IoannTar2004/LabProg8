@@ -28,7 +28,10 @@ public class VisualizationController implements Initializable, CloseAction {
         DragonTable.getDragons().forEach(Dragon::start);
     }
 
-    private final EventHandler<WindowEvent> closeEvent = event -> DragonTable.getDragons().forEach(d -> d.finish());
+    private final EventHandler<WindowEvent> closeEvent = event -> {
+        DragonTable.getDragons().forEach(d -> d.finish());
+        ProxyController.remove(VisualizationController.class);
+    };
 
     @Override
     public EventHandler<WindowEvent> close() {
