@@ -42,8 +42,8 @@ public class DragonTable {
             ProxyController controller = new ProxyController(TableController.class);
             setRows();
 
-            dragons.add(dragon);
             dragon.start();
+            dragons.add(dragon);
             ((TableView<Dragon>) controller.getField("dragonsTable")).setItems(dragons);
         });
     }
@@ -55,6 +55,8 @@ public class DragonTable {
                 ProxyController controller = new ProxyController(TableController.class);
                 setRows();
 
+                dragon.setAnimatedDragon(dragonIndex.getAnimatedDragon());
+                dragon.update();
                 dragons.set(dragons.indexOf(dragonIndex), dragon);
                 ((TableView<Dragon>) controller.getField("dragonsTable")).setItems(dragons);
             });
@@ -66,6 +68,7 @@ public class DragonTable {
             ProxyController controller = new ProxyController(TableController.class);
 
             Dragon collection = dragons.stream().filter(f -> f.getId() == dragon.getId()).findFirst().orElse(null);
+            collection.finish();
             dragons.remove(collection);
             ((TableView<Dragon>) controller.getField("dragonsTable")).setItems(dragons);
         });

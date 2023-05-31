@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class VisualizationCloseAction implements Initializable, CloseAction {
+public class VisualizationController implements Initializable, CloseAction {
 
     protected final ExecutorService service = Executors.newCachedThreadPool();
 
@@ -24,11 +24,11 @@ public class VisualizationCloseAction implements Initializable, CloseAction {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        ProxyController.setController(VisualizationCloseAction.class, this);
+        ProxyController.setController(VisualizationController.class, this);
         DragonTable.getDragons().forEach(Dragon::start);
     }
 
-    private final EventHandler<WindowEvent> closeEvent = event -> AnimatedDragon.setWork(false);
+    private final EventHandler<WindowEvent> closeEvent = event -> DragonTable.getDragons().forEach(d -> d.finish());
 
     @Override
     public EventHandler<WindowEvent> close() {

@@ -1,6 +1,7 @@
 package com.example.modules;
 
 import com.example.controllers.TableController;
+import com.example.grapghics.AnimatedDragon;
 import com.example.grapghics.Translation;
 import com.example.run.ProxyController;
 import javafx.application.Platform;

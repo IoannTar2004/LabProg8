@@ -57,19 +57,23 @@ public class Dragon implements Serializable {
     public Dragon() {}
 
     public void start() {
+        animatedDragon = new AnimatedDragon(color, type);
         try {
-            animatedDragon = new AnimatedDragon(color, type);
             animatedDragon.initialize();
         } catch (NullPointerException ignored) {}
     }
 
     public void update() {
-        animatedDragon.setColor(color);
-        animatedDragon.setType(type);
+        try {
+            animatedDragon.setColor(color);
+            animatedDragon.setType(type);
+        } catch (NullPointerException ignored) {}
     }
 
     public void finish() {
-        animatedDragon.remove();
+        try {
+            animatedDragon.remove();
+        } catch (NullPointerException ignored) {}
     }
 
     @Override
@@ -123,6 +127,10 @@ public class Dragon implements Serializable {
         return creation;
     }
 
+    public AnimatedDragon getAnimatedDragon() {
+        return animatedDragon;
+    }
+
     public void setId(long id) {
         this.id = id;
     }
@@ -157,5 +165,9 @@ public class Dragon implements Serializable {
 
     public void setCreation(Timestamp creation) {
         this.creation = creation;
+    }
+
+    public void setAnimatedDragon(AnimatedDragon animatedDragon) {
+        this.animatedDragon = animatedDragon;
     }
 }

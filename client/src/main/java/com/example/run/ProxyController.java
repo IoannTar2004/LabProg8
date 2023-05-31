@@ -77,6 +77,7 @@ public class ProxyController {
             CloseAction action = fxmlLoader.getController();
             stage.setOnCloseRequest(action.close());
         } catch (IOException e) {e.printStackTrace();}
+        catch (ClassCastException ignored) {} //Выбрасывается в случае, если контроллер не имеет логику нажатия на крестик. Игнорирую.
     }
 
     @Override

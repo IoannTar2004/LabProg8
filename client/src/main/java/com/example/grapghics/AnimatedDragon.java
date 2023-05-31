@@ -1,6 +1,6 @@
 package com.example.grapghics;
 
-import com.example.controllers.VisualizationCloseAction;
+import com.example.controllers.VisualizationController;
 import com.example.run.ProxyController;
 import javafx.animation.Animation;
 import javafx.animation.TranslateTransition;
@@ -20,13 +20,13 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * Class Dragon whose objects stored in Java Collection
  */
-public class AnimatedDragon extends VisualizationCloseAction implements Serializable {
+public class AnimatedDragon implements Serializable {
 
     private String color;
     private String type;
 
-    private AnchorPane main = new ProxyController(VisualizationCloseAction.class).getField("main");
-    private ExecutorService service = new ProxyController(VisualizationCloseAction.class).getField("service");
+    private AnchorPane main;
+    private ExecutorService service;
 
     double x;
     double y;
@@ -35,7 +35,7 @@ public class AnimatedDragon extends VisualizationCloseAction implements Serializ
     private TranslateTransition bumpTransition = new TranslateTransition(Duration.seconds(0.5));
     private final ImageView image = new ImageView();
 
-    private static AtomicBoolean work = new AtomicBoolean(true);
+    private AtomicBoolean work = new AtomicBoolean(true);
 
     public AnimatedDragon(String color, String type) {
         this.color = color;
@@ -43,6 +43,8 @@ public class AnimatedDragon extends VisualizationCloseAction implements Serializ
     }
 
     public void initialize() {
+        main = new ProxyController(VisualizationController.class).getField("main");
+        service = new ProxyController(VisualizationController.class).getField("service");
         work.set(true);
         try {
             Thread.sleep(100);
@@ -147,8 +149,8 @@ public class AnimatedDragon extends VisualizationCloseAction implements Serializ
         }
     }
 
-    public static void setWork(boolean work) {
-        AnimatedDragon.work.set(work);
+    public void setWork(boolean work) {
+        this.work.set(work);
     }
 
     public String getColor() {
