@@ -12,6 +12,9 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * updates object
+ */
 public class UpdateCommand implements Command {
     @Override
     public DataToClient<Object[]> execute(Object... args) throws DataSentException {

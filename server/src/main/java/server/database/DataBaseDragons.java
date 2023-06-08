@@ -8,6 +8,9 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
+/**
+ * Class for interact with "dragons" database
+ */
 public class DataBaseDragons {
     private final Class<Dragon> dragonClass = Dragon.class;
 

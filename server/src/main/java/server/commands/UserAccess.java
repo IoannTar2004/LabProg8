@@ -7,6 +7,9 @@ import server.modules.ServerSender;
 
 import java.util.List;
 
+/**
+ * checks user in "users" database. If it is existed in database gives access for client to enter the program
+ */
 public class UserAccess implements Command {
 
     @Override

@@ -10,7 +10,7 @@ import java.io.Serializable;
  */
 public interface Command extends Serializable {
     /**
-     * @param args    arguments are supplied to execute(). Contains some special objects.
+     * @param args arguments are supplied to execute(). Contains some special objects.
      */
     DataToClient<?> execute(Object... args) throws DataSentException;
 }

@@ -12,6 +12,9 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * removes object
+ */
 public class RemoveCommand implements Command {
 
     @Override
