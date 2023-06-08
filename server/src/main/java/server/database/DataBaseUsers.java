@@ -6,6 +6,10 @@ import org.hibernate.Session;
 
 import java.util.List;
 
+/**
+ * Class to get all registered users from database
+ */
+
 public class DataBaseUsers {
 
     public List<Users> getAll() {

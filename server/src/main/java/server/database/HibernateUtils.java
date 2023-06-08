@@ -5,6 +5,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
+/**
+ * database hibernate configurations
+ */
 public abstract class HibernateUtils {
     private static SessionFactory sessionDragonFactory;
     private static SessionFactory sessionUsersFactory;

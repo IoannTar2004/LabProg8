@@ -5,6 +5,9 @@ import server.run.ServerMain;
 
 import java.net.Socket;
 
+/**
+ * add task to task queue
+ */
 public class Producer implements Runnable {
     private final Socket socket;
 

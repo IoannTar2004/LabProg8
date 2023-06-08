@@ -4,6 +4,9 @@ import server.modules.ServerReader;
 
 import java.util.concurrent.LinkedBlockingQueue;
 
+/**
+ * blocking queue where tasks save
+ */
 public class TaskQueue {
     private static LinkedBlockingQueue<ServerReader> queue = new LinkedBlockingQueue(10);
 

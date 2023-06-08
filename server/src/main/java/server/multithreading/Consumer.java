@@ -4,6 +4,9 @@ import server.modules.ServerInvoker;
 import server.modules.ServerSender;
 import server.modules.ServerReader;
 
+/**
+ * poll task from task queue
+ */
 public class Consumer implements Runnable {
 
     @Override
