@@ -1,6 +1,9 @@
 package com.example.grapghics;
 
+import com.example.collections.Dragon;
 import com.example.controllers.VisualizationController;
+import com.example.modules.DragonTable;
+import com.example.modules.StaticData;
 import com.example.run.ProxyController;
 import javafx.animation.Animation;
 import javafx.animation.TranslateTransition;
@@ -195,7 +198,11 @@ public class AnimatedDragon implements Serializable {
     }
 
     public void setAction() {
-        image.setOnMouseClicked(event -> System.out.println(Math.random()));
+        image.setOnMouseClicked(event -> {
+            Dragon dragon = DragonTable.getDragons().stream().filter(d -> d.getAnimatedDragon().equals(this)).findFirst().orElse(null);
+            StaticData.getData().getConnection().sendToServer("remove", dragon);
+            remove();
+        });
     }
 
     public void setImage(int i) {
