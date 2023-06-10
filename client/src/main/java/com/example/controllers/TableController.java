@@ -20,6 +20,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -150,7 +151,7 @@ public class TableController implements Initializable, CloseAction {
         StaticData.getData().getConnection().close();
         DragonTable.getDragons().clear();
         Connection.stop();
-        ProxyController.changeScene((Stage) exitButton.getScene().getWindow(), "registration.fxml");
+        ProxyController.changeScene((Stage) exitButton.getScene().getWindow(), "registration.fxml", Cursor.DEFAULT);
     }
 
     @FXML
@@ -254,7 +255,7 @@ public class TableController implements Initializable, CloseAction {
 
     @FXML
     protected void visualize() {
-        ProxyController.changeScene(new Stage(), "visualization.fxml");
+        ProxyController.changeScene(new Stage(), "visualization.fxml", Cursor.NONE);
     }
 
     private final EventHandler<WindowEvent> closeEvent = event -> {

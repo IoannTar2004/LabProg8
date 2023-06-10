@@ -24,6 +24,7 @@ public class AnimatedDragon implements Serializable {
 
     private String color;
     private int strength = 100;
+    protected int speed;
     private double x;
     private double y;
 
@@ -45,6 +46,7 @@ public class AnimatedDragon implements Serializable {
         main = new ProxyController(VisualizationController.class).getField("main");
         service = new ProxyController(VisualizationController.class).getField("service");
         work.set(true);
+        setAction();
         try {
             Thread.sleep(100);
 
@@ -75,18 +77,18 @@ public class AnimatedDragon implements Serializable {
     public void run() {
         x = image.getTranslateX();
         y = image.getTranslateY();
+        double[] par = pathParameters();
+
         if (flyTransition.getStatus() == Animation.Status.RUNNING || bumpTransition.getStatus() == Animation.Status.RUNNING) {
             return;
         }
-        double endX = Math.random() * 803 - 70;
-        double endY = Math.random() * 458;
 
-        double len = Math.sqrt(Math.pow(endX - x, 2) + Math.pow(endY - y, 2));
-        flyTransition.setDuration(Duration.seconds(len / 205));
+        double len = Math.sqrt(Math.pow(par[0] - x, 2) + Math.pow(par[1] - y, 2));
+        flyTransition.setDuration(Duration.seconds(len / speed));
         flyTransition.setNode(image);
-        flyTransition.setToX(endX);
-        flyTransition.setToY(endY);
-        if ((endX - x) < 0) {
+        flyTransition.setToX(par[0]);
+        flyTransition.setToY(par[1]);
+        if ((par[0] - x) < 0) {
             image.setScaleX(-1);
         } else {
             image.setScaleX(1);
@@ -139,6 +141,23 @@ public class AnimatedDragon implements Serializable {
                 + Math.pow(dragon.getTranslateY() - dragon1.getTranslateY(), 2));
     }
 
+    private double[] pathParameters() {
+        AnchorPane pane = new ProxyController(VisualizationController.class).getField("target");
+        ImageView cursor = (ImageView) pane.getChildren().get(1);
+        boolean targetNear = Math.sqrt(Math.pow(cursor.getX() - image.getTranslateX(), 2)
+                + Math.pow(cursor.getY() - image.getTranslateY(), 2)) < 230;
+
+        if (targetNear && speed == 205) {
+            flyTransition.stop();
+            speed = 410;
+            return new double[] {Math.random() * 803 - 70, Math.random() * 530};
+        } else if (flyTransition.getStatus() == Animation.Status.STOPPED) {
+            speed = 205;
+            return new double[] {Math.random() * 803 - 70, Math.random() * 530};
+        }
+        return null;
+    }
+
     private void typeAbility(ImageView aDragon) throws NullPointerException {
         if (aDragon.getId().equals("fire") && Math.random() < 0.5) {
             try {
@@ -175,6 +194,10 @@ public class AnimatedDragon implements Serializable {
         main.getChildren().remove(image);
     }
 
+    public void setAction() {
+        image.setOnMouseClicked(event -> System.out.println(Math.random()));
+    }
+
     public void setImage(int i) {
         try {
             image.setImage(new Image(getClass().getResource("/images/" +
@@ -183,10 +206,6 @@ public class AnimatedDragon implements Serializable {
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public void setWork(boolean work) {
-        this.work.set(work);
     }
 
     public String getColor() {

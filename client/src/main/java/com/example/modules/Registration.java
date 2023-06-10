@@ -6,6 +6,7 @@ import com.example.grapghics.NodeManager;
 import com.example.run.ProxyController;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -109,7 +110,7 @@ public class Registration implements Runnable {
                     connection.close();
                 } else {
                     Stage stage = (Stage) ((Node) controller.getField("enter")).getScene().getWindow();
-                    Platform.runLater(() -> ProxyController.changeScene(stage, "table.fxml"));
+                    Platform.runLater(() -> ProxyController.changeScene(stage, "table.fxml", Cursor.DEFAULT));
                     new DragonTable().getAndAdd(connection.getSocket());
                     StaticData.getData().setLogin(login);
                     StaticData.getData().setConnection(connection);

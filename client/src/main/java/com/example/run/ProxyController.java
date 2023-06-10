@@ -4,6 +4,7 @@ import com.example.controllers.CloseAction;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -71,17 +72,23 @@ public class ProxyController {
         return controllerClass;
     }
 
-    public static void changeScene(Stage stage, String fxml) {
+    public static void changeScene(Stage stage, String fxml, Cursor cursor) {
         FXMLLoader fxmlLoader = new FXMLLoader(ClientMain.class.getResource(fxml));
         try {
             Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);
             stage.show();
-
+            cursor(scene, cursor);
             CloseAction action = fxmlLoader.getController();
             stage.setOnCloseRequest(action.close());
         } catch (IOException e) {e.printStackTrace();}
         catch (ClassCastException ignored) {} //Выбрасывается в случае, если контроллер не имеет логику нажатия на крестик. Игнорирую.
+    }
+
+    private static void cursor(Scene scene, Cursor cursor) {
+        if (scene != null) {
+            scene.setCursor(cursor);
+        }
     }
 
     @Override
